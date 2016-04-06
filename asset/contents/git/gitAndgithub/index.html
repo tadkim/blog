@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<style>
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+	body{
+		font-size:12px;
+		font-family: 'Noto Sans KR', sans-serif;
+		margin-left:30px;
+	}
+	img{
+		width:900px;
+		max-width: 900px;
+		margin-top:20px;
+	}
+	figcaption{ font-size:10px; text-align: center; color:#888; margin-bottom:20px;}
+	h1,h2,h3,h4,h5,h6{
+		text-align: center;
+	}
+	li{ line-height: 120%;}
+	strong{ font-size:16px; }
+	</style>
+</head>
+<body>
+<ul>
+<li><em><strong>문서 작성일</strong> : 2016.3.10</em></li>
+<li><em><strong>문서 작성자</strong> : tadkim</em></li>
+</ul>
+
+<h2 id="chapter1">Chapter 1</h2>
+
+<h1 id="git과github함께이해하기">Git과 GitHub 함께 이해하기</h1>
+
+<hr />
+
+<h6 id="git">Git</h6>
+
+<p>Git은 버전 관리 시스템이다. </p>
+
+<blockquote>
+<p>버전관리 시스템 : 파일의 변경 내역을 계속 추적하도록 개발된 소프트웨어이다.</p>
+
+<p>다시말해 Git은 분산 버전 관리 시스템으로, Git으로 프로젝트를 개발하는 사람은 모두 현재 상태의 파일뿐만 아니라 그 프로젝트의 전체 이력을 가지고 있게 된다는뜻이다.</p>
+</blockquote>
+
+<h6 id="github">GitHub</h6>
+
+<p>GitHub는 Git 리포지토리(repository)를 업로드 할 수 있는 웹사이트를 말한다. GitHub는 다른 사람들과의 협업을 매우 용이하게 해준다.</p>
+
+<ul>
+<li>리포지토리를 공유할 수 있는 중앙저장소</li>
+<li>웹 기반 인터페이스</li>
+<li>forking</li>
+<li>pull requests</li>
+<li>issues</li>
+<li><p>wikis</p>
+위와같은 기능을 제공하여 팀원들과 보다 효율적으로 변경안을 구체화하고 토론하며 검토할 수 있게 해준다.<sup><a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">1</a></sup></li>
+</ul>
+
+<hr />
+
+<h6 id="why">WHY</h6>
+
+<p>왜 Git을 사용하는가?</p>
+
+<p>GitHub의 장점은 협업에만 초점을 맞춘것이 아니다. 본질적으로 깃의 사용은 1인 프로젝트를 진행하는 사람에게도 다양한 가치가 있다.</p>
+
+<h6 id="왜git을사용하는가">왜 Git을 사용하는가?</h6>
+
+<ul>
+<li><strong>변경취소 가능</strong> : 실수 했을 때 구 버전의 작업 파일로 돌아갈 수 있음.</li>
+<li><strong>모든 변경에 대한 완벽한 이력 History</strong> : 짧게는 하루, 길게는 1년 전에 프로젝트가 어떤 형태였는지도 알 수 있다.</li>
+<li><strong>변경한 이유를 기록</strong> : 협업을 하다보면(때로는 내가 작성한 코드라할지라도) 왜 변경했는지 모르겠을 때가 많다. 이때 Git의 커밋 메시지(Commit message)를 이용하면 변경한 이유를 쉽게 기록할 수 있으며, 추후에 참조할 수 있다.</li>
+<li><strong>변경에 대한 확신</strong> : 이전 버전으로의 복귀가 쉽기 때문에 자신을 원하는 대로 다 변경가능한다. 잘 안되면 언제든 이전 버전으로 복귀하면 된다.</li>
+<li><strong>여러 갈래의 히스토리(History)</strong> : 콘텐츠의 변경 내용을 테스트해보거나 기능을 독립적으로 실험해보기 위해 별도의 브런치(branch)를 생성할 수 있다. 완료되면 변경 내용을 마스터 브랜치(Master branch)로 병합할 수 있고, 잘 작동하지 않을 경우 삭제 가능하다.</li>
+<li><strong>충돌 해결 능력</strong> : Git을 이용하면 여러사람이 동시에 같은 파일을 작업할 수 있다. Git은 대개 자동으로 변경사항을 병합할 수 있다. 그렇지 못할 경우에 충돌이 무엇인지 알려주고 이를 해결하기 쉽게 해준다.</li>
+<li><strong>독립된 히스토리(History)</strong> : 여러 사람들이 다른 브랜치(branch)에서 작업이 가능하다. 기능을 독립적으로 개발하고, 완료되었을 때 그 기능을 병합할 수 있다.</li>
+</ul>
+
+<hr />
+
+<h6 id="왜github를사용하는가">왜 GitHub를 사용하는가?</h6>
+
+<p>GitHub는 단순히 Git 리포지토리를 저장하는 장소 그 이상이다. Git은 다음 기능과 같은 여러 가지 이점을 추가로 제공한다.</p>
+
+<ul>
+<li><strong>기록요구</strong> : Issue(이슈)를 사용해 버그를 기록하거나 개발하고 싶은 새로운 기능을 구체화할 수 있다.</li>
+<li><strong>독립된 히스토리(History)에 대한 협력</strong> : branch와 pull requests를 이용해 다른 브랜치 또는 기능에 협력할 수 있다.</li>
+<li><strong>진행 중인 작업 검토</strong> : pull requests 목록을 통해 현재 무슨 작업이 진행되고 있는지 모두 볼 수 있다. 그리고 특정 pull request를 클릭하여 최근의 변경 내용과 변경에 관한 모든 논의 내용을 볼 수 있다.</li>
+<li><strong>팀의 작업 진척 상황 확인</strong> : 펄스(pulse)를 훑어보거나 commit histroy를 살펴보면 팀의 작업 진척 상황을 알 수 있다.</li>
+</ul>
+
+<hr />
+
+<h3 id="gitgithub주요개념">Git &amp; Github 주요개념</h3>
+
+<ul>
+<li><p><strong>commit</strong> : 하나 또는 다수의 파일에 변경 내용을 저장할 때마다 새로운 commit 생성한다. </p>
+
+<blockquote>
+<p>ex) ”이 변경 내용을 commit하고 이를 GitHub로 push 합시다.”</p>
+</blockquote></li>
+<li><p><strong>commit message</strong> : commit을 생서할 때 마다 왜 변결을 했는지에 대한 이유를 설명하는 메시지를 제공해야한다. 이 commit message는 변경을 한 이유를 추후에 이해할 때 매우유용하다.</p>
+
+<blockquote>
+<p>ex)”새로운 SEC 가이드라인에 대한 수잔의 의견을 commit 메시지에 꼭 넣으세요.”</p>
+</blockquote></li>
+<li><p><strong>branch</strong> : 테스트를 해보거나 새로운 기능을 개발하기 위해 사용할 수 있는 따로 떨어진 독립적인 commit들을 말한다. </p>
+
+<blockquote>
+<p>ex) “새로운 검색기능을 구현하기 위해 branch를 생성합시다.”</p>
+</blockquote></li>
+<li><p><strong>master branch</strong> : 새로운 Git 프로젝트를 만들 때마다 ‘master’라고 불리는 기본 branch가 생성된다. 배포할 준비가 되면 작업이 최종적으로 마무리되는 branch이다.</p></li>
+</ul>
+
+<blockquote>
+<p>ex) “master로 바로 commit 하면 안 된다는 것을 기억하세요”</p>
+</blockquote>
+
+<ul>
+<li><strong>feature or topic branch</strong> : 새로운 기능을 개발할 때마다 작업할 브랜치를 만드는데, 이를 feature branch라고 한다.</li>
+</ul>
+
+<blockquote>
+<p>ex) “feature branch가 너무 많습니다. 이들 중 하나나 두개를 완료해서 출시하는데 주력합시다.”</p>
+</blockquote>
+
+<ul>
+<li><strong>release branch</strong> : 직접 QA(품질보증) 작업을 하거나 고객의 요구로 구 버전의 소프트웨어를 지원해야 한다면 모든 수정이나 업데이트를 위한 장소로 release branch가 필요하다. feature branch와 release branch는 기능적 차이는 없지만, 팀월들과 프로젝트에 대해 이야기할 때 확연히 구별할 수 있어 유용하다.</li>
+</ul>
+
+<blockquote>
+<p>ex) “release branch 전체에 대한 보안 버그를 수정해야 합니다.”</p>
+</blockquote>
+
+<ul>
+<li><strong>Merge</strong> : 병합(merge)은 한 branch에서 완성된 작업을 가져와 다른 branch에 포함하는 방법이다. 흔히 feature branch를 master branch로 merge한다.</li>
+</ul>
+
+<blockquote>
+<p>ex) “‘내 계정’기능이 훌륭합니다. 배포할 수 있게 master로 merge 해줄 수 있습니까?”</p>
+</blockquote>
+
+<ul>
+<li><strong>Tag</strong> : 특정 이력이 있는 commit에 대한 참조. 어떤 버전의 코드가 언제 배포(release)되었는지 정확히 알 수 있도록 제품 배포 기록에 가장 자주 사용된다.</li>
+</ul>
+
+<blockquote>
+<p>ex) “이번 배포판에 태그를 달고 출시합시다.”</p>
+</blockquote>
+
+<ul>
+<li><strong>Check out</strong> : 프로젝트 history의 다른 버전으로 이동해 해당 시점의 파일을 보기 위해 ‘check out’ 한다. 가장 일반적으로 branch에서 완료된 작업을 모두 보기 위해 branch를 check out하지만, commit도 check out할 수 있다.</li>
+</ul>
+
+<blockquote>
+<p>ex) ”최종 릴리즈 태그(release tag)를 checkout 해주시겠어요? 제품에 버그가 있어서 검증하고 수정해야 합니다.”</p>
+</blockquote>
+
+<ul>
+<li><strong>Pull request</strong> : 원래 pull request는 branch에서 완료된 작업을 다른 사람이 리뷰하고 master로 merge요청을 하기 위해 사용되었다. 요즘은 개발 가능한 기능에 대한 논의를 시작하는 초기 단계에서 자주 사용한다.</li>
+</ul>
+
+<blockquote>
+<p>ex) “다른 팀원들이 어떻게 생각하는지 알 수 있게 새로운 투표 기능에 대한 pull request를 만드십시오.”</p>
+</blockquote>
+
+<ul>
+<li><strong>Issu</strong> : GitHub는 기능에 대해 논의하거나 버그를 추적하거나 혹은 두 가지 경우 모두 사용될 수 있는 Issue라는 기능을 갖고 있다.</li>
+</ul>
+
+<blockquote>
+<p>ex) “당신이 옳아요, 아이폰에서는 로그인이 도지 않네요. 버그를 검증하기 위한 단계를 기록하면서 GitHub에 issue를 생성해 주시겠습니까?”</p>
+</blockquote>
+
+<ul>
+<li><strong>Wiki</strong> : Ward Cunningham이 최초로 개발하였다. wiki는 링크들 간을 연결해 간단하게 웹페이지를 만드는 방법이다. GitHub 프로젝트는 문서 작성에 자주 Wiki를 사용한다.</li>
+</ul>
+
+<blockquote>
+<p>ex) “복수의 서버에서 작동하게끔 프로젝트 환경 설정 방법을 설명하는 페이지를 추가해 주시겠습니까?”</p>
+</blockquote>
+
+<ul>
+<li><strong>Clone</strong> : 종종 로컬로 작업하기 위해 프로젝트 복사본을 GitHub에서 다운로드 한다. repository를 사용자의 컴퓨터로 복사하는 과정을 복제(cloning)라고 한다.</li>
+</ul>
+
+<blockquote>
+<p>ex) “repository를 clone하고, 버그를 수정한 다음 오늘 밤 수정본을 다시 GitHub로 push 해주시겠습니까?”</p>
+</blockquote>
+
+<ul>
+<li><strong>Fork</strong> : 때로는 프로젝트를 직접 변경하는 데 필요한 권한을 보유하지 못할 때가 있다. 잘 알지 못하는 사람이 작성한 오픈소스 프로젝트이거나, 회사에서 작업을 같이 많이 하지 않는 다른 그룹이 작성한 프로젝트일 수도 있다. 그러한 프로젝트를 변경하고 싶다면 먼저 GitHub의 사용자 계정에 프로젝트 복사본을 만들어야한다. 그 과정을 repository를 fork한다고 한다. 그런다음 복제(clone)하고, 변경하고, pull request를 이용해 원본 프로젝트에 변경 내용을 반영할 수 있다.</li>
+</ul>
+
+<blockquote>
+<p>ex) “홈페이지 마케팅 원고를 당신이 어떻게 재작성 했는지 보고 싶습니다. repository를 fork하고 수정안과 함께 pull request를 제출해주세요.”</p>
+</blockquote>
+
+<hr />
+
+<hr />
+
+<h2 id="chapter2">Chapter 2</h2>
+
+<h1 id="프로젝트보기">프로젝트 보기</h1>
+
+<hr />
+
+<p>이 장에서는 프로젝트의 상태를 확인할 수 있는 방법을 살펴볼 것이다. 잘 알려진 부트스트랩(Bootstrap)의 오픈 소스 프로젝트를 예제로 사용하겠다.</p>
+
+<p><strong>2.1 프로젝트 페이지소개</strong></p>
+
+<p>부트스트랩은 개발자들이 웹앱을 빠르게 개발할 수 있게 해주는 프로젝트이다. <a href="https://github.com/twbs/bootstrap">GitHub의 프로젝트 페이지</a>로 이동한다. 홈페이지에 아주 많은 정보가 있지만, 먼저 가장 중요한 요소들을 살펴보자.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2.png" alt="그림2-1 GitHub의 부트스트랩 프로젝트 홈페이지 모습" title="[그림2-1 GitHub의 부트스트랩 프로젝트 홈페이지 모습]" />
+<figcaption>그림2&#8211;1 GitHub의 부트스트랩 프로젝트 홈페이지 모습</figcaption>
+</figure>
+
+<p>위 사진 왼쪽 위를 보면 <strong>twbs/bootstrap</strong>라고 적혀있는데, 이는 <strong>twbs</strong>라는 사용자가 <strong>bootstrap</strong>이라는 프로젝트를 소유하고있다는 것을 뜻한다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2_.png" alt="그림2-1-1 GitHub 아이콘의 의미" title="[그림 2-1-1] GitHub 아이콘의 의미" />
+<figcaption>그림2&#8211;1&#8211;1 GitHub 아이콘의 의미</figcaption>
+</figure>
+
+<p>GitHub를 그동안 오래 보아왔지만, 눈, 별, 나무줄기(?)형태의 아이콘이 정확히 어떤의미인지는 모르고있었다. ‘눈’은 이 프로젝트에 새로운 변화가 생길 때 마다 알림을 받겠다는 뜻이다. ‘구독’정도의 의미로 이해하면 좋겠다. ‘별’은 즐겨찾기 또는 별점을 부여했다는 것이고, ‘나무줄기’는 아이콘에도 나와있지만, 이 프로젝트를 fork한 수를 의미한다.</p>
+
+<p><strong>README.md</strong>파일 보기</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2__.png" alt="그림2-1-2 GitHub README.md 파일 보기" title="[그림 2-1-2] GitHub README.md 파일 보기" />
+<figcaption>그림2&#8211;1&#8211;2 GitHub README.md 파일 보기</figcaption>
+</figure>
+
+<p>프로젝트의 루트에 <strong>README.md</strong>라는 파일이 있으면 그 파일의 콘텐츠가 프로젝트 홈페이지의 폴더와 파일 목록 바로 아래에 표시된다. </p>
+
+<p>이 파일은 프로젝트에 대한 소개와 협력자들에게 유용한 추가 정보(소프트웨어를 어떻게 설치하는지, 자동화된 테스트를 어떻게 실행하는지, 코드를 어떻게 사용하는지, 프로젝트에 어떻게 기여할 수 있는지 등)를 제공한다.</p>
+
+<p>요즘들어 <strong>README.md</strong> 파일은 <strong>badge</strong>도 자주 포함하는데, <strong>badge</strong>는 자동화된 <strong>test suite</strong>같이 프로젝트의 현 상태를 알려주기 위해 사용되는 이미지다. </p>
+
+<blockquote>
+<p>[그림2&#8211;1&#8211;2]에서는 부트스트랩이 동작하는 두 개의 다른 프로젝트의 버전을 표시하고 있다. 또한 자동화된 테스트를 통과했고, 종속관계(dependencies)가 업데이트 되었다는 것과, 브라우저와 운영체제의 버전을 보여주고있다.</p>
+</blockquote>
+
+<p><strong>commit history 보기</strong></p>
+
+<p>다음으로 살펴 볼 <strong>commit history</strong>는 어떤 특정 branch에서 작어빙 완료되었을 때 가장 최근 작업이 무엇인지 알아보는 좋은 방법이다. </p>
+
+<p>이를 확인하기위해 <em><a href="https://github.com/twbs/bootstrap/commits/master">GitHub의 부트스트랩페이지로 이동해 “9,448 commits”링크를 클릭한다.</a></em></p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-3.png" alt="그림2-3 GitHub Bootstrap 프로젝트의 commit history 페이지" title="[그림 2-3] GitHub Bootstrap 프로젝트의 commit history 페이지" />
+<figcaption>그림2&#8211;3 GitHub Bootstrap 프로젝트의 commit history 페이지</figcaption>
+</figure>
+
+<blockquote>
+<p>(물론, 부트스트랩 프로젝트 페이지에 접속한 시점을 기준으로 commit 수가 달라질 것이다.)</p>
+
+<p>가장 최근의 작업이 목록 위쪽으로 오는 순서로 commit 목록이 표시된다.([그림 2&#8211;3]참조)</p>
+</blockquote>
+
+<p><strong>각 commit을 클릭하면,</strong> 변경이 된 이유를 설명하는 <strong>commit message</strong>가 표시된다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-4.png" alt="그림2-4 GitHub Bootstrap 프로젝트의 commit message 페이지" title="[그림 2-4] GitHub Bootstrap 프로젝트의 commit message 페이지" />
+<figcaption>그림2&#8211;4 GitHub Bootstrap 프로젝트의 commit message 페이지</figcaption>
+</figure>
+
+<p><strong>commit message</strong> 아래로 commit의 일부분으로 추가되거나 삭제 또는 수정된 각각의 파일을 볼 수 있다. <strong>삭제된 콘텐츠는 빨간색으로, 추가된 콘텐츠는 녹색으로 표시된다.</strong></p>
+
+<p><strong>Pull Request 보기</strong></p>
+
+<p><img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-5.png" alt="그림2-5 GitHub Bootstrap 프로젝트의 pull request 페이지" title="[그림 2-5] GitHub Bootstrap 프로젝트의 pull request 페이지" /></p>
+
+<p><strong>pull request</strong>는 현재 진행 중인 작업이 무엇인지 알 수 있게 해준다. 프로젝트 페이지 화면에서 오른쪽위의 <strong>pull request</strong>를 클릭하면 공개된 <strong>pull request</strong> 목록이 표시된다. 이것은 사람들이 현재 작업하고 있는 기능이나 수정사항을 나타낸다.([그림 2&#8211;5]참조)</p>
+
+<p><strong>pull request</strong>를 살펴보면 사람들이 현재 무슨 작업을 하고 있으며, 버그 수정을 하든 기능 개발을 하든 각가의 변경 사항에 대해 어떤 역할을 하고 있는지 알 수 있다.</p>
+
+<p><strong>Issue 보기</strong></p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-6.png" alt="그림2-6 GitHub Bootstrap 프로젝트의 issues 페이지" title="[그림 2-6] GitHub Bootstrap 프로젝트의 pull request 페이지" />
+<figcaption>그림2&#8211;6 GitHub Bootstrap 프로젝트의 issues 페이지</figcaption>
+</figure>
+
+<p><strong>pull request</strong>로 현재 진행되고 있는 버그 수정과 기능을 알 수 있다면, <strong>issue</strong>를 통해서는 프로젝트에 필요한 작업을 <strong>넓은 관점</strong>에서 볼 수 있다. </p>
+
+<p>pull request는 주로 issue에 링크되어 있지만, 아무도 작업을 시작하지 않아 pull request가 없는 issue또한 존재한다. issue 목록을 보기 위해 링크를 클릭하면 모든 공개 issue목록이 자동으로 나타난다([그림 2&#8211;7] 참조).</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-7.png" alt="그림2-7 GitHub Bootstrap 프로젝트의 issues 페이지" title="[그림 2-7] GitHub Bootstrap 프로젝트의 pull request 페이지" />
+<figcaption>그림2&#8211;7 GitHub Bootstrap 프로젝트의 issues 페이지</figcaption>
+</figure>
+
+<p>누군가 Bootstrap 사용 중 겪은 어려움을 적어 공유하는 모습이다.</p>
+
+<p><strong>pulse 보기</strong></p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-8.png" alt="그림2-8 GitHub Bootstrap 프로젝트의 pulse 페이지" title="[그림 2-8] GitHub Bootstrap 프로젝트의 pull request 페이지" />
+<figcaption>그림2&#8211;8 GitHub Bootstrap 프로젝트의 pulse 페이지</figcaption>
+</figure>
+
+<p><strong>pulse</strong>는 프로젝트에 대한 최근의 활동 내용을 엿볼 수 있는 좋은 방법이다. 오른 쪽 위에서 기간을 최종일, 3일, 1주 또는 한 달 등의 기간으로 지정할 수 있다. </p>
+
+<p><strong>pulse는 merge되거나 추가된 pull request의 수를 먼저 표시한다.</strong>또한 얼마나 많은 issue가 마감되고 개설되었는지 표시한다.</p>
+
+<p><strong>pulse</strong>가 활성화된 pull request와 issue의 수를 언급할 때 이것이 단지 각가의 개수를 말하는 것이 아니라, <strong>사용자가 지정한 시기에 개설되고 마감된 request와 issue의 수를 말하는 것임을 이해하는 것이 중요</strong>하다.</p>
+
+<blockquote>
+<p>예를들어, 이 책을 작성할 시기에, 부트스트랩은 지나주에 총 23개의 “활성화된” pull request가 있었는데 그중에 15개가 merge되고, 8개가 아직 논의가 되고 있다. 하지만 총 28개의 공개 pull request를 갖고 있다.</p>
+</blockquote>
+
+<p>그 다음으로 나오고 있는 단락은 최근의 변경 내용을 간략히 요약한 것으로 개발자의 수, 마스터의 commit수, 전체 branch의 총 commit수, master branch에서 추가되거나 삭제 또는 수정된 파일의 수를 나열하고 있다.</p>
+
+<p>그리고 추가되거나 삭제된 콘텐츠의 라인 수를 표시하는데, <strong>파일에서 텍스트 라인이나 하나 수정되면 Git은 한 라인이 삭제되고 그 자리에 다른 라인이 추가 된 것으로 인식한다는 것</strong>을 알아야한다.</p>
+
+<p><strong>오른쪽 막대그래프</strong>는 지정된 시기에 commit을 가장 많이 생성한 기여자(contributor)를 막대그래프로 나타낸다. 그 아래에는 병합되고 논의되고 있는 pull request의 제목과 마감되고 개설 된 issue를 나타낸다. </p>
+
+<p>pulse는 “Unresolved conversation”로 표시되는 목록으로 끝나는데 이는 새롭게 추가된 댓글이 있으나 아직 마감되지 않는 모든 issue와 pul request의 목록을 말한다.</p>
+
+<p><strong>GitHub Graphs 보기</strong></p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-9.png" alt="그림2-9 GitHub Bootstrap 프로젝트의 Graphs 페이지" title="[그림 2-9] GitHub Bootstrap 프로젝트의 Graphs 페이지" />
+<figcaption>그림2&#8211;9 GitHub Bootstrap 프로젝트의 Graphs 페이지</figcaption>
+</figure>
+
+<p>pulse가 최근의 활동내용을 요약해서 알려주는 반면, <strong>Graphs</strong> 화면은 좀 더 긴 기간 동안 프로 젝트에 행한 작업을 알 수 있게 해준다.</p>
+
+<ul>
+<li><p><strong>기여자(Contributor) Graph</strong> : 기여자 그래프는 일정 기간 동안 commit수, 추가 또는 삭제 수에 근거해 기여자들을 부여준다. 전체 공헌 활동에 대한 그래프가 먼저 나오고, 뒤이어 각 개발자들의 공헌을 나타내는 작은그래프가 가장 많이 공헌한 개발자 순으로 나온다.</p>
+
+<p>기본 commit그래프는 일정 기간 동안 master branch에 만들어진 commit수를 나타낸다. <strong>master branch에 merge된 commit만을 나타낸다는 것</strong>을 반드시 알아두자. feature branch에 일주일 내내 작업했는데 아직 그 작업이 병합되지 않았다면, 배포 준비가 되어 master branch로 merge되어서야 비로소 공헌내용을 볼 수 있었을 것이다.</p>
+
+<p><strong>commit에 정해진 기준은 없다.</strong>개발자들이 오류를 조사하거나 무언가를 테스트하지 않고 코드를 작성한다면 대략 5&#8211;10분 마다 commit을 생성할 것이다. 그러나 팀에 따라서 어떤 개발자들은 비슷한 시간을 작업해도 다른 사람보다 훨씬 적은 수의 commit을 생성한다.<strong>이 경우라면 기여자 그래프의 <em>contribution type</em>을 추가 또는 삭제로 바꾸는 것이 좋겠다.</strong>이렇게 하면 개발자들이 프로젝트에서 추가하거나 삭제한 코드의 라인 수를 알아낼 수 있다. 개발자들이 라인을 수정하면 이전 라인을 삭제하고 새로운 라인이 추가된 것으로 나타날 것이다.</p></li>
+<li><p><strong>Commit Graph</strong> : [그림 2&#8211;10] commit그래프는 프로젝트 전 기간에 걸쳐 얼마나 많은 commit이 발생했는지 나타내는데 활동이 얼마나 활발했는지 그리고 어떻게 달라졌는지 대략적인 추측을 해볼 수 있다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-10.png" alt="그림2-10 GitHub Bootstrap 프로젝트의 Graphs-commit 페이지" title="[그림 2-10] GitHub Bootstrap 프로젝트의 Graphs-commit 페이지" />
+<figcaption>그림2&#8211;10 GitHub Bootstrap 프로젝트의 Graphs-commit 페이지</figcaption>
+</figure>
+
+<p>commit Graph를 살펴보는 첫 번째 이유는 매주 얼마나 많은 commit이 발생 했는지 알 수 있기 때문이다. 일주일 간 발생한 commit 수를 하나의 막대로 나타낸 막대그래프를 먼저 표시한다. 주기적인 또는 장기간의 동향을 알아보는 좋은 방법이다.</p>
+
+<p><em>프로젝트의 commit수가 서서히 감소하는가? 개발자 수가 많으면 commit수가 지속적으로 증가하는가? 대부분의 commit이 매달 마지막 주에 발생하는가? 아니면 계절적 추세인가?</em> 이 그래프는 commit 수가 일정 기간 동안 어떻게 변하고 있는지 잘 보여주어 생산성을 대략 추측 해볼 수 있다.</p></li>
+<li><p><strong>Code Frequency Graph</strong></p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-11.png" alt="그림2-11 GitHub Bootstrap 프로젝트의 Graphs-code frequency 페이지" title="[그림 2-11] GitHub Bootstrap 프로젝트의 Graphs-code frequency 페이지" />
+<figcaption>그림2&#8211;11 GitHub Bootstrap 프로젝트의 Graphs-code frequency 페이지</figcaption>
+</figure>
+
+<p><strong>code frequency</strong> 그래프는 일정 기간에 프로젝트에 추가되고 삭제된 코드줄수를 보여주며, 특히 코드에 큰 변화가 있을 때 이를 식별하는 데 매우 유용하다.</p>
+
+<p>개발자들이 대규모 리팩토링을 할 때는 commit마다 몇 백 또는 몇 천의 코드줄을 추가하고 삭제한다. 반면 일반적인 비즈니스에서는 commit이 몇 줄만 추가되거나, 수정 또는 삭제된 코드를 포함한다. 이러한 대규모 리팩터링의 경우 commit 수는 많이 변경되지 않을 수도 있지만 추가되고 삭제되는 줄 수는 급증한다. 따라서 코드에 큰 변화가 생겼는지 알고 싶다면 <strong>code frequency</strong> 그래프를 살펴보면 된다.</p></li>
+</ul>
+
+<blockquote>
+<p>예를 들어, [그림&#8211;13]에서 대규모의 리팩토링이 실행된 것은 2013년 2월과 3월 임을 알 수 있다.</p>
+</blockquote>
+
+<ul>
+<li><p><strong>Punch Card Graph</strong></p>
+
+<p>punch card 그래프는 무슨 요일, 몇시에 대부분의 commit이 일어났는지 나타낸다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-12.png" alt="그림2-14 GitHub Bootstrap 프로젝트의 Punch card Graph 페이지" title="[그림 2-14] GitHub Bootstrap 프로젝트의 Punch Card 페이지" />
+<figcaption>그림2&#8211;14 GitHub Bootstrap 프로젝트의 Punch card Graph 페이지</figcaption>
+</figure>
+
+<p>Punch card 그래프는 일주일 동안 매일 매시간을 원으로 나타낸다. 원의 크기는 해당 시간에 만들어진 commit이 차지하는 비율을 나타낸다. </p>
+
+<p>원이 클수록 그 시간에 commit이 많이 만들어졌다는 뜻이다. <strong>다시 말하면, 작업팀이 언제 가장 생산성이 높은지 엿볼 수 있는 좋은 방법</strong>이 된다.</p></li>
+<li><p><strong>Network Graph</strong></p>
+
+<p>네트워크 그래프는 모든 branch의 수와 해당 branch의 commit 수를 나타낸다. 또한, 기여자(Contributors)가 생성한 fork도 모두 보여준다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-13.png" alt="그림2-15 GitHub Processing 프로젝트의 Network Graph페이지" title="[그림 2-15] GitHub Processing 프로젝트의 Network Graph 페이지" />
+<figcaption>그림2&#8211;15 GitHub Processing 프로젝트의 Network Graph페이지</figcaption>
+</figure>
+
+<p><em>여기서는 부트스트랩 프로젝트가 아닌, Processing의 GitHub 프로젝트 내 Network Graph 사진을 포함했다. 부트스트랩과 같이 너무 많은 네트워키가 이루어진 경우, GitHub의 Network Graph는 동작하지 않기 때문이다.</em></p>
+
+<p><strong>Network Graph는 한 branch가 얼마나 많이 앞서나갔는지 또는 누가 자신의 fork에서 어떤 작업을 하고 있는지 보고 싶을 때 유용하다.</strong> pull request를 통해 commit이 repository의 master로 merge되면 화살표와 merge commit으로 표시되는 것을 볼 수 있다.</p>
+
+<p>또한 commit에 마우스를 올리면 누가 작성을 하였고 commit message는 무엇인지 볼 수 있다.</p></li>
+<li><p><strong>Members List</strong></p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/160310_git_chapter2-14.png" alt="그림2-16 GitHub Bootstrap 프로젝트의 Members 페이지" title="[그림 2-16] GitHub Bootstrap 프로젝트의 Members 페이지" />
+<figcaption>그림2&#8211;16 GitHub Bootstrap 프로젝트의 Members 페이지</figcaption>
+</figure>
+
+<p>접근 권한에 상관없이 볼 수 있는 마지막 그래프. 만약 fork의 수가 평소와 다르다면 메시지가 나타나고 전체 멤버 중 일부의 멤버 만 화면에 표시된다.</p>
+
+<p>멤버 목록은 누가 repository를 fork 했는지 보여준다. 이들은 초기 parent repository의 협력자가 아니기 때문에 pull request를 이용해 기여하려면 repository 복사본이 필요하다.</p></li>
+<li><p><strong>traffic Graph</strong></p></li>
+</ul>
+
+<figure>
+<img src="https://help.github.com/assets/images/help/graphs/repo_traffic_graphs_tooltip.png" alt="그림2-17 help GitHub, traffic Graph 페이지" title="[그림 2-16] help GitHub, traffic Graph 페이지" />
+<figcaption>그림2&#8211;17 help GitHub, traffic Graph 페이지</figcaption>
+</figure>
+
+<pre><code>이 traffic Graph는 __프로젝트의 소유자와 협력자만 볼 수 있다.__ 
+트래픽(traffic)그래프는 일정 기간 조회 수와 순방문자 수를 표시하며, 링크된 참조 사이트 목록과 GitHub 프로젝트 사이트에서 가장 인기 있는 콘텐츠를 보여준다. 이는 오픈 소스 프로젝트가 인기가 있는지 알아볼 수 있는 방법이기도 하다.
+</code></pre>
+
+<p>지금까지의 <strong>”README.md 파일, commit, pull request, issue, pulse, GitHub 그래프”</strong>를 살펴봄으로써 프로젝트를 더 잘 파악할 수 있을 것이다. </p>
+
+<p>다음 장에서는 프로젝트에 어떻게 기여할 수 있는지 살펴보도록 하자.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>Peter Bell &amp; Brent Beer지음, Ann Lee 번역, “GitHub 사용설명서”, 교학사, 2015, p.12 <a href="#fnref:1" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+</li>
+
+</ol>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<p><strong>리팩터링 실전 예제 8 : 직접 삽입(Inline)</strong></p>
+
+<p>읽기 좋은 코드를 고민하며 개발하다 보면 코드가 장황해지기 쉽다. 몇 줄로 설명할 수 있는 것을 주저리주저리 설명하게 된다. 이런 상황은 코드의 가독성이 지나치게 낮은 것 보다는 좋을 수 있지만 코드를 읽고 수정하는 데는 큰 도움이 되지 못한다. 이런 상황에서 코드를 안전하게 리팩터링 하고 싶다면 <code>Inline</code> 리팩터가 도움이 된다.</p>
+
+<p><strong>리팩터링기법 08 직접 삽입(Inline)의 세부 구성</strong></p>
+
+<ul>
+<li><strong>8&#8211;1</strong> <code>메서드 내용 직접 삽입</code>(Inline Method[Function])</li>
+<li><strong>8&#8211;2</strong> <code>지역 변수 직접 삽입</code>(Inline Local Variable[Inline Temp])</li>
+</ul>
+
+<p><strong>8&#8211;1 메서드 내용 직접 삽입(Inline Method[Function])</strong></p>
+
+<blockquote>
+<p>마틴 파울러의 저서 “리팩토링”의 메서드 내용 직접 삽입(Inline Method)에서, “<strong>메서드의 몸체가 메서드의 이름만큼이나 명확할 때는 호출하는 곳에 메서드 몸체를 넣고 메서드를 삭제하라</strong>.”<sup><a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">1</a></sup></p>
+</blockquote>
+
+<ol>
+<li><code>inline &gt; Spinbox.js</code> 파일 열기 : <code>Spinbox</code> 객체의 <code>setValue</code> 메서드는 <code>_isOverValue</code>, <code>_isUnderValue</code> 메서드를 사용한다.</li>
+</ol>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_01.png" alt="Webstorm, Refactoring inline Method " title="Webstorm, Refactoring - inline Method " />
+<figcaption>Webstorm, Refactoring inline Method </figcaption>
+</figure>
+
+<p>코드를 살펴보면, 사진에서 설명하고 있는대로 <code>_isOverValue</code>, <code>_isUnderValue</code>는 단순한 로직으로 값의 크기를 비교하는 역할을 수행하고 있다. 코드 가독성은 좋지만, 너무 로직이 너무 단순한 경우라면 웹스톰의 <code>Inline Method</code> 리팩터를 활용해보는 것이 좋다.</p>
+
+<ol>
+<li><code>setValue</code>의 <code>this.isOverValue</code>에 포인터를 올리고 마우스 오른쪽 버튼을 클릭</li>
+<li><code>Refactor &gt; Inline</code>을 클릭해 <code>Inline Function</code> 창을 연다.</li>
+</ol>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_02.png" alt="Webstorm, Refactoring Inline Method " title="Webstorm, Refactoring - inline Method " />
+<figcaption>Webstorm, Refactoring Inline Method </figcaption>
+</figure>
+
+<p><code>Inline Function</code> 팝업 창 상세</p>
+
+<ul>
+<li>첫 번째 옵션 : <code>inline</code> 대상이 되는 메서드를 삭제해서 리팩터링하는 방식</li>
+<li>두 번째 옵션 : <code>inline</code> 대상이 되는 메서드의 몸체를 옮겨오고 원본은 그대로 두는 것</li>
+</ul>
+
+<p><strong><code>Inline Function</code> 팝업창의 옵션 선택 기준</strong></p>
+
+<p><code>_isOverValue</code> 메서드는 <code>setValue</code> 메서드에서만 사용하므로 첫 번째 라디오 버튼을 클릭해서 삭제한다. 만약 <code>inline</code> 대상이 되는 메서드를 다른 곳에서 사용할 가능성이 있다면 두 번째 라디오 버튼을 클릭해 리팩터링한 다음 <code>Safe Delete</code> 리팩터를 사용해 코드를 정리하는 편이 안전하다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_03.png" alt="Webstorm, Refactoring Inline Method " title="Webstorm, Refactoring - inline Method " />
+<figcaption>Webstorm, Refactoring Inline Method </figcaption>
+</figure>
+
+<p><strong>Inline Method 리팩터 적용 전 후 코드 비교</strong></p>
+
+<p><code>Inline Function</code> 창에서 판단 기준에 따라 삭제, 또는 리팩터링과 함께 보존 후 <code>safe delete</code>로 삭제하는 방법이 있었다. 여기서는 첫 번째 방법으로 진행했고, 그에 따라 위 사진과 같은 결과를 볼 수 있다.</p>
+
+<p>기존 <code>_isUnderValue</code> 메서드 바로 위에 위치했던 <code>_isOverValue</code> 메서드는 삭제되었고, 그 대신 <code>setValue</code> 메서드에 <code>_isOverValue</code>메서드가 직접 삽입되었다.</p>
+
+<hr />
+
+<p><strong>8&#8211;2 지역 변수 직접 삽입(Inline Local Variable[Inline Temp])</strong></p>
+
+<blockquote>
+<p>마틴 파울러의 저서 “리팩토링”의 메서드 임시 변수 내용 직접 삽입(Inline Temp)에서, “<strong>간단한 수식의 결과값을 가지고 있는 임시변수가 있고 그 임시변수가 다른 리팩터링을 하는데 방해된다면 이 임시변수를 참조하는 부분을 모두 원래의 수식으로 바꿔라.</strong>”<sup><a href="#fn:2" id="fnref:2" title="see footnote" class="footnote">2</a></sup></p>
+</blockquote>
+
+<p>보통 임시 변수는 어떤 수식의 결과값을 명확하게 설명하기 위해 작성한다. 이는 코드를 읽기 쉽게 하기 위함이지만, 개발하다 보면 임시 변수에 값을 대입하지 않아도 충분히 목적을 설명하는 경우가 있다.</p>
+
+<p><strong>지역 변수 직접 삽입의 상황을 판단하는 과정</strong></p>
+
+<p><code>Inline &gt; init.js</code> 파일을 열어보자.<br/>
+ <img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_04.png" alt="Webstorm, Refactoring Inline Local Variable " title="Webstorm, Refactoring Inline Local Variable " /></p>
+
+<p><code>aDirectories</code> 변수는 디렉터리 목록을 원소로 하는 배열을 포함하고 있다. <strong>하지만 각 원소값이 디렉터리 목록임을 나타내고 있어서 임시 변수에 삽입하지 않아도 충분히 의미를 설명할 수 있을 것 같다</strong>.</p>
+
+<p><strong><code>aDirectories</code> 임시 변수를 직접 삽입해 보기</strong></p>
+
+<p><code>aDirectories</code> 변수에 오른쪽 클릭을 한 다음 <code>Refactor &gt; Inline</code> 을 클릭해 <code>Inline Local Variable</code>창을 연다. <code>OK</code>를 클릭하면 <code>aDirectories</code> 임시 변수가 삭제되고 변수를 사용하는곳으로 직접 삽입된다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_05.png" alt="Webstorm, Refactoring Inline Local Variable " title="Webstorm, Refactoring Inline Local Variable " />
+<figcaption>Webstorm, Refactoring Inline Local Variable </figcaption>
+</figure>
+
+<p>변경하고자 하는 변수 명에서 오른쪽 클릭을 하거나, shortkey를 활용하여 <code>Inline</code>관련 기능을 연다. 새롭게 열린 <code>Inline Local Variable</code> 창에서는 <code>aDirectories</code>가 1개 잡혔다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_06.png" alt="Webstorm, Refactoring Inline Local Variable " title="Webstorm, Refactoring Inline Local Variable " />
+<figcaption>Webstorm, Refactoring Inline Local Variable </figcaption>
+</figure>
+
+<p><code>OK</code> 버튼을 누르면 위 사진과 같은 형태로 코드가 정리 될 것이다. 이것이 해당 메서드는 삭제하고, 변수를 직접 사용하고 있는 곳으로 직접 삽입된다.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>주우영 지음, “프런트엔드 개발 시작하기”, 위키북스, 2015, 110쪽, 재인용 <a href="#fnref:1" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+</li>
+
+<li id="fn:2">
+<p>위의 책. <a href="#fnref:2" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+</li>
+
+</ol>
+</div>
+
+
+</body>
+</html>

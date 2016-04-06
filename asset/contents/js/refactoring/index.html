@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="05리팩터링기법">05 리팩터링 기법</h1>
+
+<h3 id="리팩터링의정의">리팩터링의 정의</h3>
+
+<p>리팩터링은 간단히 말해 “악취나는 코드에서 악취를 제거하는 기법.”이다. 리팩터링은 이미 생산된 코드를 대상으로하며, 오류발생가능성은 최대한 낮추며 코드를 정리하는 기법이다.</p>
+
+<p>“<strong>코드는 변경될 수 밖에 없다</strong>.”</p>
+
+<p>요구사항은 항상 변한다. 개발을 시작하기전에, 도중에, 그리고 개발을 마치고 난 후에도 요구사항은 항상 변한다. 변덕스러운 클라이언트의 모든 요구사항을 항상 단번에 만족 시킨다는 것은 불가능하다. <strong>결국, 코드는 변경될 수 밖에 없다</strong>.</p>
+
+<p><strong>리팩터링 기법의 주의점</strong></p>
+
+<p>리팩터링 기법은 실제로 작동 중인 코드를 변경하는 방법 이므로, 예측하기 힘든 버그를 만들어낼 수 있는 위험이 있기 때문에 <strong>단순히 코드를 정리하는 방법이 아닌 수정 하려는 코드를 사용하는 외부 코드에 영향을 주지 않으면서 내부를 어떻게 개선할 지에 대한 고민이 담겨있어야 한다</strong>.</p>
+
+<h3 id="웹스톰리팩터링">웹스톰 &amp; 리팩터링</h3>
+
+<p>웹스톰의 제작사인 젯브레인스는 강력한 리팩터 지원을 모토로 하고 있으며 모토에 걸맞게 훌륭한 리팩터링 환경을 제공한다. 뛰어난 리팩터링 환경을 이용해 자바스크립트 코드를 효율적이고 빠르며 안정적으로 리팩터링 할 수 있다.</p>
+
+<p><strong>리팩터링 기법의 종류</strong></p>
+
+<p>리팩터링 기법은 알고리즘 전환(Substitute Algorithm), 과잉 중개 메서드 제거(Remove middle man), 필드 캡슐화(Encapsulate Field)등 많이 있다. <strong>하지만 이 책에서 모든 리팩터링 기법을 다룰 수는 없으므로 웹스톰의 리팩터 기능 위주로 접근한다</strong>. 다루게 될 웹스톰의 리팩터 기능은 다음과 같다.</p>
+
+<ul>
+<li>이름 변경(rename)</li>
+<li>이동(move)</li>
+<li>안전한 삭제(safe delete)</li>
+<li>시그니처 변경(change signature)</li>
+<li>직접 삽입(inline)</li>
+<li>추출(extract)</li>
+</ul>
+
+<blockquote>
+<p>리팩터링에 대해 더 자세하게 알고 싶다면 “리팩토링:코드 품질을 개선하는 객체지향 사고법”(마틴 파울러 지음, 한빛미디어 출판)을 추천한다. </p>
+</blockquote>
+
+<hr />
+
+<h3 id="웹스톰리팩터링실전예제1:이름변경rename">웹스톰 &amp; 리팩터링 실전 예제 1 : 이름 변경(rename)</h3>
+
+<ol>
+<li>Refactoring 이라는 이름의 프로젝트 생성</li>
+<li><a href="https://github.com/wikibook/frontenddevelopment/tree/master/5장/1.refactoring_before"> [리팩토링 예제 파일 다운로드 바로가기] </a></li>
+<li>예제폴더 &gt; rename &gt; translateX.js 파일 열기</li>
+<li>변수 nVelocity 오른쪽 클릭</li>
+<li>Refactor 메뉴의 Rename 클릭</li>
+<li>동일한 변수명 활성화 되는 것을 확인 후 변수명을 변경</li>
+</ol>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_02.png" alt="Webstorm, Refactoring EX 1-1 : Rename 실행 전 " title="Webstorm, Refactoring EX 1 : Rename" />
+<figcaption>Webstorm, Refactoring EX 1&#8211;1 : Rename 실행 전 </figcaption>
+</figure>
+
+<p><strong>리팩터링으로 변수명을 변경하기</strong></p>
+
+<p>nVelocity는 nSpeed보다 덜 보편적인 단어기 때문에 협업 개발자나 유지보수 개발자는 의아해 할 수 있다. 혼란을 주는 변수명은 좋은 코드라 볼 수 없으니 이름을 변경한다. </p>
+
+<p>하지만 nVelocity는 함수 곳곳에서 사용하고 있는데 잘못 변경하면 함수 외부의 동작이 바뀌거나 예기치 않은 오류를 발생시킬 수 있다. <strong>이때 웹스톰의 Rename 리팩터를 활용하면 한번에 모든 지역 변수 이름을 안전하게 변경할 수 있다</strong>.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_03.png" alt="Webstorm, Refactoring EX 1-2 : Rename 실행 과정 " title="Webstorm, Refactoring EX 2 : Rename" />
+<figcaption>Webstorm, Refactoring EX 1&#8211;2 : Rename 실행 과정 </figcaption>
+</figure>
+
+<p><strong>리팩터링 실제 과정 : Rename</strong></p>
+
+<p>앞서 리팩터링 Rename과정을 설명한 순서대로, 변경하고자하는 변수명을 오른쪽 클릭후 Refactor - Rename의 순서로 진행하면 된다. 여기까지하고나면 화면에는 우리가 선택한 변수명이 모두 선택되어있는데, 그 상태에서 변경하고자하는 변수명을 입력해주면 지역 변수 내 모든 변경이 동시에 이루어진다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_04.png" alt="Webstorm, Refactoring EX 1-3 : Rename 실행 후 " title="Webstorm, Refactoring EX 3 : Rename" />
+<figcaption>Webstorm, Refactoring EX 1&#8211;3 : Rename 실행 후 </figcaption>
+</figure>
+
+<p><strong>리팩터링 실행 결과 : Rename</strong></p>
+
+<p>Rename을 실행하여 해당하는 모든 지역 변수 이름을 한번에 변경했다. 물론 sublime text나 심지어 메모장에서도 replace 기능을 활용해서 치환을 할 수 있으나 웹스톰IDE안에서 믿고 처리할 수 있는 첫 번째 리팩터링 기법이라는 점까지 고려하여 이 기능에 대해 숙지해 두기로 하자.</p>
+
+<h3 id="웹스톰리팩터링실전예제2:프로퍼티명변경renameproperty">웹스톰 &amp; 리팩터링 실전 예제 2 : 프로퍼티명 변경(Rename Property)</h3>
+
+<p>객체 내부 여러 곳 에서 사용하는 프로퍼티명을 변경하려면 지역 변수이름을 변경하는 것과 마찬가지로 객체 내부 전체를 살펴보면서 하나하나 바꾸거나 서브라임텍스트 등의 Replace기능을 활용했을 것이다. 사실, 방금 살펴본 Rename을 사용할만한 지역변수안에서의 치환작업에서는 오류발생이 거의 일어나지 않는다. <strong>하지만 객체의 프로퍼티명을 변경하려고 한다면 상황은 달라진다. 이는 각각의 다른 파일들을 모두 순서대로 천천히 살펴보아야 할 뿐 아니라, 객체 외부에서 사용중이라면 문제는 꽤나 복잡해지기 마련이다</strong>. </p>
+
+<ol>
+<li>rename &gt; Greeter.js 파일 열기</li>
+<li>파일 형태 이해하기</li>
+<li>변경할 프로퍼티 명 오른쪽 클릭</li>
+<li>Refactor &gt; Rename &gt; 새로운 Rename창이 팝업으로 생성됨</li>
+<li>변경할 프로티명 입력 후 ‘Refactor’클릭.</li>
+</ol>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_05.png" alt="Webstorm, Refactoring EX 1-4 : Property Rename " title="Webstorm, Refactoring EX 3 : Rename" />
+<figcaption>Webstorm, Refactoring EX 1&#8211;4 : Property Rename </figcaption>
+</figure>
+
+<p>리팩터링 실전 예제 2 : 프로퍼티명 변경</p>
+
+<p>앞서 소개한 ‘변수명 Rename’예제와 과정은 동일하나, 프로퍼티명에 대한 Rename을 적용하려고하면, 새로운 팝업창이 뜨고, 그 안에서 새로운 프로퍼티명을 입력한다는 점에서 변수명 변경시 사용과정과 차이가 있다.</p>
+
+<figure>
+<img src="imgtest.png" alt="testimg" />
+<figcaption>testimg</figcaption>
+</figure>
+
+</body>
+</html>

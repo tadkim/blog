@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h3 id="웹스톰리팩터링실전예제3:파일명변경renamefilename">웹스톰 &amp; 리팩터링 실전 예제 3 : 파일 명 변경(Rename File Name)</h3>
+
+<p>개발시 종종 파일 명 변경이 필요할 때가 있다. 보통 HTML 파일에서 자바스크립트 파일에 의존하고 있는데 파일명을 변경할 때마다 의존하는 HTML 파일을 하나씩 찾는 것은 매우 귀찮은 작업이다.</p>
+
+<ol>
+<li><p><code>rename &gt; index.html</code> 열기 : <code>index.html</code> 파일은 ‘Categorys.js’파일에 의존하고 있음.</p></li>
+<li>상황 설정 : <code>Categorys.js</code>을 올바를 표기법인 <code>Categories.js</code>로 변경.
+
+<ul>
+<li>변경하지 않는다면 : 그냥 두기엔 꺼림직하다.</li>
+<li>객체 명(Categorys)만 반영할 경우, <strong>객체명과 파일이름은 통일시킨다는 기본 규칙에 위배된다</strong>.</li>
+</ul></li>
+<li><p>웹스톰 Refactoring 의 <code>Rename</code>사용 : 파일 명<em>(이 경우 categorys.js)</em>을 우클릭 후 <code>Refactoring</code> 클릭.</p></li>
+</ol>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_08.png" alt="Webstorm, Refactoring EX 1-7 : FileName Rename " title="Webstorm, Refactoring EX 1-6 : Rename" />
+<figcaption>Webstorm, Refactoring EX 1&#8211;7 : FileName Rename </figcaption>
+</figure>
+
+<p><strong>리팩터링 파일명 변경</strong></p>
+
+<p>이 경우도 마찬가지로 단순히 파일 명 뿐 아니라 의존하는 코드에 안전하게 바뀐 것을 확인할 수 있다. 이 기능은 디렉터리명을 변경할 때도 동일하게 동작한다.</p>
+
+</body>
+</html>

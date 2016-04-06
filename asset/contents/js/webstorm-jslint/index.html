@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title> webstorm and jslint work </title>
+	<!-- <link rel="stylesheet" href="css/spoca.css"/> -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
+
+
+	<!-- <link rel="stylesheet" href="https://spoqa.github.io/css/styles.css"/> -->
+	<!-- <link rel="stylesheet" href="http://whiteleo.azurewebsites.net/colony/markdown/css/markdown.css"/> -->
+</head>
+<body>
+<h1 id="웹스톰과jslint"><strong>웹스톰과 JSLint</strong></h1>
+<p> <code>p</code></p>
+<h3 id="jslint설정"><strong>JSLint설정</strong></h3>
+<pre class="highlight">
+<code class="js">
+var tadkim = yumm's boy friend;
+
+hljs.initHighlightingOnLoad();
+$(function() {
+  $('.hiring-banner').bind("click", function() {
+    location.href = '/jobs.html';
+  });
+  $('.toggle').bind("touchstart", function() {
+    $('.menu').toggle();
+  })
+});
+</code>
+</pre>
+
+<p>웹스톰은 JSLint를 내장하고 있어 별다른 설치 과정 없이 JSLint를 사용할 수 있으며 <strong>실시간으로 코드를 검증할</strong> 수 있다.</p>
+
+<ol>
+<li>웹스톰 실행</li>
+<li>Welcome screen &gt; create new project</li>
+<li>Spinbox 라는 새로운 프로젝트 생성</li>
+</ol>
+
+<p>협업 개발자의 모듈을 배포해야하는 업무를 배정받았다고 가정해보자.<strong>자바스크립트는 인터프리터 언어라는 특성상 코드를 실행하기 전까지 그 코드의 문제를 알기 어렵다</strong>.</p>
+
+<h3 id="jslint검증활성화"><strong>JSLint 검증 활성화</strong></h3>
+
+<ol>
+<li>preference &gt; project setting</li>
+<li>javascript &gt; Code Quality Tools &gt; JSLint</li>
+<li>Enable 활성화</li>
+</ol>
+
+<h3 id="실시간코드검증"><strong>실시간 코드 검증</strong></h3>
+
+<p><strong>웹스톰에서는 코드를 실행하지 않고 정적 분석으로 코드 품질과 구문 오류를 검사한다.</strong> src 디렉터리의 navaer.SpinboxModel.js 파일을 열어보자 오른쪽 마커 바(Marker bar)는 몇 행에서 검증에 실패했는지 알려준다,</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_error1.png" alt="그림1-1 Webstorm, JSLint ERROR1 " title="그림1-1 Webstorm, JSLint ERROR1 " />
+<figcaption>그림1&#8211;1 Webstorm, JSLint ERROR1 </figcaption>
+</figure>
+
+<p>JSLint에서는 naver라는 변수가 선언된 적이 없는데 사용한다고 경고한다. naver라는 변수는 네임스페이스 변수로 글로벌에서 사용될 것이다. 이렇게 전역에 걸쳐 글로벌로 사용되는 변수는 Predefined에 등록해주는 것이 좋다. </p>
+
+<ol>
+<li>JSLint 설정 창 열기</li>
+<li>Predefined에 naver 등록</li>
+</ol>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_predefined.png" alt="그림1-2 Webstorm, JSLint Predefined " title="그림1-2 Webstorm, JSLint Predefined" />
+<figcaption>그림1&#8211;2 Webstorm, JSLint Predefined </figcaption>
+</figure>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_error2.png" alt="그림1-2 Webstorm, JSLint ERROR2 " title="그림1-2 Webstorm, JSLint ERROR2" />
+<figcaption>그림1&#8211;2 Webstorm, JSLint ERROR2 </figcaption>
+</figure>
+
+<p>두 번째는 JSLint 검증에 실패한 것이 아니라 사전에 등록돼 있지 않은 단어가 사용되고 있음을 웹스톰에서 경고하고 있는 것이다. 이 기능으로 개발 중 생기는 오타를 바로 알 수 있어 편리하지만 naver는 오타가 아니라 의도한 변수명이므로 <strong>Interaction actions suggest를</strong> 이용해 사전에 등록한다.</p>
+
+<ol>
+<li>전구모양 버튼 클릭</li>
+<li>Typo: Save ‘never’ to dictionary</li>
+</ol>
+
+<hr />
+
+<h3 id="naver.spinboxmodel.js에러제거하기"><strong>naver.SpinboxModel.js 에러 제거하기</strong></h3>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_ERROR3.png" alt="그림1-3 Webstorm, JSLint ERROR 3 " title="그림1-2 Webstorm, JSLint Predefined" />
+<figcaption>그림1&#8211;3 Webstorm, JSLint ERROR 3 </figcaption>
+</figure>
+
+<p>자바스크립트에는 동등연산자(==)와 비동등연산자(!=)가 있다. 이 연산자는 타입을 비교하지 않으므로 나중에 문제가 될 소지가 충분히 있다. 그래서 가능하면 모든 비교에 일치연산자(===)와 불일치 연산자(!==)를 사용하도록 권고한다. 위코드의 비동등 연산자를 불일치연산자로 변경한다. </p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_ERROR4.png" alt="그림1-5 Webstorm, JSLint ERROR 4 " title="그림1-2 Webstorm, JSLint ERROR4 " />
+<figcaption>그림1&#8211;5 Webstorm, JSLint ERROR 4 </figcaption>
+</figure>
+
+<p><strong>++와 —는 안티패턴</strong>.</p>
+
+<p>이 코드는 증감 연산자를 사용했기 때문에 검증 실패. 더글라스 크락포드는 이 코드가 버퍼 오버플로<sup><a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">1</a></sup> 버그의 주된 요인이라고 말한다. 하지만 대부분의 경우, 코드 가독성 때문에 증감 연산자를 사용하지 않는다. </p>
+
+<ul>
+<li>++this.<em>nValue와 - -this</em>nValue를 각각 this_nValue+1,<em>this</em>nValue&#8211;1로 변경한다.</li>
+</ul>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_ERROR5.png" alt="그림1-6 Webstorm, JSLint ERROR 5 " title="그림1-2 Webstorm, JSLint ERROR5 " />
+<figcaption>그림1&#8211;6 Webstorm, JSLint ERROR 5 </figcaption>
+</figure>
+
+<p>‘-‘<strong>가 이스케이프되지 않음</strong>.</p>
+
+<p>이 검증 오류는 정규표현식에서 -(대시)를 이스케이프<sup><a href="#fn:2" id="fnref:2" title="see footnote" class="footnote">2</a></sup>하지 않았기 때문에 발생한 것이다.</p>
+
+<ul>
+<li>/^[-+]을/(^[/-+])로 변경한다.</li>
+</ul>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_ERROR6.png" alt="그림1-7 Webstorm, JSLint ERROR 6 " title="그림1-2 Webstorm, JSLint ERROR6 " />
+<figcaption>그림1&#8211;7 Webstorm, JSLint ERROR 6 </figcaption>
+</figure>
+
+<p><strong>불필요한 연산</strong></p>
+
+<p>naver.SpinboxModel.js의 마지막 오류다. if구문 안에서도 return문을 사용하고 else 구문 안에서도 return문을 사용한다. if 구문의 return문이 실행되면 else가 실행되지 않으니 이렇게 작성할 필요가 없다. </p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_ERROR7.png" alt="그림1-8 Webstorm, JSLint ERROR 7 " title="그림1-2 Webstorm, JSLint ERROR7 " />
+<figcaption>그림1&#8211;8 Webstorm, JSLint ERROR 7 </figcaption>
+</figure>
+
+<p>이를 수정해보자. else 구문에 마우스 커서를 올리면 <strong>Quick-fix suggested가</strong> 나타난다. <strong>Quick-fix suggested를</strong> <strong>클릭한 다음 remove redundant else를 클릭한다</strong>.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_ERROR9.png" alt="그림1-9 Webstorm, JSLint ERROR 7 " title="그림1-2 Webstorm, JSLint ERROR7 " />
+<figcaption>그림1&#8211;9 Webstorm, JSLint ERROR 7 </figcaption>
+</figure>
+
+<p><strong>Console이 선언되어 있지 않음.</strong></p>
+
+<p><strong>생성자 함수에서 console 객체를 사용하고 있으므로 검증에 실패했다</strong>. 이 코드가 서비스에 배포된제품 코드라면 console 객체를 지원하지 않는 브라우저에서 동작이 멈출 것이므로 코드를 삭제한다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_ERROR10.png" alt="그림1-10 Webstorm, JSLint ERROR 8 " title="그림1-2 Webstorm, JSLint ERROR8 " />
+<figcaption>그림1&#8211;10 Webstorm, JSLint ERROR 8 </figcaption>
+</figure>
+
+<p><strong>Predefined등록&#8211;2</strong></p>
+
+<p>이 코드는 jQuery 라이브러리를 사용하므로 naver를 Predefined에 등록했던 것과 마찬가지로 역시 Predefined로 등록한다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/jslint/jslint_ERROR11.png" alt="그림1-11 Webstorm, JSLint ERROR 9 " title="그림1-2 Webstorm, JSLint ERROR9 " />
+<figcaption>그림1&#8211;11 Webstorm, JSLint ERROR 9 </figcaption>
+</figure>
+
+<p><strong>event 파라미터를 사용하지 않음</strong></p>
+
+<p>이번 에러는 event 파라미터를 선언만 하고 메서드 몸체에서 사용하지 않았기 때문에 발생했다. 사용하지 않는 파라미터를 선언해 코드를 읽는 협업 개발자에게 혼란을 줄 필요는 없으므로 삭제한다. 파라미터를 삭제하면서 JSDoc<sup><a href="#fn:3" id="fnref:3" title="see footnote" class="footnote">3</a></sup> 주석의 @param 태그도 함께 삭제한다. </p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>버퍼 오버플로 : 할당된 메모리 공간 이상으로 데이터를 쓰려고 할 때 발생하는 버그를 말한다. <a href="#fnref:1" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+</li>
+
+<li id="fn:2">
+<p>정규표현식의 특수문자를 리터럴 문자로 바꾸는 문자, 예를 들어 정규표현식 특수 문자’+’를 리터럴 문자 그대로 검색하려고 한다면 ‘+’와 같이 이스케이프해야한다. <a href="#fnref:2" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+</li>
+
+<li id="fn:3">
+<p>JSDoc은 7장 148쪽에서 자세히 설명하고 있다. <a href="#fnref:3" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+</li>
+
+</ol>
+</div>
+
+<!-- <script src="https://spoqa.github.io/js/highlight.pack.js"></script> -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

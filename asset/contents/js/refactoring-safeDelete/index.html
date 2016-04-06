@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h3 id="웹스톰리팩터링실전예제5:안전한삭제safedelete">웹스톰 &amp; 리팩터링 실전 예제 5 : 안전한 삭제(Safe Delete)</h3>
+
+<p>프로젝트의 규모가 클수록 모든 파일을 검사해 사용 여부를 판단하기란 불가능 하다. 그런 상황에서 코드를 삭제하면 예기치 않은 오류가 만들어 질 수 있다. 하지만 이것이 두려워 불필요한 코드를 계속 보존하면 코드는 망가지게 된다.</p>
+
+<p>_</p>
+
+<p><strong>웹스톰의 안전한 삭제(Safe Delete</strong>)</p>
+
+<p><code>안전한 삭제(Safe Delete)</code>는 메서드 뿐 아니라 변수, 파일 등을 삭제할 때도 사용할 수 있는 리팩터다. 어떤 코드 또는 파일을 삭제하면 안전하지 않은지, 왜 안전하지 않은 지, 의존하고 있는 곳은 어디인지를 알 수 있다. 이 기능을 이용해 안전하게 파일과 코드를 제거할 수 있다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_safeDelete_00.png" alt="Webstorm, Refactoring EX 1-100 : Refactor, Safe Delete " title="Webstorm, Refactoring EX 1-100 : Refactor, Safe Delete " />
+<figcaption>Webstorm, Refactoring EX 1&#8211;100 : Refactor, Safe Delete </figcaption>
+</figure>
+
+<p>예제에서는 <code>greet</code>이라는 메서드를 삭제하는 과정을 다룬다. 메서드 이름에 커서를 두고 <code>control</code>+<code>T</code> 키를 누르고, <code>safe Delete</code>를 클릭하면, 위 사진에 보이는 창이 뜬다. </p>
+
+<p><strong>Safe Delete 윈도우의 옵션 상세(확인 후 추가 필요)</strong></p>
+
+<ul>
+<li><code>Search in comments and strings</code> : 내용 추가</li>
+<li><code>Search for text occurrences</code> : 내용 추가</li>
+</ul>
+
+<p>옵션을 확인한 후, OK를 누른다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_safeDelete_01.png" alt="Webstorm, Refactoring EX 1-10 : Refactor, Safe Delete " title="Webstorm, Refactoring EX 1-10 : Refactor, Safe Delete " />
+<figcaption>Webstorm, Refactoring EX 1&#8211;10 : Refactor, Safe Delete </figcaption>
+</figure>
+
+<p>“<strong>현재 삭제 하려는 것은 어딘가에서 사용되고 있어요”</strong> - Usage Detected</p>
+
+<p>상황에 따라, 어떤 것을 삭제하느냐에 따라 다르겠지만 이 예제에서 <code>greet</code> 이라는 메서드를 삭제하려고 보면 <code>Usage Detected</code>라는 새로운 알림창이 뜬다.</p>
+
+<p><strong>Usage Detected 상세 옵션</strong></p>
+
+<ul>
+<li><code>View usages</code> : 삭제 대상이 사용되고 있는 관련 소스 정보를 보여주는 <code>Find Safe Delete</code>윈도우를 연다.</li>
+<li><code>Delete Anyway</code> : 무시하고 그냥 삭제한다.</li>
+</ul>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_safeDelete_02.png" alt="Webstorm, Refactoring EX 1-11 : Refactor, Safe Delete " title="Webstorm, Refactoring EX 1-11 : Refactor, Safe Delete " />
+<figcaption>Webstorm, Refactoring EX 1&#8211;11 : Refactor, Safe Delete </figcaption>
+</figure>
+
+<p><strong>Find Safe Delete</strong></p>
+
+<p>삭제대상 코드를 사용중인 파일의 경로와 위치를 보여준다. 이 예제에서는 총 2건에 대한 내용이 나왔는데, 이 <code>Find Safe Delete</code> 윈도우에서 해당 파일을 오른쪽 클릭한 후 <code>Jump to Source</code> 클릭하면 해당 파일 내 사용중인 코드의 위치로 이동할 수 있다. 그 곳에서 코드 삭제의 적절성을 판단하여 삭제를 진행할지, 아니면 중단할지를 판단하면 된다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_safeDelete_03.png" alt="Webstorm, Refactoring EX 1-12 : Refactor, Safe Delete " title="Webstorm, Refactoring EX 1-12 : Refactor, Safe Delete " />
+<figcaption>Webstorm, Refactoring EX 1&#8211;12 : Refactor, Safe Delete </figcaption>
+</figure>
+
+<p><strong>Jump to Source 기능 사용 결과 화면</strong></p>
+
+<p><code>Jump to Source</code> 기능을 활용하여 삭제 대상이었떤 <code>greet</code> 메서드가 사용중인 파일화면으로 이동한 결과이다. </p>
+
+<p><strong>웹스톰의 Safe Delete 리팩터의 장점</strong></p>
+
+<p>웹스톰의 <code>Safe Delete</code> 리팩터를 이용하면 삭제할 때 안전성을 검증할 수 있을 뿐더러 안전을 보장할 수 없다면 그 사실을 알려주고 안전하게 코드나 파일을 제거할 수 있게 도와준다. 책의 저자 주우영씨는 toolcon2014에서 이 <code>safe delete</code> 기능을 거의 모든 삭제 작업 진행에 사용한다고 말했다.</p>
+
+</body>
+</html>

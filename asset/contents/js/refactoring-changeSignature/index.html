@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h3 id="웹스톰리팩터링실전예제6:시그니처변경changesignature">웹스톰 &amp; 리팩터링 실전 예제 6 : 시그니처 변경(Change Signature)</h3>
+
+<p>함수나 메서드의 시그니처를 변경해야 할 때가 있다. 하지만 변경하려고 하는 함수나 메서드를 이미 사용하고 있을 때 시그니처 변경은 자칫 원치 않는 동작이나 버그를 만들 수 있다. 이때 웹스톰의 <code>Change Signature</code>를 리팩터를 사용하면 안전하게 시그니처를 변경할 수 있다.</p>
+
+<ol>
+<li><code>Cage_signature &gt; Images.js</code> 파일을 열어본다. : 이 파일 내 <code>Image</code> 객체는 이미지 정보를 데이터베이스에 생성, 조회, 변경, 삭제하는 <strong>DAO객체<sup><a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">1</a></sup>이다</strong>. 이 객체는 파라미터로 <code>url</code>을 요구한다. 또한, 이 Image객체를 app.js 내부 <code>createUser</code>, <code>createArticle</code>함수에서 사용하고 있다.</li>
+<li>상황 설정 : 어느날 서비스 정책이 변경되어 이미지 정보를 생성해야 할 때 이미지의 타입 정보도 함께 저장하게 됐다고 가정하자. 타입은 이미지의 용도를 나타내며 기존에는 모든 이미지의 용도가 ‘main’이었지만 새로운 정책에서는 ‘contents’용 이미지가 추가된다고 하자.</li>
+</ol>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_changeSignature_01.png" alt="Webstorm, Refactoring EX 1-13 : Refactor, Change Signature " title="Webstorm, Refactoring EX 1-13 : Refactor, Change Signature " />
+<figcaption>Webstorm, Refactoring EX 1&#8211;13 : Refactor, Change Signature </figcaption>
+</figure>
+
+<p><strong>웹스톰 [Change Signature] 리팩터 기능 활용하기</strong></p>
+
+<ol>
+<li><code>Change Signature</code> 리팩터를 이용해 <code>Image</code> 객체의 <code>create</code> 메서드에 <code>sType</code>파라미터를 추가하기.</li>
+<li>create 메서드에서 오른쪽 클릭 후 <code>Refactor &gt; Change Signature</code>를 클릭하면 <code>Change Signature of create()</code> 창이 열린다.</li>
+<li>가운데에 있는 <code>+</code>를 클릭하면서 시그니처를 추가할 수 있다. <code>Name</code>은 시그니처 명이고 <code>Value</code>는 시그니처의 기본 값이다. 원래는 이미지의 타임이 <code>’main’</code>이었으므로, 기본값으로 ‘<code>main’</code>이라고 하고 <code>refactor</code>를 클릭한다.</li>
+</ol>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_changeSignature_02.png" alt="Webstorm, Refactoring EX 1-14 : Refactor, Change Signature " title="Webstorm, Refactoring EX 1-14 : Refactor, Change Signature " />
+<figcaption>Webstorm, Refactoring EX 1&#8211;14 : Refactor, Change Signature </figcaption>
+</figure>
+
+<p>사진에서 설명하는 것 처럼 <code>create</code> 메서드에는 새롭게 <code>sType</code> 파라미터가 추가됐을 뿐만 아니라 기본 값인 <code>’main’</code> 역시 자동으로 입력됐다.</p>
+
+<figure>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_changeSignature_03.png" alt="Webstorm, Refactoring EX 1-15 : Refactor, Change Signature " title="Webstorm, Refactoring EX 1-15 : Refactor, Change Signature " />
+<figcaption>Webstorm, Refactoring EX 1&#8211;15 : Refactor, Change Signature </figcaption>
+</figure>
+
+<p><strong>지역 변수를 넘어, 디렉토리 내 해당 메서드를 사용하고 있는 코드를 추적한다</strong>.</p>
+
+<p>웹스톰의 <code>Change Signature</code> 리팩터는 <code>create</code> 메서드를 사용하고 있는 코드를 추적해 <code>app.js</code>의 <code>createUser</code>, <code>createArticle</code> 함수에 기본 값인 <code>’main’</code>을 사용해 파라미터를 자동으로 추가했다.</p>
+
+<p><strong>웹스톰 리팩터링기법 01 - Change Signature 정리</strong></p>
+
+<ul>
+<li>메서드나 함수의 시그니처 변경 위험을 최소화하여 리팩터링 할 수 있음</li>
+<li>예제에서는 파라미터가 추가될 경우를 다뤘지만 기본값이 변경되거나 또 파라미터가 제거되는 경우에도 안전하고 유용하게 변경할 수 있다.</li>
+</ul>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>1 <a href="#fnref:1" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+</li>
+
+</ol>
+</div>
+
+
+</body>
+</html>
