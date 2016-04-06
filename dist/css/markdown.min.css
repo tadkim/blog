@@ -1,0 +1,77 @@
+/* 마크다운 기본 템플릿 CSS 파일입니다 */
+/* 작성자 : 정유미; 작성일 : 4월 첫째주; */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+/* CSS 리셋 - HTML5doctor */
+/* 
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com 
+Twitter: @rich_clark
+*/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent;}
+body {line-height:1;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display:block; }
+nav ul { list-style:none; }
+blockquote, q { quotes:none; }
+blockquote:before, blockquote:after, q:before, q:after { content:''; content:none; }
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
+/* change colours to suit your needs */ ins { background-color:#ff9; color:#000; text-decoration:none; }
+/* change colours to suit your needs */ mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
+del { text-decoration: line-through; }
+abbr[title], dfn[title] { border-bottom:1px dotted;cursor:help;}
+table { border-collapse:collapse; border-spacing:0; }
+/* change border colour to suit your needs */hr { display:block; height:1px; border:0; border-top:1px solid #cccccc; margin:1em 0; padding:0; }
+input, select { vertical-align:middle; }
+/* -- CSS 리셋 완료 -- */
+
+
+
+/*  Markdown Styling  */
+body{ background-color: #efefef; font-size: 16px; font-family:  'Nanum Myeongjo', serif; font-weight: normal; letter-spacing: -0.05em; line-height: 1.9em;}
+#wrap{ background-color: #fff; width: 45%; min-width: 600px; margin: 0 auto; padding: 1em 3em; }
+table, pre, blockquote, p, ul, ol, img{ margin: 0 0 1.5em 0; }
+img{ width: 100%; height: auto; }
+
+pre{ background-color: #222; color: white; border-radius: 0.3em; padding:  0.8em 1.5em 0.8em 1.5em; line-height: 1.5em; }
+pre, code{ font-family: 'Nanum Gothic Coding', serif; letter-spacing: 0em; white-space: pre-wrap; }
+p > code {background-color: #efefef; margin: 0 0.2em; padding: 0.1em 0.3em 0.1em 0.3em; border-radius: 0.3em; border: 1px solid #ccc; }	
+li > code { background-color: #efefef; margin: 0 0.2em; padding: 0.1em 0.3em 0.1em 0.3em; border-radius: 0.3em; border: 1px solid #ccc;}
+
+ul , ol { background-color: #f7f7f7; border-radius: 0.3em; padding:  0.5em 1.5em 0.5em 2.5em; font-family: 'Noto Sans KR', sans-serif; font-size: 0.95em; color: #333; line-height: 1.8em;}
+ol{ padding:  0.5em 1.5em 0.5em 2em; }
+ul li, ol li { margin : 0.5em 0; }
+li > ol, li> ul{ margin-top: -0.5em; }
+
+a:link, a:visited{text-decoration: none; color: hsl(158,100%,27%); }
+a:hover, a:focus, a:active{ color: #000; }
+
+h1,h2,h3,h4,h5,h6{ font-family: 'Noto Sans KR', sans-serif; }
+h1{ font-size: 3em; font-family:  'Noto Sans KR', serif; font-weight: 300; letter-spacing: -0.05em; padding-bottom: 0.3em; border-bottom: 3px solid #444; margin: 2em 0 1em 0; }
+h2{ font-size: 1.3em; line-height: 1.5em; margin: 2em 0 1em 0; font-weight: 600; }
+h3{ font-size: 1em; margin : 0.4em 0 0.4em 0; }
+h3:before{ background: transparent no-repeat; background-image: url(img/bar.png); display: block; width: 5px; height: 17px; content: ''; float: left; margin:  0.55em 0.55em 0 0; }
+h4{ font-size: 0.9em; color: #444; margin: 0.4em 0 0 0; }
+h5, h6{ font-size: 0.9em; color: #444; margin: 0.5em 0 0 0; }
+
+blockquote { padding-left : 1em; border-left: 7px solid #ddd; }
+
+table{width: 100%;}
+table, th, td{border-bottom : 1px solid #ccc;}
+th, td{vertical-align:  center;padding: 0.3em 0.7em;font-family: 'Noto Sans KR', sans-serif;font-size: 0.95em;color: #333;line-height: 1.8em;text-align:  left;}
+th { border-bottom: 2px solid #333;}
+tr:hover{background-color: #f7f7f7;}
+/* -- Markdown Styling -- */
+
+/* 상단 문서 정보 */
+#meta {margin-bottom: -3em;}
+#meta th, #meta td, #meta, tr:last-child {border: 0px solid #fff;}
+#meta th{ text-align: center;}
+#meta th:first-child{text-align: left;}
+#meta th:last-child{text-align: right;}
+#meta tr:hover{background-color: #fff;}
+/* -- 상단 문서 정보 -- */
+
