@@ -38,7 +38,7 @@ img{ width: 100%; height: auto; }
 
 pre{ background-color: #222; color: white; border-radius: 0.3em; padding:  0.8em 1.5em 0.8em 1.5em; line-height: 1.5em; }
 pre, code{ font-family: 'Nanum Gothic Coding', serif; letter-spacing: 0em; white-space: pre-wrap; }
-p > code {background-color: #efefef; margin: 0 0.2em; padding: 0.1em 0.3em 0.1em 0.3em; border-radius: 0.3em; border: 1px solid #ccc; }	
+p > code {background-color: #efefef; margin: 0 0.2em; padding: 0.1em 0.3em 0.1em 0.3em; border-radius: 0.3em; border: 1px solid #ccc; }
 li > code { background-color: #efefef; margin: 0 0.2em; padding: 0.1em 0.3em 0.1em 0.3em; border-radius: 0.3em; border: 1px solid #ccc;}
 
 ul , ol { background-color: #f7f7f7; border-radius: 0.3em; padding:  0.5em 1.5em 0.5em 2.5em; font-family: 'Noto Sans KR', sans-serif; font-size: 0.95em; color: #333; line-height: 1.8em;}
@@ -58,7 +58,7 @@ h4{ font-size: 0.9em; color: #444; margin: 0.4em 0 0 0; }
 h5, h6{ font-size: 0.9em; color: #444; margin: 0.5em 0 0 0; }
 
 blockquote { padding-left : 1em; border-left: 7px solid #ddd; }
-
+cite{display: block;font-size: 0.9;color: #aaa;text-align: right;}
 table{width: 100%;}
 table, th, td{border-bottom : 1px solid #ccc;}
 th, td{vertical-align:  center;padding: 0.3em 0.7em;font-family: 'Noto Sans KR', sans-serif;font-size: 0.95em;color: #333;line-height: 1.8em;text-align:  left;}
