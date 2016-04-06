@@ -58,7 +58,7 @@ h4{ font-size: 0.9em; color: #444; margin: 0.4em 0 0 0; }
 h5, h6{ font-size: 0.9em; color: #444; margin: 0.5em 0 0 0; }
 
 blockquote { padding-left : 1em; border-left: 7px solid #ddd; }
-cite{display: block;font-size: 0.9;color: #aaa;text-align: right;}
+cite{display: block;font-size: 0.9em;color: #aaa;text-align: right;}
 table{width: 100%;}
 table, th, td{border-bottom : 1px solid #ccc;}
 th, td{vertical-align:  center;padding: 0.3em 0.7em;font-family: 'Noto Sans KR', sans-serif;font-size: 0.95em;color: #333;line-height: 1.8em;text-align:  left;}
@@ -74,5 +74,18 @@ tr:hover{background-color: #f7f7f7;}
 #meta th:last-child{text-align: right;}
 #meta tr:hover{background-color: #fff;}
 /* -- 상단 문서 정보 -- */
+
+
+
+/*지우지마세요*/
+.menu a{
+    cursor:pointer;
+    font-weight:bold;
+    list-style-type:none;
+}
+.menu .hide{display:none;}
+/*--지우지마세요--*/
+
+
 #tems{color:aqua;}
 
