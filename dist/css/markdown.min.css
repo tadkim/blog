@@ -53,7 +53,7 @@ h1,h2,h3,h4,h5,h6{ font-family: 'Noto Sans KR', sans-serif; }
 h1{ font-size: 3em; font-family:  'Noto Sans KR', serif; font-weight: 300; letter-spacing: -0.05em; padding-bottom: 0.3em; border-bottom: 3px solid #444; margin: 2em 0 1em 0; }
 h2{ font-size: 1.3em; line-height: 1.5em; margin: 2em 0 1em 0; font-weight: 600; }
 h3{ font-size: 1em; margin : 0.4em 0 0.4em 0; }
-h3:before{ background: transparent no-repeat; background-image: url(img/bar.png); display: block; width: 5px; height: 17px; content: ''; float: left; margin:  0.55em 0.55em 0 0; }
+h3:before{ background: transparent no-repeat; background-image: url(../../img/bar.png); display: block; width: 5px; height: 17px; content: ''; float: left; margin:  0.55em 0.55em 0 0; }
 h4{ font-size: 0.9em; color: #444; margin: 0.4em 0 0 0; }
 h5, h6{ font-size: 0.9em; color: #444; margin: 0.5em 0 0 0; }
 
