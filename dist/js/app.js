@@ -5,7 +5,7 @@
 $(function(){
 
     $('.menu > ul > li').on("click", function(listEle){
-        console.log(this);
+        
         var $this = this;
         var src_root = $(this).attr('class').split("_")[0];
         var src_content = $(this).attr('class').split("_")[1];
