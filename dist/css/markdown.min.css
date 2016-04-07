@@ -37,13 +37,13 @@ body{ background-color: #efefef; font-size: 16px; font-family:  'Nanum Myeongjo'
 #wrap{ width: 100%; min-width: 960px; height: auto; padding: 0; display: block;}
 .container{ width : 960px; height: 100%; margin: 0 auto; padding: 0 0 6em 0; display: block; background-color: #fff; }
 .container div{ display: inline-block; height: 100%;}
-.menu_bar{ z-index: 10; position: fixed; top:0 ;width: 250px; height: 100%; background-color: #63a35c; overflow: scroll; padding-top: 2em;}
+.menu_bar{ z-index: 10; position: fixed; top:0 ;width: 250px; height: 100%; background-color: hsla(142, 28%, 50%, 1); overflow: scroll; padding-top: 2em;}
 .menu_bar > ul > li> a> img{height: 1.5em; width: auto; margin-bottom: 0.7em;}
 .menu_bar li{list-style-type: none;}
 .menu_bar > ul > li > ul > li{list-style-type: disc; margin: 0 0 0.8em -0.5em; line-height: 1.3em;}
 .menu_bar > ul > li > ul {padding-left: 1.2em;}
-.menu_bar ol, .menu_bar ul{ padding-left: 0 ; margin-left: 1em; background-color: #63a35c; }
-.content_area{  width: 710px; height: 100%; background-color: #fff; margin: 0 0 0 250px;}
+.menu_bar ol, .menu_bar ul{ padding-left: 0 ; margin-left: 1em; background-color: hsla(142, 28%, 50%, 1); }
+.content_area{  width: 710px; height: 100%; background-color: #fff; margin: 0 0 0 250px; padding-top:2em;}
 .content{ width: 560px; background-color:#fff; margin: 0 4.5em; }
 /*footer{ font-family: 'Noto Sans KR', serif; font-size: 0.8em; letter-spacing: 0em; z-index: 20; width: 100%; height: 2.5em; position:fixed; bottom: 0; background-color: #333; text-align: center; color: #aaa; }*/
 .menu a{cursor:pointer; font-weight:bold; list-style-type:none;  }
@@ -90,7 +90,7 @@ tr:hover{background-color: #f7f7f7;}
 /* -- Markdown Styling -- */
 
 /* 상단 문서 정보 */
-#meta {margin-top: 2em; margin-bottom: -5.2em;}
+#meta {margin-top: 0em; margin-bottom: -5.2em;}
 #meta th, #meta td, #meta, tr:last-child {border: 0px solid #fff;}
 #meta th{ text-align: center;}
 #meta th:first-child{text-align: left;}

@@ -13,7 +13,7 @@ $(function(){
 
 
         // $('#content').load(toSrc + ' #content', function() {
-        $('#content').load(toSrc , function() {
+        $('.content').load(toSrc , function() {
             $('pre code').each(function(i, block) {
                 hljs.highlightBlock(block);
             });
