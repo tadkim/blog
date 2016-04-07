@@ -31,8 +31,17 @@ input, select { vertical-align:middle; }
 
 
 /*  Markdown Styling  */
+#fixed_header{background-color: #1f7199; width: 100%; height: 3em; text-align: center; color: #fff;}
 body{ background-color: #efefef; font-size: 16px; font-family:  'Nanum Myeongjo', serif; font-weight: normal; letter-spacing: -0.05em; line-height: 1.9em;}
-#wrap{ background-color: #fff; width: 45%; min-width: 600px; margin: 0 auto; padding: 1em 3em; }
+#wrap{ width: 100%; height: auto; margin: 0 auto;}
+.container{ width : 100% ; height: auto;}
+.container div{ display: inline-block; height: 100%;}
+.menu_bar{ width: 25%; height: 10em; background-color: #fff;  }
+.content_area{ width: 60%; height: 10em; background-color: #2dcc70; }
+.content{ width: 100%; background-color:#fff; margin: 0 auto; }
+
+
+/*#wrap{ background-color: #fff; width: 80%; min-width: 660px; margin: 3em 0 3em auto ; padding: 1em 3em; float: right;}*/
 table, pre, blockquote, p, ul, ol, img{ margin: 0 0 1.5em 0; }
 img{ width: 100%; height: auto; }
 
@@ -48,6 +57,7 @@ li > ol, li> ul{ margin-top: -0.5em; }
 
 a:link, a:visited{text-decoration: none; color: hsl(158,100%,27%); }
 a:hover, a:focus, a:active{ color: #000; }
+
 
 h1,h2,h3,h4,h5,h6{ font-family: 'Noto Sans KR', sans-serif; }
 h1{ font-size: 3em; font-family:  'Noto Sans KR', serif; font-weight: 300; letter-spacing: -0.05em; line-height:1.5em; padding-bottom: 0.3em; border-bottom: 3px solid #444; margin: 2em 0 1em 0; }
@@ -78,12 +88,12 @@ tr:hover{background-color: #f7f7f7;}
 
 
 /*지우지마세요*/
-.menu a{
-    cursor:pointer;
-    font-weight:bold;
-    list-style-type:none;
-}
-.menu .hide{display:none;}
+/*.menu a{*/
+    /*cursor:pointer;*/
+    /*font-weight:bold;*/
+    /*list-style-type:none;*/
+/*}*/
+/*.menu .hide{display:none;}*/
 /*--지우지마세요--*/
 
 
