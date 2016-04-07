@@ -90,7 +90,7 @@ tr:hover{background-color: #f7f7f7;}
 /* -- Markdown Styling -- */
 
 /* 상단 문서 정보 */
-#meta {margin-top: 2em; margin-bottom: -4em;}
+#meta {margin-top: 2em; margin-bottom: -5.2em;}
 #meta th, #meta td, #meta, tr:last-child {border: 0px solid #fff;}
 #meta th{ text-align: center;}
 #meta th:first-child{text-align: left;}
