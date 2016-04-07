@@ -39,8 +39,9 @@ body{ background-color: #efefef; font-size: 16px; font-family:  'Nanum Myeongjo'
 .container div{ display: inline-block; height: 100%;}
 .menu_bar{ z-index: 10; position: fixed; top:0 ;width: 250px; height: 100%; background-color: hsla(142, 28%, 50%, 1); overflow: scroll; padding-top: 2em;}
 .menu_bar > ul > li> a> img{height: 1.5em; width: auto; margin-bottom: 0.7em;}
-.menu_bar li{list-style-type: none;}
+.menu_bar li{list-style-type: none; cursor: pointer;}
 .menu_bar > ul > li > ul > li{list-style-type: disc; margin: 0 0 0.8em -0.5em; line-height: 1.3em;}
+.menu_bar > ul > li > ul > li:hover{ color: #efefef;}
 .menu_bar > ul > li > ul {padding-left: 1.2em;}
 .menu_bar ol, .menu_bar ul{ padding-left: 0 ; margin-left: 1em; background-color: hsla(142, 28%, 50%, 1); }
 .content_area{  width: 710px; height: 100%; background-color: #fff; margin: 0 0 0 250px; padding-top:2em;}
@@ -55,8 +56,9 @@ body{ background-color: #efefef; font-size: 16px; font-family:  'Nanum Myeongjo'
 /*#wrap{ background-color: #fff; width: 80%; min-width: 660px; margin: 3em 0 3em auto ; padding: 1em 3em; float: right;}*/
 table, pre, blockquote, p, ul, ol, img{ margin: 0 0 1.5em 0; }
 img{ width: 100%; height: auto; }
+figcaption{ font-family: 'Noto Sans KR', sans-serif; font-size: 0.8em; margin : -2.5em 0 1.5em 0; text-align: left; color: #000;}
 
-pre{ background-color: #222; color: white; border-radius: 0.3em; padding:  0.8em 1.5em 0.8em 1.5em; line-height: 1.5em; }
+/*pre{ background-color: #222; color: white; border-radius: 0.3em; padding:  0.8em 1.5em 0.8em 1.5em; line-height: 1.5em; }*/
 pre, code{ font-family: 'Nanum Gothic Coding', serif; letter-spacing: 0em; white-space: pre-wrap; }
 p > code {background-color: #efefef; margin: 0 0.2em; padding: 0.1em 0.3em 0.1em 0.3em; border-radius: 0.3em; border: 1px solid #ccc; }
 li > code { background-color: #efefef; margin: 0 0.2em; padding: 0.1em 0.3em 0.1em 0.3em; border-radius: 0.3em; border: 1px solid #ccc;}
@@ -81,6 +83,7 @@ h5, h6{ font-size: 0.9em; color: #444; margin: 0.5em 0 0 0; }
 
 
 blockquote { padding-left : 1em; border-left: 7px solid #ddd; }
+.footnote{ font-size: 0.6em; font-weight:600; vertical-align : text-bottom; margin-right: 0.15em;}
 cite{display: block;font-size: 0.9em;color: #aaa;text-align: right;}
 table{width: 100%;}
 table, th, td{border-bottom : 1px solid #ccc;}
