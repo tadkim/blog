@@ -5,11 +5,11 @@
 $(function(){
 
     $('.menu > ul > li').on("click", function(listEle){
-        
+
         var $this = this;
         var src_root = $(this).attr('class').split("_")[0];
         var src_content = $(this).attr('class').split("_")[1];
-        var toSrc = 'http://yumm.co.kr/blog/asset/contents/' + src_root + '/' + src_content + '/';
+        var toSrc = 'http://yumm.co.kr/blogs/asset/contents/' + src_root + '/' + src_content + '/';
 
 
         // $('#content').load(toSrc + ' #content', function() {
