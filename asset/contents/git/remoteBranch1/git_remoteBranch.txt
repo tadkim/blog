@@ -1,0 +1,162 @@
+<p>{{TOC}}</p>
+
+<h1>Git 협업하기 - Remote Branch 사용하기</h1>
+
+<hr />
+
+<p><strong>리모트 브랜치 <code>remote branch</code></strong> : remote 저장소에서 만들어지는 branch</p>
+
+<hr />
+
+<p><code>리모트 저장소</code>는 협업에 참여하고 있는 작업자들이 접속할 수 있는 중립된 저장소를 의미</p>
+
+<p><strong>SSH Keys</strong></p>
+
+<hr />
+
+<p><code>SSH Key</code>: push와 같은 쓰기작업을 시도했을 때 공개키와 로컬PC의 비공개키를 비교해 ‘자동로그인’과 같은 기능을 적용해주게된다.</p>
+
+<pre><code>$ ssh-keygen
+//*Your identification has been saved in **`/Users/admin/.ssh/`**id_rsa.*
+</code></pre>
+
+<p><strong><code>/Users/admin/.ssh/</code></strong>를 카피해서 해당 디렉토리로 바꿔준다.</p>
+
+<pre><code>$ ls -al
+</code></pre>
+
+<p><code>id_rsa</code>, <code>id_rsa.pub</code>을 기억해야하고 유출해서도 안된다.
+- <code>id_rsa</code> : 비공개키.
+- <code>d_rsa.pub</code> : 공개키</p>
+
+<p>원격 저장소 연결하는 등의 작업시 비공개키와 공개키를 매칭해서 맞으면 별도의 로그인없이 작업을 진행할 수 있게 된다.</p>
+
+<pre><code>$ cat id_rsa.pub //ssh key 출력
+
+//ssh key 출력 결과
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQbM29wqgX+RpKLyG+MtdFOeC7lb3rIID1fTiW5HKATj38Fta7VRRiiPUba/YwvCqWz7r4eejAjbDf3YsSV+4gijHeT5XoLiA1PPEd1+/zk+UeEwkvA/41zPUniQgwGFhuqvM6d5BF/gPy3bu9zlfl+rBuBiNO0iG2WaeCCfADmNW6KF8IzLZ82PIwJsTxfrqwk1TpKoQOaGZiP5ZLFJ1fiOQCRaTsQvoRBOMdJmVV71/InyXIAIookGYhgHpvyRWsftNuGitrnDyoGn3byBa65bL8Ah4Mf681BQQlCdE/iwDu6u3C1N8zqUL3O2D6Hy13qzL9ugbdNMxz336KKe/B admin@adminui-MacBook-Pro.local
+</code></pre>
+
+<p>출력 된 키를 드래그해서 복사한 후 다음의 과정에 따른다.</p>
+
+<ol>
+<li>Github 로그인</li>
+<li>Account Settings > SSH keys</li>
+<li>new SSH Key (또는 Add SSH Key)</li>
+<li><code>title</code>에는 자유롭게 SSH KEY 이름을 입력 (예 : admin everybody computing)</li>
+<li><code>key</code>영역에 드래그로 복사했던 sshkey를 불어넣기.</li>
+</ol>
+
+<h2>Git console에서의 협업 1(리모트 저장소)</h2>
+
+<hr />
+
+<p><strong>리모트 저장소 복제</strong></p>
+
+<pre><code>**$ git clone (SSH KEY)**
+//*git clone git@github.com:tadkim/openeverybody.git*
+
+**$ls -al**
+**$cd openeverybody** //*openeverybody는 저장소이름*
+
+**$ls -al**
+//*total 16*
+//*drwxr-xr-x   5 admin  staff  170  3 22 12:08 .*
+//*drwxr-xr-x   5 admin  staff  170  3 22 12:08 ..*
+//*drwxr-xr-x  13 admin  staff  442  3 22 12:08 .git*
+//*-rw-r--r--   1 admin  staff  106  3 22 12:08 .gitignore*
+//*-rw-r--r--   1 admin  staff   32  3 22 12:08 README.md*
+//*adminui-MacBook-Pro:openeverybody admin$ cat .gitignore*
+//**/config/development*
+//**/logs/log-*.php*
+//*!*/logs/index.html*
+//**/cache/**
+//*!*/cache/index.html*
+//*!*/cache/.htaccess*
+</code></pre>
+
+<p>그다음에는</p>
+
+<pre><code>**$ git add helloworld.html** //*tracked 상태로 전환*
+
+**$ git commit -m 'first commit**'
+//*[master 4479b64] first commit*
+//*1 file changed, 165 insertions(+)*
+//*create mode 100644 helloworld.html*
+</code></pre>
+
+<p>commit을 했으나 원격저장소에 바로 가는 것이 아니다. 커밋은 오로지 로컬저장소에 저장되고, push했을 경우 반영된다.</p>
+
+<pre><code>**$git remote** // *리모트 저장소의 별명 확인하는 코드*
+//*origin : 원격저장소를 clone해서 그렇다.*
+</code></pre>
+
+<p><strong>git <code>push</code> : 서버에 작업내용을 업로드</strong></p>
+
+<blockquote>
+  <p><em>서버에있는 내용을 먼저 다운로드해야한다. 다운로드 후, 자신의 파일의 내용과 충돌하는 게 없는지 확인후 push해줘야한다.(동기화작업)</em></p>
+</blockquote>
+
+<p><strong>리모트 브랜치와 동기화</strong>
+- <code>git fetch</code> (리모트 저장소의 별명) (리모트 브랜치)
+(리모트 저장소 별명)에 해당하는 저장소의 (리모트 브랜치)를 현재 선택된 로컬 브랜치로 가져온다.
+- <code>git pull</code> (리모트 저장소의 별명) (리모트 브랜치)
+- git fetch명령을 실행하고 자동으로 merge(병합) 하기
+- git push (리모트 저장소의 별명) (리모트 브랜치)
+(리모트 저장소 별명)의 (리모트 브랜치)로 로컬 브랜치를 전송한다.
+이 명령을 수행하기 전에 git fetch나 git pull을 수행한다.</p>
+
+<pre><code>**$git pull origin master**
+//*From github.com:tadkim/openeverybody*
+//* branch master -&gt; FETCH_HEAD*
+//*Already up-to-date.*
+</code></pre>
+
+<p><strong>리모트 브랜치 생성</strong>
+- <code>git checkout -b</code> (새로운 브랜치) : (새로운 브랜치)를 로컬 브랜치로 만든다.
+- <code>git push</code> (리모트 저장소) (리모트 브랜치) :(리모트 저장소)에 (리모트 브랜치)를 생성하고 현재의 로컬 브랜치와 추적상태를 만든다.</p>
+
+<p><strong>$git push origin master</strong> </p>
+
+<pre><code>//*Counting objects: 3, done.*
+//*Delta compression using up to 4 threads.*
+//*Compressing objects: 100% (3/3), done.*
+//*Writing objects: 100% (3/3), 2.63 KiB | 0 bytes/s, done.*
+//*Total 3 (delta 0), reused 0 (delta 0)*
+//*To git@github.com:tadkim/openeverybody.git*
+//*f05bfaa..4479b64  master -&gt; master*
+</code></pre>
+
+<p>별도 설정하지않으면 git에서 ‘master`라는 이름을 자동으로 생성한다.</p>
+
+<p><strong>리모트 저장소 복제</strong>
+- <code>git clone</code> (리모트 저장소 URL)
+- <code>git add</code> (리모트 저장소의 별명) (리모트 저장소의 URL)</p>
+
+<p><strong>리모트 저장소의 삭제</strong>
+- <code>git remote rm</code> (리모트 저장소의 별명)</p>
+
+<p><strong>리모트 브랜치 현황보기</strong>
+- <code>git remote</code> : 로컬 브랜치에 연결되어 있는 리모트 브랜치 리스트 보기
+- <code>git remote show</code> (리모트 브랜치) : (리모트 브랜치)와 로컬브랜치의 관계를 상세히 보기
+<strong>리모트 브랜치 삭제</strong>
+- <code>git push</code> (리모트 저장소의 별명) :(리모트 브랜치)
+(리모트 저장소의 별명)의 (리모트 브랜치를 삭제) ':' 앞에 뛰어쓰기해야 함</p>
+
+<p><strong>git fetch VS git pull</strong></p>
+
+<hr />
+
+<p><strong>git fetch와 git pull 중 어떤 것이 더 나은 방법일까</strong>? 
+정답은 없지만 git fetch가 더 바람직하다. git fetch는 원격저장소의 내용을 모두 가져오지만 그것을 working copy에 합치지 않는다. 다시 말해서 소스가 변경되지 않는다는 것이다. 그럼 어떻게 해야 코드가 최신 상태가 될까? git merge 명령을 실행시키면 된다. 그럼 fetch를 통해서 가져온 원격 저장소의 소스와 자신이 작업하고 있었던 소스가 병합(merge) 된다. </p>
+
+<p><strong>간단하게 pull하면 되는데 fetch를 하는 이유는 무엇일까</strong>? 
+fetch를 하면 실제로는 working copy에 반영되지 않기 때문에 원격 저장소와 로컬 저장소 사이의 차이점을 비교 할 수 있다. 문제점이 있는지 여부를 미리 검토 할 수 있는 것이다. 필자의 경우 fetch를 이용하는 경우 아래와 같은 흐름으로 작업을 한다. </p>
+
+<ul>
+<li><code>git fetch;</code> #원격 저장소에서 로컬 저장소로 변경점을 가져온다. 단, Working Copy에는 반영하지 않는다.</li>
+<li><code>git log git log ..origin/master;</code> #fetch를 이용해서 가져온 변경점과 Working Copy 사이의 차이점만 보여준다.</li>
+<li><code>git merge;</code> #fetch를 이용해서 가져온 내용을 Working Copy에 반영한다. 만약 fetch를 이용해서 가져온 변경 점 중에 특정 커밋 이전만 Working Copy에 반영하고 싶다면 git merge 뒤에 커밋 ID를 붙인다. </li>
+</ul>
+
+<p><a href="https://www.youtube.com/watch?v=NCHhXvvX4OU">생활코딩 - Git console에서의 협업 1(리모트 저장소)</a></p>

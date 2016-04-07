@@ -1,0 +1,64 @@
+<h2>자료형과 변수</h2>
+
+<p>프로그래밍의 가장 중요한 역할은 데이터 조작이다. 데이터(data)는 컴퓨터 프로그램에 저장된 정보를 가리킨다.</p>
+
+<p><strong>자바스크립트의 기본 자료형</strong>
+1. 숫자
+2. 문자열 : 텍스트
+3. 불리언 : 참(true)또는 거짓(false)가 될 수 있는 값.</p>
+
+<p><strong>숫자와 연산자</strong>
+자바스크립트로 기본 수칙 연산을 수행할 수 있는데, 이러한 계산을 할때 연산자(Operator)가 사용된다.
+-  Operator : +, -, *, /</p>
+
+<p><strong>변수(Varialble</strong>)
+자바스크립트에서는 변수를 써서 값에 이름을 붙일 수 있다.</p>
+
+<p><strong>논리 연산자</strong>
+숫자를 +, -, *, / 등의 산술 연산자와 함께 사용하듯이, 불리언 값은 불리언 연산자와 함께 쓸 수 있다. 자바스크립트에는 <code>&amp;&amp;</code>, <code>||</code>, <code>!</code> 이렇게 세 가지 불리언 연산자가 있다.</p>
+
+<ol>
+<li><code>&amp;&amp;</code> (AND) : 두 가지 불리언 값이 모두 참인가?</li>
+<li><code>||</code> (OR) : 두 가지 불리언 값중 하나라도 참인가?</li>
+</ol>
+
+<p><strong>논리연산자 결합하기</strong>
+숫자 계산시 <code>*</code>를 <code>+</code>보다 먼저 계산하는 것 처럼 불리언 연산자에서는 <code>&amp;&amp;</code>를 <code>||</code>보다 먼저 계산하게 되어있다.</p>
+
+<p><strong>이중 등호 &amp; 삼중 등호</strong>
+- 이중 등호 : 비슷한 값이다. (equal-ish)
+- 삼중 등호 : 동일하다. (equal to) : 자료형 유형이 다른 두 값이 같은지?</p>
+
+<p><strong>0은 <code>false</code>인가</strong>?</p>
+
+<pre><code>0 == false; //true
+“false” === false; //false
+</code></pre>
+
+<p>0과 false는 같지만, 0과 문자열 “false”는 같지 않다고 나온다.</p>
+
+<p><strong>undefined와 null</strong>
+이 두가지 모두 “아무것도 아니다(nothing).”이라는 뜻이다. 하지만 의미하는 바가 약간 다르다.
+- <code>undefined</code>: 무언가를 위해 쓸 값이 없을 때 쓴다. 새로운 변수를 만들어놓고 어떠한 값도 입력하거나 할당하지 않았다면 <code>undefined</code>가 된다.
+- <code>null</code> : 값을 비워두었다는 의도를 명확히 알리고 싶을 때 쓴다.</p>
+
+<p>일부러 <code>undefined</code>를 넣을 일은 흔치 않다. 따라서 변수에 아무것도 넣지 않아야 할 때는 <code>null</code>을 넣자.</p>
+
+<h2>배열</h2>
+
+<p><strong>한 배열에서 여러 자료형 사용하기</strong></p>
+
+<p>[<strong>3, “디자인”, [“시각”, “산업”, 2016], “디자이너”, 10</strong>];
+위의 배열의 색인은 다음과 같다.
+- <strong>3</strong> : [0]
+- “<strong>디자인</strong>” : [1]
+- “<strong>시각</strong>” : 2[0]
+- “<strong>산업</strong>” : 2[1]
+- <strong>2016</strong> : 2[2]
+- “<strong>디자이너</strong>” : [3]
+- <strong>10</strong> : [4]</p>
+
+<p><strong>배열 다루기</strong>
+배열은 <code>Property</code>와 <code>Method</code>로 다룬다.
+- <code>Property</code> : 보통 배열에 대한 정보를 알려준다.
+- <code>Method</code>:  배열을 변경하거나 새로운 배열을 반환한다.</p>

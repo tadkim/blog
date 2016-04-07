@@ -1,0 +1,42 @@
+<h1 id="sass-01-install">SASS 01 - install</h1>
+<hr>
+<p>이 글은 <code>Sass</code> 기술의 원활한 학습을 위해 작성되었다. 이 글에 기술한 내용들은 단순히 &#39;복사&amp;불어넣기&#39;에 의한 것이 아니라, 직접 코드를 실행해가면서 불필요한 내용(중복 설치 및 역사에 대한 내용들)은 과감히 Skip하며 진행했다.</p>
+<hr>
+<h2 id="-">학습 환경</h2>
+<p>앞서 일러두었듯이, 이 문서에 작성 된 코드들은 실제로 실행해본 것이다. 다만, 개발환경이 다르거나 관련 라이브러리나 기술의 버전이 다름으로 의도치 않는 방황(?)이 있을 수 있기에 시작 전에 작성자의 개발환경을 짧게나마 명시해 둔다. </p>
+<h3 id="-">개발환경</h3>
+<ul>
+<li>작성일 : 2016년 3월 31일</li>
+<li>OS : Mac</li>
+<li>Browser : Chome</li>
+</ul>
+<h3 id="mac">Mac</h3>
+<p>축하한다. <code>Sass</code>는 <code>Ruby</code>에 의존성을 가지고 있고, mac에는 이미 Ruby가 내장 되어있다. 우리는 터미널에서 몇 줄의 코드만 실행하면 바로 <code>Sass</code> 학습을 시작할 수 있다.</p>
+<hr>
+<p>##Install Sass</p>
+<p>Ruby는 gems를 이용해 <code>Sass</code>와 같은 다양한 코드 패키지들을 관리한다. 터미널을 실행한 뒤 아래와 같은 명령어를 입력한다.</p>
+<pre><code class="bash">gem install sass</code></pre>
+
+<p>이 명령어로 설치할 경우, <code>Sass</code>는 당신의 컴퓨터에 의존성을 갖게 된다. 만약 이와 관련한 에러 메시지가 발생한다면,  <code>sudo</code>코드를 활용해 <code>Sass</code>를 설치해주자.(모르겠으면 <code>sudo</code>코드를 사용하자)</p>
+<pre><code class="bash">sudo gem install sass</code></pre>
+
+<p>제대로 설치 되었는지 확인해보자.</p>
+<pre><code class="bash">sass -v // Sass 3.4.22 (Selective Steve)</code></pre>
+
+
+<hr>
+<h2 id="scss-css-">scss파일을 트래킹해 css로 자동 변환하기</h2>
+<p>이 작업은 <code>.scss</code>파일에 코드를 작성하고 저장 버튼을 누를 경우, 자동으로 우리가 원하는 형태인 .css파일 문서에 반영되도록 하는 것이다. 이 작업은 다음과 같은 순서로 진행된다.</p>
+<ol>
+<li>빈 폴더에 style.scss 파일 생성하기</li>
+<li>터미널에서 예제폴더 경로로 이동한 후 <code>style.scss</code>파일에 <code>--watch</code> 설정<pre><code> sass --watch style.scss:style.css
+</code></pre></li>
+<li><code>style.scss</code>파일에서 임의로 코드작성후, 파일을 저장</li>
+<li><code>style.css</code>파일 변화 확인</li>
+</ol>
+<p><img src="../img/sass/sass_01_howToInstallSass_01.png" alt="" title="툴팁 메세지">
+<img src="../img/sass/sass_01_howToInstallSass_02.png" alt="" title="툴팁 메세지"></p>
+<p>위 코드는 <code>style.scss</code>파일이 변경 될 경우 변경사항을 트래킹 해 자동으로 <code>style.css</code>파일에 반영하도록 설정하는 코드이다.</p>
+<p><link rel="stylesheet" href="../css/lib/hilight/monokai-sublime.css"></p>
+<script src="../js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>

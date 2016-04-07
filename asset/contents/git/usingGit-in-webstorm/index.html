@@ -1,0 +1,242 @@
+<h1> Git for Version Control (in Webstorm)</h1>
+
+<p>이글은 스튜디오 Colony의 협업 개발 환경에 대한 내용을 정리하기 위해 작성되었으며, 자세한 내용은 <code>1</code>과 <code>2</code>에서 확인 가능하다.</p>
+
+<h2>사전 준비사항</h2>
+
+<p>이 글에서 정리한 과정을 진행하기 위해서는 다음과 같은 개발환경이 세팅되어야 한다.
+- Webstorm
+- Git
+- GitHub Account
+- npm</p>
+
+<p>위 환경에 대한 설치 및 설저엥 대한 내용은 <a href="http://visualize.tistory.com">Colony Dev Setting Guide</a> 을 참고한다. </p>
+
+<h2>INDEX</h2>
+
+<ol>
+<li><p>기본 환경 점검</p>
+
+<ul>
+<li>웹스톰 정상작동 여부</li>
+</ul></li>
+<li><p>기본 협업 환경 설정</p>
+
+<ul>
+<li>Github의 <code>SSH Key</code> 확인</li>
+<li>Webstorm 실행 후 빈 프로젝트 생성</li>
+<li><code>Webstorm</code> > <code>Preference</code> > <code>GitHub</code>에서 연동 확인</li>
+</ul></li>
+<li><p>Github 기본 협업 예제</p>
+
+<ul>
+<li>3-1. 원격 저장소 <code>Clone</code>
+<ul>
+<li><abbr title="Remote Repository">원격 저장소</abbr>를 로컬 저장소로 복제하기</li>
+</ul></li>
+<li>3-2. <code>Commit</code> &amp; <code>Push</code> <br />
+<ul>
+<li>복제된 파일 중 <code>changeThis.html</code>파일을 임의로 수정 후 <code>Commit</code> &amp; <code>Push</code></li>
+</ul></li>
+<li>3-3. 브랜치 생성하기
+<ul>
+<li>브랜치를 생성하는 방법</li>
+<li>브랜치가 충돌하는 경우 와 대처법</li>
+</ul></li>
+</ul></li>
+<li><h2>Git관련 주요 명령어 정리</h2></li>
+</ol>
+
+<hr />
+
+<h3>2. 기본 협업 환경 설정</h3>
+
+<p><img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/ws_git_01.png" alt="그림 2-1" title="" /></p>
+
+<hr />
+
+<h3>3. Github 기본 협업 예제</h3>
+
+<p><strong>3-1 원격 저장소 복제(<code>Clone</code>)하기</strong></p>
+
+<p><strong>Before</strong>
+- 탬 : "잠깐만 나 이거 JS파일 수정 좀만 더하고.. 다른거 하고 있어봐."
+- 윰 : "이미지 작업 다했는데..내가 CSS라도 건들고있을까?"
+- 탬 : "아니야, 그러면 엉키니까.. 좀만 기다려 압축해서 넘겨줄게"</p>
+
+<p><strong>After</strong>
+- 탬 : "내가 기본적인 HTML, JS, CSS, http://whiteleo.azurewebsites.net/colony/markdown/git/img 폴더링은 해놨어. 거기서 시작해."
+- 윰 : "그래, 거기서 작업할게"</p>
+
+<blockquote>
+  <p><strong>탬이 생각하는 Git의 "원격 저장소 복제"기능</strong><br/>
+ <em>"원격 저장소 복제"기능을 하는 이유는, (팀의 협업 관점에서 보면) 나도 너도아닌 곳에 저장소를 만들어 놓고 공동편집을 할 수 있도록 하는 것이다. 구글드라이브에서 워드를 공동작업 하던 것고 비슷하나, 그 분야와 배경이 개발(Development)라는 점에서, 조금 더 신중하고 프로세스 기반으로 진행된다는 점이 다르다. (문장은 어색해도 읽히긴 하나, 코드는 앞뒤 문맥이 맞지않으면 작동을 하지 않으니까!)</em></p>
+</blockquote>
+
+<ol>
+<li>웹스톰 실행 후 화면 우측 상단의 돋보기 버튼을 클릭후 <code>checkout version control</code>을 검색한다. 
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/ws_git_03.png" alt="그림 3-2 돋보기 클릭 후 <code>checkout from Version Control</code>메뉴를 찾는 사진 " title="" /></li>
+<li><code>Clone Repository</code>팝업 윈도우에서 복제(Clone)하고자 하는 Github 저장소(Repository)를 지정해준다.
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/ws_git_05.png" alt="그림 3-1-1 돋보기 클릭 후 <code>Clone Repository</code> 윈도우 " title="" />
+<em>위  사진 속 빨간 메시지는 이미 해당 저장소를 동일한 경로에 복제했다는 사실을 알려주는 메시지이다. 처음 복제한(할)경우에는 등장하지 않으므로, 당황하지말고 원격저장소의 파일을 로컬저장소로 복제해보자.</em>
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/ws_git_11.png" alt="그림 3-1-2 돋보기 클릭 후 <code>Clone Repository</code> 윈도우 방법 2" title="" />
+복제를 하는 두 번째 방법은 웹스톰의 메뉴바에서 실행하는 것이다. [ <code>MENU</code>><code>VCS</code>><code>Checkout from Version Control</code>><code>Github</code>또는 <code>Git</code> ] 이런 과정을 통해 원격저장소의 파일을 개인의 저장소인 지역저장소로 복제해오게 된다. 정상적으로 수행하였다면 다음과 같은 결과를 얻을 수 있다. 
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/ws_git_12.png" alt="그림 3-1-3 " title="" />
+총 3개의 파일이 생성된 것을 좌측 사이드바에서 확인할 수 있다. 각 파일에 대한 설명은 아래에서 확인할 수 있다.
+<ul>
+<li><code>.gitignore</code> : 이 파일에 무시해야할 파일목록을 작성하면 저장소에 커밋되지 않는다. (개발자에게 해당하는 임시 파일이나 웹스톰과 같은 IDE가 생성하는 파일은 버전 관리를 하지 않아도되므로 <code>.gitignore</code>에 지정하는 게 일반적이다.)</li>
+<li><code>changeMe.html</code> : 예제를 위해 임의로 만든 HTML파일이다. 이번 예제에서는 어떻게 개인이 이 파일을 수정하고 팀의 저장소에 공유하는지. 그 과정에 대해서 소개한다.</li>
+<li><code>Readme.md</code> : 이 파일은 프로젝트에 대한 소개와 Contributor들에게 추가정보(소프트웨어 설치 방법, 자동화 테스트 실행 방법, 코드 사용 방법, 프로젝트 기여방법 등)을 제공한다.</li>
+</ul></li>
+</ol>
+
+<p><br/></p>
+
+<p><strong>3-2. 변경사항을 적용하는 두 가지 방법. <code>Commit</code>과 <code>Push</code></strong></p>
+
+<p><code>Commit</code>과 <code>Push</code>모두 Git에서 변경사항을 적용하는 방법이며, 세부적인 명세는 다음과 같다.</p>
+
+<ul>
+<li><code>Commit</code> : 지역 저장소에 변경 사항을 적용하기 위해 새로운 리비전을 추가하고 변경된 로그를 저장하는 기능. 변경 사항을 <code>Commit</code>해도 중앙 저장소에 적용하지 않는 다는 것을 기억하자.</li>
+<li><code>Push</code> : 지역 저장소에 <code>Commit</code>된 변경 사항을 원격 저장소에도 반영하고자 할 때 사용하는 기능.
+<ul>
+<li>방법 : 프로젝트 최상위 트리에서 [ <code>RC</code> > <code>Git</code> > <code>Repository</code> > <code>Push</code> ]</li>
+<li><code>Git Push</code> : 커밋 내역을 확인해서 <code>push</code>할 수 있다. 
+<ul>
+<li><code>Push current branch to alternative branch</code> : <code>push</code>할 <code>branch</code>를 지정하고 싶다면 이 옵션을 선택하고 <code>branch 이름</code>을 입력하고 <code>Push</code>버튼을 클릭한다.</li>
+<li><code>Commit and Push</code> : '지역 저장소에 <code>commit</code>하고 원격 저장소에  <code>push</code>하는 과정이 번거로울 때 사용한다. <code>commit</code>후 바로 <code>push</code>하는 기능이다.</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>개념을 대충 살펴봤다면, 실제로 웹스톰에서 <code>commit</code>과 <code>push</code>가 어떻게 이루어지는지 살펴보도록 하자.</p>
+
+<p><strong>- 3-2-1. <code>changeMe.html</code> 파일을 임의로 변경하기 : 변경 파일을 <code>commit</code>하기 위함이다.</strong><br/>
+<strong>- 3-2-2. <code>changeMe.html</code> 파일 변경 후, <code>command</code>+<code>K</code> 단축키로 <code>[Commit Changes]</code>창을 연다.</strong></p>
+
+<ul>
+<li><p>또는, 웹스톰 IDE 우측 최상단에 보이는 두 개의 화살표 중 위를 가리키는 화살표를 눌러주면 동일하게 작동한다.
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/ws_git_14.png" alt="그림 3-2-1 " title="" />
+위에서도 언급했지만, 주의 할 것은 <code>commit</code>만으로는 원격저장소에 반영되지 않는다. 반영되길 원한다면 <code>push</code>를 실행하거나, <code>commit</code>단계에서 <code>commit and push</code>버튼을 클릭하여 원격저장소에 반영해야한다.</p>
+
+<p><img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/ws_git_16.png" alt="그림 3-2-1 " title="" />
+<code>commit and push</code>기능을 실행한 후 Github의 원격저장소 페이지를 새로고침해보자. 9번 라인에 우리가 수정한 부분이 반영되어 있는 것을 볼 수 있다. 이처럼 우리가 각자 개별작업을 진행하더라도, <code>commit</code>과 <code>push</code>기능을 활용하면 단 한줄을 고쳤거나, 아니면 수 백 줄에 이르는 새로운 기능에 대한 코드를 작성했거나 원격저장소에 이에대한 결과를 반영할 수 있다.</p>
+
+<p>마지막으로 <code>commit and push</code>를 하기전에 로컬저장소의 최신 버전 파일들로 자신의 로컬 저장소로 업데이트 하는 것을 잊지말자.</p></li>
+</ul>
+
+<p><em>*3-3. 브랜치(<code>Branch</code>)를 생성하는 방법 *</em></p>
+
+<p>우리는 앞으로 <code>Branch</code>를 활용한 작업이 많이 진행 될 것이다. 여러 사람이 독립적인 <code>branch</code>에서 작업해 마지막 최종 버전에 <code>merge</code>만 하면 되기 때문이다. 본격적으로 브랜치에 대해 이야기하기 앞서, 브랜치의 종류에 대해서 살펴보자.</p>
+
+<ul>
+<li><code>Master Branch</code> : "언제나 안정!"을 추구하는 버전의 브랜치. 새롭게 Git 저장소를 생성할 때 자동으로 브랜치 하나가 생성되는데 이것이 master branch다.</li>
+<li><code>Feature Branch</code> : 새로운 개발 테스트  또는 기능 추가시 곧바로 마슽에 작성하는 것이아니라, 작성하고 검증 후 master에 병합하는 방법에 사용된다.</li>
+<li><code>Release Branch</code> : 특정 버전 배포준비하는 브랜치를 이렇게 별도로 만들 수도 있다. 
+    git checkout -b release -0.9.0. development //</li>
+</ul>
+
+<p><strong>브랜치 생성하기 실전!</strong></p>
+
+<p>우선, 웹스톰에서 원격 저장소에 연결되어있는 환경을 가정한다. (만약 되어있지않다면, 새로운 원격저장소를 <code>clone</code>하여 진행하면 된다.) 우리는 다음과 같은 순서로 진행할 것이다.</p>
+
+<ul>
+<li><em>* 3-1. *</em> 지역 저장소에 새로운 브랜치 생성하기</li>
+<li><em>* 3-2. *</em> 새로운 브랜치를 원격 저장소에 <code>push</code>하기</li>
+<li><p><em>* 3-3. *</em> 파일 변경작업 후 새로만든 브랜치에 <code>Commit</code> &amp; <code>Push</code>하여 차이점 확인하기 </p>
+
+<ul>
+<li><em>* 3-1. *</em> 지역 저장소에 새로운 브랜치 생성하기
+새로운 <code>branch</code>를 생성하는 방법은 크게 두 가지가 있는데, 편한 것을 사용하면 된다. </li>
+</ul>
+
+<p><img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/git_branch_01.png" alt="그림 3-3-1 " title="" />
+첫 번째 방법은 상단 메뉴바를 통해 접근하는 방법으로 자세한 방법은 다음과 같다. 
+[프로젝트 최상위 트리 오른쪽클릭 > Git > Repository > New Branch 클릭 ]
+<img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/git_branch_02.png" alt="그림 3-3-2 " title="" />
+여기까지 마쳤다면, 아마 웹스톰에서 정상적으로 브랜치를 생성했음을 알리는 팝업 메시지까지 확인했을 것이다. 바로 확인해보기 전에, 잊지말고 해야할 것이 하나 있다. 바로 생성한 로컬저장소의 브랜치를 원격저장소로 <code>push</code>해주는 것이다. 우리는 로컬저장소에 브런치를 만들었을 뿐, 원격저장소에 반영하지 않았다. 만약 협업개발자가 있다면, 이 브랜치의 존재도 확인할 수 없을 것이다.</p>
+
+<p><img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/git_branch_03.png" alt="그림 3-3-3 " title="" />
+여기서 한가지 주의해야할 것이 있는데, 위에서 소개한 &lt;파일 변경 후 <code>push</code>하기>에서, 우리는 해당 파일 수정하던 화면 그대로 <code>command</code> + <code>K</code> 키를 활용하여 <code>commit &amp; push</code>를 실행했다. 기본적으로 <code>commit</code>과 <code>push</code>한다는 메커니즘 자체는 <code>branch</code>도 다르지 않다. 다만, <code>branch</code>는 하나의 파일을 가리키는 것이 아니라 하나 혹은 그 이상을 대상으로 하는 것이기 때문에, 반드시 "최 상위 트리"에서 <code>commit</code>과 <code>push</code>를 해야 변경사항이 반영된다. </p>
+
+<p>다음으로는 살펴볼 방법이 권장하는 방법이다. 쉽고, 빠르다.</p>
+
+<p><img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/git_branch_2-1.png" alt="그림 3-3-2-1  " title="" />
+웹스톰 화면의 우측 하단을 살펴보면 <code>Git:master</code>라고 적혀있는 곳이 있을 것이다. 위 사진과 같이 눌러보면 <code>Git Branches</code>라는 새로운 팝업 윈도우가 생성된다. 방금 위에서 눌러봤던 그 윈도우창과 같은 거다. 
+(혹시 <code>Git:master</code>가 아니라면, 이미 다른 <code>branch</code>로 연결되어서 그럴 것이다. 당황하지말고 진행하자.)</p>
+
+<p><img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/git_branch_2-2.png" alt="그림 3-3-2-2  " title="" />
+<code>[New Branche]</code>를 클릭한 다음은 위에서 실행했던 방법과 동일하게 진행하면 된다. 
+    [ Create New Branch 팝업 윈도우 > 새로운 브랜치 이름을 자유롭게 작성후 OK ]</p>
+
+<p>이처럼 두 번째 방법으로 <code>branch</code>를 생성하는 것이 더 쉽다. 이제 Github의 원격 저장소로 가서 우리가 만든 <code>branch</code>가 반영이 되었는지 살펴보자. </p>
+
+<p><img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/git_branch_2-3.png" alt="그림 3-3-2-3  " title="" />
+Github의 해당 원격저장소 페이지에 들어가면 <code>commit</code>, <code>branches</code>, release`등으로 구성된 탭 창이 있다. 그 곳을 살펴보면 "2 branches"라고 표시되어있는데 이는 "2개의 브랜치가 있음."이라는 뜻이다. 이 영역을 클릭하면 우측 사진과 같이 언제 우리가 새로운 브런치를 생성했는지에 대한 정보와, 누구에의해서 생성되었는지를 확인해볼 수 있다.</p>
+
+<p>첫 번째 방법과 마찬가지로 우리는 새로운 <code>branch</code>가 생성되었음을 원격저장소에게 알려주어야한다. 프로젝트 최상위에서 <code>commit</code>과 <code>push</code>를 실행하자.</p>
+
+<blockquote>
+  <p>파일에서 바로 <code>commit</code>과 <code>push</code>를 하지않고 귀찮게(?) 프로젝트 최상위로 올라가서 해야하는지 궁금하다면 직접 실험 해보면 된다. 파일 커밋에 익숙해져있다가 <code>commit</code>과 <code>push</code>가 정상적으로 완료되었다는 메시지를 두 눈으로 확인했음에도 원격저장소 파일이 변경 되지않음을 확인할 수 있을 것이다.</p>
+</blockquote>
+
+<p><img src="http://whiteleo.azurewebsites.net/colony/markdown/git/img/git_branch_2-5.png" alt="그림 3-3-2-5  " title="" />
+결과 화면이다. 수정 내용은 우리가 원한대로 master branch에는 아무런 변화 없는 채로 동일한 구성으로 만들어진 테스트 브런치에만 포함되어 있다. 이러한 기능을 바탕으로 프로젝트 작업에서는 <code>master branch</code>를 안정적인 저장소(모든 테스트는 이곳에서 하지않는다.)로 만들어 두고, 새로운 기술 개발이나 테스트를 진행할 때는 <code>master branch</code>와 동일한 개발 환경에서 새롭게 <code>branch</code>를 구성하여 작업을 진행하면 된다. </p>
+
+<p><p>예를들어 <code>master branch</code>가 아닌, 다른 기능 개발 및 테스를 하기위해 새 <code>branch</code>를 만들었다가 개별적인 테스트 종료후 팀원의 의논을 거쳐 <code>master</code>계정 으로 <code>merge</code>하는 순서로 진행할 수 있다.</p></li>
+</ul>
+<hr /></p>
+
+<hr />
+
+<h3>Git 주요 명령어</h3>
+
+<ol>
+<li><p><strong>Git 작업환경 시작하기 (see also: git help tutorial)</strong></p>
+
+<ul>
+<li><code>clone</code> :    새로운 디렉터리에 Repository를 복제한다.</li>
+<li><code>init</code>  :    새로운 빈 Repository를 생성하고, 기존 존재하던 것들을 초기화한다.</li>
+</ul></li>
+<li><p><strong>현재 변경작업 (see also: git help everyday)</strong></p>
+
+<ul>
+<li><code>add</code>    :   인덱스에 파일 내용을 추가</li>
+<li><code>mv</code>     :   파일 이동 또는 파일 명 변경 또는 심볼릭 링크의 이름변경 (Move or rename a file, a directory, or a symlink)</li>
+<li><code>reset</code>  :   지정된 상태로현재 HEAD 리셋 (Reset current HEAD to the specified state)</li>
+<li><code>rm</code>     :    작업 트리(Working tree)에서 인덱스 파일을 제거(Remove files from the working tree and from the index)</li>
+</ul></li>
+<li><p><strong>작업이력과 현재 상태를 검사 (see also: git help revisions</strong>)</p>
+
+<ul>
+<li><code>bisect</code> :   ~이진 검색으로 버그 변경을? 찾는다.( Find by binary search the change that introduced a bug)~</li>
+<li><code>grep</code>   :   Print lines matching a pattern</li>
+<li><code>log</code>    :   Commit 로그를 보이게한다. (Show commit logs)</li>
+<li><code>show</code>   :   다양한 종류의 객체를 보이게 한다.(Show various types of objects)</li>
+<li><code>status</code> :   작업트리(Working tree)를 보이게한다.(Show the working tree status)</li>
+</ul></li>
+<li><p><strong>성장, 표시, 당신의 최근 변경 이력</strong></p>
+
+<ul>
+<li><code>branch</code> :   브런치를 생성하거나 목록을 만든다. 테스트를 해보거나 새로운 기능을 개발하기 위해 사용할 수 있는 따로 떨어진 독립적인 <code>commit</code>들을 말한다.</li>
+<li><code>checkout</code> :  Branche를 변경하거나 작업트리를 이전으로 되돌린다. 프로젝트 history의 다른 버전으로 이동해 해당 시점의 파일을 보기 위해 ‘check out’ 한다. 가장 일반적으로 branch에서 완료된 작업을 모두 보기 위해 branch를 check out하지만, commit도 check out할 수 있다.</li>
+<li><code>commit</code>   :  저장소(Repository)에 변경사항을 기록한다. 하나 또는 다수의 파일에 변경 내용을 저장할 때마다 새로운 commit 생성한다.</li>
+<li><code>diff</code>     :  두 개 이상의 변경사항 (Commit과 작업트리의 Commit등)을 표시 변경? (Show changes between commits, commit and working tree, etc)</li>
+<li><code>merge</code>    :  두 개 이상의 개발 과정을 병합 </li>
+<li><code>rebase</code>   :  Forward-port 지역 저장소의 Commit을 업데이트 된 상위 HEAD에 전달. (Forward-port local commits to the updated upstream head)</li>
+<li><code>tag</code>      :  다양한 태그 객체를 생성, 삭제 또는 확인한다. (Create, list, delete or verify a tag object signed with GPG)</li>
+</ul></li>
+<li><p><strong>협업 관련 (see also: git help workflows)</strong></p>
+
+<ul>
+<li><code>fetch</code>    : 다른 저장소에서 개체를 다운로드하고 바로 병합하지는 않는 상태</li>
+<li><code>pull</code>     : 원격 저장소에서 로컬저장소로 가져와 로컬지점과 통합한다.</li>
+<li><code>push</code>     : 관련 객체를 가지고 원격저장소에 업데이트 위해 보낸다. 바로업데이트는 되지않는다.</li>
+</ul></li>
+</ol>
+
+<hr />
+
+<p>참고문헌</p>
+
+<p>Peter Bell &amp; Bent Beer 지음, Ann Lee 옮김, "GitHub 사용 설명서", 교학사, 2015</p>
