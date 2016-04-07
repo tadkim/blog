@@ -37,10 +37,18 @@ body{ background-color: #efefef; font-size: 16px; font-family:  'Nanum Myeongjo'
 #wrap{ width: 100%; height: auto; margin: 3em 0 0 0; padding: 0; display: block;}
 .container{ width : 80% ; min-width:960px; height: auto; margin: 0 auto; display: block; background-color: #8888ff;}
 .container div{ display: inline-block; height: 100%;}
-.menu_bar{ width: 25%; background-color: #fff; }
-.content_area{ width: 70%; background-color: #2dcc70; margin: 0 0 0 4%;}
+.menu_bar{  position: fixed; top:3em ;width: 25%; height: 10em; background-color: #fff; overflow: scroll;}
+.menu_bar img{height: 1.5em; width: auto;}
+.menu_bar li{list-style-type: none;}
+.menu_bar ol, .menu_bar ul{ padding-left: 0 ; margin-left: 1em;}
+.content_area{  position: fixed; top: 3em; right: 0;width: 70%; height: 10em; background-color: #2dcc70; margin: 0 0 0 4%; overflow: scroll;}
 .content{ width: 100%; background-color:#fff; margin: 0; }
 footer{ width: 100%; position:fixed; bottom: 0; background-color: #636363; text-align: center; color: #fff;}
+.menu a{cursor:pointer; font-weight:bold; list-style-type:none;  }
+.menu .hide{display:none;}
+
+
+
 
 /*#wrap{ background-color: #fff; width: 80%; min-width: 660px; margin: 3em 0 3em auto ; padding: 1em 3em; float: right;}*/
 table, pre, blockquote, p, ul, ol, img{ margin: 0 0 1.5em 0; }
