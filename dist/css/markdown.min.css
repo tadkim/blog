@@ -38,11 +38,9 @@ body{ background-color: #efefef; font-size: 16px; font-family:  'Nanum Myeongjo'
 .container{ width : 960px; height: 100%; margin: 0 auto; padding: 0 0 6em 0; display: block; background-color: #fff; }
 .container div{ display: inline-block; height: 100%;}
 .menu_bar{ z-index: 10; position: fixed; top:0 ;width: 250px; height: 100%; background-color: hsla(142, 28%, 50%, 1); overflow: scroll; padding-top: 2em;}
-/*.menu_bar > ul > li:after{ content: '>'; }*/
 .menu_bar > ul > li> a> img{height: 1.5em; width: auto; margin-bottom: 0.7em;}
 .menu_bar li{list-style-type: none; cursor: pointer;}
-/*.menu_bar > ul > li > ul > li{list-style-type: none; margin: 0 0 0.8em -0.5em; line-height: 1.3em;}*/
-.menu_bar > ul > li > ul > li{list-style-type: none; margin: 0 0 0.8em -1.0em; line-height: 1.3em;}
+.menu_bar > ul > li > ul > li{list-style-type: disc; margin: 0 0 0.8em -0.5em; line-height: 1.3em;}
 .menu_bar > ul > li > ul > li:hover{ color: #efefef;}
 .menu_bar > ul > li > ul {padding-left: 1.2em;}
 .menu_bar ol, .menu_bar ul{ padding-left: 0 ; margin-left: 1em; background-color: hsla(142, 28%, 50%, 1); }

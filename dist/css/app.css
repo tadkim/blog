@@ -10,8 +10,6 @@
 
 
 .basement { width:960px; max-width:960px; display: table; margin: 110px auto auto 5px;  color:#fff; }
-
-
 /* warpper > baseGrid > columnGrid */
 .menuBar{ display:inline-block;
 	width:230px;
