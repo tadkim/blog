@@ -1,105 +1,11 @@
-<<<<<<< Temporary merge branch 1
-<h1 id="colony-sass-summary">Colony Sass Summary</h1>
-<hr>
-<p>최종 수정자 : tadkim
-최종 작성일 : 2016. 4. 4.</p>
-<hr>
-<h2 id="sass-">Sass란?</h2>
-<p><a href="http://sass-lang.com">Sass</a>는 <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html">공식 문서</a>에서 스스로를 이렇게 묘사하고 있다:</p>
-<blockquote>
-<p>사스는 기초 언어에 힘과 우아함을 더해주는 CSS의 확장이다.</p>
-</blockquote>
-<ul>
-<li>목적 : CSS 결함 보정</li>
-<li>역할 : CSS의 구문을 개선</li>
-<li>핵심 : CSS를 완전한 기능의 언어로 바꾸지 않는다는 것.</li>
-<li>우리의 관점 : Sass에도 올바른 사용법이 있고, 이에 대한 학습 및 다양한 탐구가 필요하다는 것을 인지한다.(공짜는 없다.)</li>
-</ul>
-<h6 id="-">참고</h6>
-<ul>
-<li><a href="http://sass-lang.com">Sass</a></li>
-<li><a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html">Sass documentation</a></li>
-</ul>
-<h2 id="sass-scss">Sass 혹은 SCSS</h2>
-<p><em>&quot;Sass? SCSS?&quot;</em>  </p>
-<ul>
-<li>Sass 초기에는 들여쓰기의 가치를 핵심 특성으로 삼고, 의존.</li>
-<li>이후 SCSS는 <em>Sassy CSS</em>를 의미하며, CSS와 비슷한 구문을 제공.<blockquote>
-<p>SCSS의 모토: &quot;만약 유효한 CSS라면, 유효한 SCSS이다.&quot;</p>
-</blockquote>
-</li>
-<li>둘은 정확히 동등한 기능을 갖고 있음.</li>
-<li>순전히 미관적으로 어떤 것이 마음에 드는지, 혹은 익숙한지로 결정하면 된다.</li>
-</ul>
-<h6 id="-">참고</h6>
-<ul>
-<li><a href="http://www.sitepoint.com/whats-difference-sass-scss/">What’s the difference between Sass and SCSS</a></li>
-</ul>
-<hr>
-<h2 id="sass-">Sass 핵심 원칙</h2>
-<p>우리는 <code>Sass</code>를 사용하면서 =  <strong>Sass는 가능한 한 간단하게 유지되어야 한다</strong>는 것을 생각해야 한다. 이와 관련하여 몇 가지 원칙을 마련할 수 있다.</p>
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/KISS_principle">KISS 원칙 : CSS보다 복잡해서는 안된다. </a> (Keep It Simple Stupid)</li>
-<li><a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY 원칙 : 스스로 반복작업을 추가하지 마라 </a> (Don’t Repeat Yourself)</li>
-</ul>
-<blockquote>
-<p>때로는, 코드를 유지가능하도록 만들기 위해 조금 반복하는 편이 더 낫습니다. 무거운 머리를 가진, 통제하기 힘들고, 불필요하게 복잡한 시스템을 제작하면 지나친 복잡성 때문에 유지관리가 완전히 불가능해질 수 있습니다.</p>
-</blockquote>
-<p>우리는 Sass를 이렇게 바라보면 좋겠다.</p>
-<ul>
-<li>실용주의가 완벽을 이긴다. <a href="https://csswizardry.com"> - Harry Roberts</a></li>
-<li>코드는 목적이 아니라 수단에 불과하다.</li>
-</ul>
-<p>귀찮다고 생각하기보다, Sass를 자신이 재미있다고 생각하는 분야에 활요해보면서 익히는 것이 좋겠다. 전체를 Sass로 작성하지 않더라도, 개발환경을 세팅해두고 언제든지 &quot;난 CSS와 SCSS를 사용할 수 있어!&quot;라는 생각을 한다면, 아마 Sass의 문법이 손에 익는 것은 오래 걸리지 않으리라고 생각한다.</p>
-<p>마지막으로, Sass역시 수 많은 코드종류 중 하나에 불과하다는 점을 기억하고,  이 문서에 적혀있는 가이드, 기준에 매몰되지 않기로 하자. 만약 그것이 타당하다면, 만약 스스로 판단하고, 그것이 옳게 느껴진다면, 그렇게 진행한다.코드는 목적이 아니라 수단에 불과하다.</p>
-<h6 id="-">참고</h6>
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/KISS_principle">KISS principle</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY principle</a></li>
-<li><a href="http://www.sitepoint.com/keep-sass-simple/">Keep Sass Simple</a></li>
-</ul>
-<hr>
-<hr>
-<h1 id="-">변수</h1>
-<ul>
-<li>가장 중요한 점은 값 수정을 매우 쉽게 만들어준다는 것 : 더이상 찾아서 바꾸기나 하나하나 고칠 필요가 없는 것</li>
-<li>유효범위 없음</li>
-<li>가이드 : 타당한 상황에서만 변수를 생성<ul>
-<li>값이 적어도 두 번 반복된다;</li>
-<li>값이 적어도 한 번은 수정될 가능성이 크다;</li>
-<li>값의 실현은 모두 변수와 관련되어 있다(즉, 우연에 의한 것이 아니라).</li>
-</ul>
-</li>
-</ul>
-<h2 id="-">스코프</h2>
-<ul>
-<li>Sass의 변수 스코프는 수년 동안 변화해옴</li>
-<li>버전 아주 최근까지, 규칙과 다른 스코프 내에서의 변수 선언은 기본적으로 지역적.<ul>
-<li>하지만 같은 이름의 전역 변수가 이미 존재하는 경우, 지역적 지정은 전역 변수의 값을 변경.</li>
-</ul>
-</li>
-<li>버전 3.4 이후로, Sass는 이제 스코프 개념에 적절하게 대응하며 대신 새로운 지역 변수를 생성.</li>
-</ul>
-<blockquote>
-<p>문서를 보면 <em>전역 변수 가림shadowing</em>에 대한 부분이 있습니다. 전역 스코프에 이미 존재하는 변수를 내부 스코프(선택자, 함수, 믹스인…)에서 선언할 때, 지역 변수가 전역 변수를 <em>가린다</em>고 말합니다. 기본적으로, 지역 변수가 지역 스코프 내에서는 우선시됩니다.</p>
-</blockquote>
-<p>다음의 코드 스니펫은 <em>변수 가림</em> 개념을 설명하고 있다.</p>
-<pre class="highlight"><code class="css">
-// 루트 수준에 전역 변수를 초기화합니다.
-$variable: 'initial value';
+<table id="meta">
+  <thead><th>160404</th><th>Sass</th><th>Tad Kim</th></thead>
+  <tbody>
+  <tr><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
 
-// 전역 변수를 덮어쓰게 하는 믹스인을 만듭니다.
-@mixin global-variable-overriding {
-  $variable: 'mixin value' !global;
-}
-
-.local-scope::before {
-=======
-<h1>Colony Sass Summary</h1>
-
-<hr />
-
-<p id="who">tad, HTML, 2016.4.4</p>
+<h1>Sass 주요개념 요약</h1>
 
 <h2>Sass란?</h2>
 
