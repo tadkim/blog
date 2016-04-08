@@ -127,10 +127,14 @@ $variable: 'initial value';
 }
 </code></pre>
 
+*`!global` 플래그 : 는 지역 스코프로부터 전역 변수를 정의할 때 사용.
+(루트 레벨에서 변수를 정의할 때, `!global` 플래그를 사용해서는 안됨)*
+
 
 즉, 지역변수 스코프 내에서는 전역변수가 이후에 실행된다고 하더라도 , 지역변수의 값이 우선적으로 적용된다.
 
 
+___
 ## `!default` 플래그
 
 라이브러리나 프레임워크, 그리드 시스템, 혹은 배포되어 외부의 개발자들에 의해 사용될 Sass 소품을 개발할 때는, 덮어쓰일 수 있도록 모든 환경설정 변수들을 `!default` 플래그를 붙여 정의해야 한다.
@@ -153,52 +157,35 @@ $baseline: 2em; //이게 탬이 정의한 코드라면.
 
 
 ___
-## `!global` 플래그
+## 여러 개의 변수 vs 맵
 
-`!global` 플래그는 지역 스코프로부터 전역 변수를 정의할 때에만 사용되어야 한다.
-루트 레벨에서 변수를 정의할 때, `!global` 플래그는 생략되어야 한다.
+**여러 개의 다른 변수들 대신 맵을 사용함으로써 얻는 이점.**
 
-<pre class="highlight"><code class="css">
-// Yep
-$baseline: 2em;
+- 가장 중요한 것은 맵을 반복해서 순환하는 기능(별개의 변수들로는 이것이 불가능.)
+- 사용이 편리한 API를 제공하는 작은 getter 함수를 만드는 기능
+    <pre class="highlight"><code class="css">
+    /* 작은 getter 작성 예제 아직 정확하게 사용법을 알지 못하고있음 (탬)*/
+    /// Z-index 맵. 어플리케이션의 Z 레이어들을 한데 모음.
+    /// @access private
+    /// @type Map
+    /// @prop {String} 키 - 레이어 이름
+    /// @prop {Number} 값 - 키에 연결된 Z 값
+    $z-indexes: (
+      'modal': 5000,
+      'dropdown': 4000,
+      'default': 1,
+      'below': -1,
+    );
+    /// 레이어 이름으로부터 z-index 값을 가져온다.
+    /// @access public
+    /// @param {String} $layer - 레이어 이름
+    /// @return {Number}
+    /// @require $z-indexes
+    @function z($layer) {
+      @return map-get($z-indexes, $layer);
+    }
+    </code></pre>
 
-// Nope
-$baseline: 2em !global;
-</code></pre>
-
-___
-## 여러 개의 변수 혹은 맵
-
-여러 개의 다른 변수들 대신 **맵을 사용함으로써 얻는 이점이 있다.**습니다. 가장 중요한 것은 맵을 반복해서 순환하는 기능인데, 별개의 변수들로는 이것이 불가능합니다.
-
-맵 사용의 또다른 장점은 사용이 편리한 API를 제공하는 작은 getter 함수를 만드는 기능입니다. 다음의 Sass 코드를 예로 들 수 있습니다:
-
-<pre class="highlight"><code class="css">
-/// Z-index 맵. 어플리케이션의 Z 레이어들을 한데 모음.
-/// @access private
-/// @type Map
-/// @prop {String} 키 - 레이어 이름
-/// @prop {Number} 값 - 키에 연결된 Z 값
-$z-indexes: (
-  'modal': 5000,
-  'dropdown': 4000,
-  'default': 1,
-  'below': -1,
-);
-
-/// 레이어 이름으로부터 z-index 값을 가져온다.
-/// @access public
-/// @param {String} $layer - 레이어 이름
-/// @return {Number}
-/// @require $z-indexes
-@function z($layer) {
-  @return map-get($z-indexes, $layer);
-}
-</code></pre>
-
-
-
-___
 ___
 
 # Extend
@@ -234,7 +221,7 @@ ___
 * @media 안에서 외부의 선택자를 @extend할 수 없다.
 * 같은 지시어 안에 있는 선택자만 @extend할 수 있다.
 
->요약하자면, 어떤 특정한 상황 아래가 아니라면 `@extend` 지시어를 사용하지 말라고 조언하겠습니다. 그러나 그것을 완전히 금하라고까진 않겠습니다.
+>*요약하자면, 어떤 특정한 상황 아래가 아니라면 `@extend` 지시어를 사용하지 말라고 조언하겠습니다. 그러나 그것을 완전히 금하라고까진 않겠습니다.*
 
 ###### 참고
 
@@ -256,7 +243,7 @@ ___
 
 **"믹스인 남용말자. 핵심은 *간결성* " **
 
-거대한 로직을 가진 엄청나게 강력한 믹스인을 만들고 싶어질 수 있습니다. 이는 과설계over-engineering라고 하며 대부분의 개발자들이 이것 때문에 괴로워 함.
+> *거대한 로직을 가진 엄청나게 강력한 믹스인을 만들고 싶어질 수 있습니다. 이는 과설계over-engineering라고 하며 대부분의 개발자들이 이것 때문에 괴로워 함*
 
 - 믹스인 기준 : 20줄을 넘어서게 되었다면, 더 작은 덩어리로 나뉘거나 완전히 수정.
 
@@ -283,7 +270,9 @@ ___
 </pre>
 
 
-다른 타당한 예로는 요소의 크기를 조절하는 믹스인이 있으며, `width`와 `height`를 동시에 정의합니다. 이는 코드 입력을 간단하게 만들 뿐만 아니라 쉽게 읽을 수 있도록 해 줍니다.
+- 다른 타당한 예) 요소의 크기를 조절하는 믹스인
+    - :`width`와 `height`를 동시에 정의.
+    - 이는 코드 입력을 간단하게하며, 가독성에도 도움.
 
 <pre class="highlight"><code class="css">
 ///요소 크기를 설정하는 헬퍼
@@ -296,6 +285,11 @@ ___
 }
 </code></pre>
 
+> **JSDOC3 내용들을 추가** <br/>@author: 개발자, @param : parameter type. 즉, 해당 몸체(여기서는 mixin)에 어떤 파라미터가 들어가는지를 기술.
+
+[ mixin 관련 예제 - codepen. ]
+<p data-height="495" data-theme-id="0" data-slug-hash="XdVReE" data-default-tab="result" data-user="colony-tad" class="codepen">See the Pen <a href="http://codepen.io/colony-tad/pen/XdVReE/">sass-mixin</a> by tadkim (<a href="http://codepen.io/colony-tad">@colony-tad</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 ######참고
 
@@ -304,10 +298,11 @@ ___
 * [Building a Linear-Gradient Mixin](http://www.sitepoint.com/building-linear-gradient-mixin-sass/)
 
 
-
+___
 ##매개변수 리스트
 
-믹스인에 들어가는 매개변수의 개수를 알 수 없을 때는, 리스트 대신 항상 `arglist`를 사용하세요. `arglist`는 임의의 수의 매개변수를 믹스인이나 함수에 전달할 때 암묵적으로 사용되는 Sass의 여덟 번째 데이터 유형이라고 생각할 수 있으며, `...`이 그 특징입니다.
+믹스인에 들어가는 매개변수의 개수를 알 수 없을 때, 리스트 대신 항상 `arglist`를 사용하자.
+ - `arglist` : 임의의 수의 매개변수를 믹스인이나 함수에 전달할 때 암묵적으로 사용되는 Sass의 여덟 번째 데이터 유형.
 <pre class="highlight"><code class="css">
 @mixin shadows($shadows...) {
   //type-of($shadows) == 'arglist'
@@ -315,11 +310,10 @@ ___
 }
 </code></pre>
 
+> 몇 개의 매개변수(3개 혹은 그 이상)를 취하는 믹스인을 만들 때, 하나하나 넘겨주는 것보다 쉬울 거라는 생각으로 매개변수들을 리스트나 맵으로 병합하기 전에 다시 생각해 보세요.
 
-
-몇 개의 매개변수(3개 혹은 그 이상)를 취하는 믹스인을 만들 때, 하나하나 넘겨주는 것보다 쉬울 거라는 생각으로 매개변수들을 리스트나 맵으로 병합하기 전에 다시 생각해 보세요.
-
-Sass는 사실 믹스인과 함수 선언에 재주가 있어서, 리스트나 맵을 함수/믹스인에 매개변수 리스트로 전달해 일련의 매개변수들로 읽히도록 할 수 있습니다.
+**Sass는 사실 믹스인과 함수 선언에 재주가 있다.**<br/>
+ `리스트`나 `맵`을 `함수`/`믹스인`에 `매개변수 리스트`로 전달해 **일련의 매개변수들로 읽히도록** 할 수 있음.
 
 <pre class="highlight"><code class="css">
 @mixin dummy($a, $b, $c) {
