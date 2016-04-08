@@ -1,0 +1,137 @@
+# Mixins
+
+- 믹스인은 재사용성과 DRY 컴퍼넌트의 핵심
+- 믹스인은 시맨틱한 클래스에 기대지 않고도 재사용가능한 코드를 작성하게 해줌.
+    -  `.float-left` 클래스에 기대면 너무 힘듦.
+- 믹스인은 CSS 규칙과 Sass 문서에서 허용되는 거의 모든 것을 포함.
+- 함수처럼 매개변수를 받을 수도 있음.
+
+** "믹스인 남용말자. 핵심은 간결성 " **
+
+거대한 로직을 가진 엄청나게 강력한 믹스인을 만들고 싶어질 수 있습니다. 이는 과설계over-engineering라고 하며 대부분의 개발자들이 이것 때문에 괴로워 함.
+
+- 믹스인 기준 : 20줄을 넘어서게 되었다면, 더 작은 덩어리로 나뉘거나 완전히 수정.
+
+
+## Mixins Basic
+
+(우연이 아닌) 어떤 이유로 항상 같이 모습을 보이는 CSS 속성들의 그룹을 발견하게 되면, 그것들을 믹스인에 넣을 수 있다. 예를 들면 [Nicolas Gallagher의 마이크로 클리어픽스 핵](http://nicolasgallagher.com/micro-clearfix-hack/)은 (매개변수 없는) 믹스인 안에 들어갈 만한 코드.
+
+
+
+<pre class="highlight">
+<code class="css">
+ ///내부 float을 해제하는 헬퍼
+///@author Nicolas Gallagher
+///@link http://nicolasgallagher.com/micro-clearfix-hack/ Micro Clearfix
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+</code>
+</pre>
+
+
+다른 타당한 예로는 요소의 크기를 조절하는 믹스인이 있으며, `width`와 `height`를 동시에 정의합니다. 이는 코드 입력을 간단하게 만들 뿐만 아니라 쉽게 읽을 수 있도록 해 줍니다.
+
+<pre class="highlight"><code class="css">
+///요소 크기를 설정하는 헬퍼
+///@author Hugo Giraudel
+///@param {Length} $width
+///@param {Length} $height
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+</code></pre>
+
+
+######참고
+
+* [Sass Mixins to Kickstart your Project](http://www.sitepoint.com/sass-mixins-kickstart-project/)
+* [A Sass Mixin for CSS Triangles](http://www.sitepoint.com/sass-mixin-css-triangles/)
+* [Building a Linear-Gradient Mixin](http://www.sitepoint.com/building-linear-gradient-mixin-sass/)
+
+
+___
+## Mixins & Vender Prefix
+
+- Q : "지원 미비 or 부분 지원 CSS 속성을 위한 벤더 프리픽스를 처리하기 위하여 믹스인을 정의하는 것을 해야하는 것일까?"
+- A : 좋은 생각이 아님.
+
+  >우선, [Autoprefixer](https://github.com/postcss/autoprefixer)를 사용할 수 있다면 Autoprefixer를 사용하세요. 여러분의 프로젝트에서 Sass 코드를 없애 주고, 항상 최신 정보를 반영하며, 프리픽스를 처리하는 데에는 여러분보다 훨씬 나을 것입니다.
+
+** 불행하게도, `Autoprefixer`를 선택할 수 없는 상황에서는 **
+- [Bourbon](http://bourbon.io/)
+- [Compass](http://compass-style.org/)
+등을 사용하는 방법이 있음.
+
+** 직접 CSS 지원위한 믹스인 코드를 작성해야하는 유일한 경우 **
+
+>만약 `Autoprefixer`를 사용할 수 없고 `Bourbon`이나 `Compass`도 사용할 수 없다면, **오직 그런 경우에만, 여러분 스스로 CSS 속성에 프리픽스를 붙이는 믹스인을 만들어 사용할 수 있습니다. 하지만. 바라건대 속성마다 하나씩 믹스인을 만들어 각 벤더를 수동으로 출력하진 마세요.
+
+<pre class="highlight"><code class="css">
+// Nope
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -moz-transform: $value;
+  transform: $value;
+}
+</code></pre>
+
+영리한 방식으로 하세요.
+
+<pre class="highlight"><code class="css">
+/// 벤더 프리픽스를 산출하는 믹스인 헬퍼
+/// @access public
+/// @author HugoGiraudel
+/// @param {String} $property - 프리픽스가 붙지 않은 CSS 속성
+/// @param {*} $value - 가공되지 않은 CSS 값
+/// @param {List} $prefixes - 산출할 프리픽스 리스트
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: $value;
+  }
+
+  #{$property}: $value;
+}
+</code></pre>
+
+위 믹스인을 사용하는 방법은 간단하다.
+
+<pre class="highlight"><code class="css">
+.foo {
+  @include prefix(transform, rotate(90deg), ('webkit', 'ms'));
+}
+</code></pre>
+
+**그래도 , 이것은 조악한 해결책이라는 점을 명심하자. **
+>예를 들면, `Flexbox`에 필요한 것과 같은 복잡한 폴리필은 처리하지 못합니다. 그런 면에서, `Autoprefixer`를 사용하는 것이 훨씬 나은 선택입니다.
+
+###### 참고
+
+* [Autoprefixer](https://github.com/postcss/autoprefixer)
+* [Building a Linear-Gradient Mixin](http://www.sitepoint.com/building-linear-gradient-mixin-sass/)
+
+
+
+
+<pre class="highlight">
+<code class="css">
+ ///내부 float을 해제하는 헬퍼
+///@author Nicolas Gallagher
+///@link http://nicolasgallagher.com/micro-clearfix-hack/ Micro Clearfix
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+</code>
+</pre>
+
+

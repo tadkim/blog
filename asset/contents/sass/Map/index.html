@@ -1,0 +1,87 @@
+<h2 id="-">맵</h2>
+<ul>
+<li>Sass 3.3부터, 스타일시트 작성자는 맵을 정의 가능.<ul>
+<li>이는 연관 배열, 해쉬 혹은 JavaScript 오브젝트에 해당하는 Sass 용어</li>
+<li>맵은 키를 모든 유형의 값과 연결하는 자료 구조(키는 어떤 자료 유형도 될 수 있으며, 추천하지는 않지만 맵도 포함됨.).</li>
+</ul>
+</li>
+</ul>
+<p><strong>Sass 맵 작성 가이드라인</strong></p>
+<ul>
+<li>콜론(<code>:</code>) 다음에 스페이스;</li>
+<li>여는 괄호 (<code>(</code>)는 콜론(<code>:</code>)과 같은 줄에;</li>
+<li>(99%의 경우에 해당하는) 문자열인 <strong>키는 따옴표로 감싼다</strong>;</li>
+<li>각각의 키/값 쌍은 새 줄을 차지한다;</li>
+<li>각 키/값 뒤에는 쉼표(<code>,</code>);</li>
+<li>추가, 제거 혹은 순서를 바꾸기 쉽도록 마지막 아이템 <strong>뒤에 따라오는 쉼표</strong>(<code>,</code>);</li>
+<li>닫는 괄호(<code>)</code>)는 새 줄을 차지한다;</li>
+<li>닫는 괄호(<code>)</code>)와 세미콜론(<code>;</code>) 사이에는 스페이스나 새 줄을 넣지 않는다.</li>
+</ul>
+<p>보기:</p>
+<pre class="highlight"><code>
+// Yep
+$breakpoints: (
+  'small': 767px,
+  'medium': 992px,
+  'large': 1200px,
+);
+
+// Nope
+$breakpoints: ( small: 767px, medium: 992px, large: 1200px );
+</code></pre>
+
+<hr>
+<h3 id="sass-">Sass 맵 디버그</h3>
+<blockquote>
+<p>어떤 미친 마법이 Sass 맵에서 일어나고 있는 건지 알 수 없어 헤매는 스스로를 발견하게 된다면, 아직 구원받을 수 있는 방법이 있으니 걱정하지 마십시오.</p>
+</blockquote>
+<pre class="highlight"><code>
+@mixin debug-map($map) {
+  @at-root {
+    @debug-map {
+      __toString__: inspect($map);
+      __length__: length($map);
+      __depth__: if(function-exists('map-depth'), map-depth($map), null);
+      __keys__: map-keys($map);
+      __properties__ {
+        @each $key, $value in $map {
+          #{'(' + type-of($value) + ') ' + $key}: inspect($value);
+        }
+      }
+    }
+  }
+}
+</code></pre>
+
+
+<p>맵의 깊이를 알고 싶으시면 아래 함수를 추가하세요. 위의 믹스인이 자동으로 값을 표시할 것입니다.</p>
+<pre class="highlight"><code class="css">
+/// 맵의 최대 깊이를 계산한다
+/// @param {Map} $map
+/// @return {Number} `$map`의 최대 깊이
+@function map-depth($map) {
+  $level: 1;
+
+  @each $key, $value in $map {
+    @if type-of($value) == 'map' {
+      $level: max(map-depth($value) + 1, $level);
+    }
+  }
+
+  @return $level;
+}
+</code></pre>
+
+<h6 id="-">참고</h6>
+<ul>
+<li><a href="http://www.sitepoint.com/using-sass-maps/">Using Sass Maps</a></li>
+<li><a href="http://www.sitepoint.com/debugging-sass-maps/">Debugging Sass Maps</a></li>
+<li><a href="http://www.sitepoint.com/extra-map-functions-sass/">Extra Map functions in Sass</a></li>
+<li><a href="http://blog.grayghostvisuals.com/sass/real-sass-real-maps/">Real Sass, Real Maps</a></li>
+<li><a href="http://viget.com/extend/sass-maps-are-awesome">Sass Maps are Awesome</a></li>
+<li><a href="https://github.com/lunelson/sass-list-maps">Sass list-maps</a></li>
+<li><a href="https://github.com/lunelson/sass-maps-plus">Sass Maps Plus</a></li>
+<li><a href="https://github.com/at-import/sassy-maps">Sassy-Maps</a></li>
+<li><a href="http://webdesign.tutsplus.com/tutorials/an-introduction-to-sass-maps-usage-and-examples--cms-22184">Introduction to Sass Maps Usage and Examples</a></li>
+</ul>
+<hr>
