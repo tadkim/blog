@@ -5,6 +5,7 @@
 
 ## Directory-based project format:
 .idea/
+.vscode/
 # if you remove the above rule, at least ignore the following:
 
 # User-specific stuff:
@@ -40,6 +41,7 @@
 
 # JIRA plugin
 atlassian-ide-plugin.xml
+.tasks.json
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
@@ -50,6 +52,7 @@ crashlytics-build.properties
 
 # IntelliJ project files
 .idea
+
 *.iml
 out
 gen
