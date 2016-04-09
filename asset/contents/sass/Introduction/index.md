@@ -1,20 +1,13 @@
-<h1>Sass 인트로</h1
-
-        # Colony Sass Summary
-        ___
 <table id="meta">
-    <thead><th>160401</th><th>Sass</th><th>작성자</th></thead>
+    <thead><th>160406</th><th>Sass</th><th>김태경</th></thead>
     <tbody>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
     <tr><td></td><td></td><td></td></tr>
     </tbody>
 </table>
 
-<p id="who">tad, HTML, 2016.4.4</p>
-
 # Colony Sass Summary
-___
-
-<p id="who">tad, HTML, 2016.4.4</p>
 
 
 ## Sass란?

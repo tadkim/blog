@@ -1,6 +1,13 @@
+<table id="meta">
+    <thead><th>160406</th><th>Sass</th><th>김태경</th></thead>
+    <tbody>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    </tbody>
+</table>
 
-
-## 스코프(Scope)
+# 스코프(Scope)
 
 
 - Sass의 변수 스코프는 수년 동안 변화해옴

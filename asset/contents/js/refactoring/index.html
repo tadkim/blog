@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8"/>
-</head>
-<body>
-<h1 id="05리팩터링기법">05 리팩터링 기법</h1>
+<table id="meta">
+	<thead><th>160406</th><th>Javascript</th><th>김태경</th></thead>
+	<tbody>
+	<tr><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td></tr>
+	</tbody>
+</table>
 
-<h3 id="리팩터링의정의">리팩터링의 정의</h3>
+
+<h1>05 리팩터링 기법</h1>
+
+<h2>리팩터링의 정의</h2>
 
 <p>리팩터링은 간단히 말해 “악취나는 코드에서 악취를 제거하는 기법.”이다. 리팩터링은 이미 생산된 코드를 대상으로하며, 오류발생가능성은 최대한 낮추며 코드를 정리하는 기법이다.</p>
 
@@ -33,6 +37,7 @@
 <li>시그니처 변경(change signature)</li>
 <li>직접 삽입(inline)</li>
 <li>추출(extract)</li>
+<li>Find Refactoring Preview 도구 창</li>
 </ul>
 
 <blockquote>
@@ -41,71 +46,612 @@
 
 <hr />
 
-<h3 id="웹스톰리팩터링실전예제1:이름변경rename">웹스톰 &amp; 리팩터링 실전 예제 1 : 이름 변경(rename)</h3>
+<h2>웹스톰 &amp; 리팩터링 실전 예제 1 : 이름 변경(rename)</h2>
 
 <ol>
-<li>Refactoring 이라는 이름의 프로젝트 생성</li>
-<li><a href="https://github.com/wikibook/frontenddevelopment/tree/master/5장/1.refactoring_before"> [리팩토링 예제 파일 다운로드 바로가기] </a></li>
-<li>예제폴더 &gt; rename &gt; translateX.js 파일 열기</li>
-<li>변수 nVelocity 오른쪽 클릭</li>
-<li>Refactor 메뉴의 Rename 클릭</li>
-<li>동일한 변수명 활성화 되는 것을 확인 후 변수명을 변경</li>
+	<li><code>Refactoring</code> 이라는 이름의 프로젝트 생성</li>
+	<li><a href="https://github.com/wikibook/frontenddevelopment/tree/master/5장/1.refactoring_before"> [리팩토링 예제 파일 다운로드 바로가기] </a></li>
+	<li><code>예제폴더 &gt; rename &gt; translateX.js</code> 파일 열기</li>
+	<li>변수 <code>nVelocity</code> 오른쪽 클릭</li>
+	<li><code>Refactor</code> 메뉴의 <code>Rename</code> 클릭</li>
+	<li>동일한 변수명 활성화 되는 것을 확인 후 변수명을 변경</li>
 </ol>
 
 <figure>
-<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_02.png" alt="Webstorm, Refactoring EX 1-1 : Rename 실행 전 " title="Webstorm, Refactoring EX 1 : Rename" />
-<figcaption>Webstorm, Refactoring EX 1&#8211;1 : Rename 실행 전 </figcaption>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_02.png" alt="Webstorm, Refactoring EX 1-1 : Rename 실행 전 " title="Webstorm, Refactoring EX 1 : Rename" />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;1 : Rename 실행 전 </figcaption>
 </figure>
 
 <p><strong>리팩터링으로 변수명을 변경하기</strong></p>
 
-<p>nVelocity는 nSpeed보다 덜 보편적인 단어기 때문에 협업 개발자나 유지보수 개발자는 의아해 할 수 있다. 혼란을 주는 변수명은 좋은 코드라 볼 수 없으니 이름을 변경한다. </p>
+<p><code>nVelocity</code>는 <code>nSpeed</code>보다 덜 보편적인 단어기 때문에 협업 개발자나 유지보수 개발자는 의아해 할 수 있다. 혼란을 주는 변수명은 좋은 코드라 볼 수 없으니 이름을 변경한다. </p>
 
-<p>하지만 nVelocity는 함수 곳곳에서 사용하고 있는데 잘못 변경하면 함수 외부의 동작이 바뀌거나 예기치 않은 오류를 발생시킬 수 있다. <strong>이때 웹스톰의 Rename 리팩터를 활용하면 한번에 모든 지역 변수 이름을 안전하게 변경할 수 있다</strong>.</p>
+<p>하지만 <code>nVelocity</code>는 함수 곳곳에서 사용하고 있는데 잘못 변경하면 함수 외부의 동작이 바뀌거나 예기치 않은 오류를 발생시킬 수 있다. <strong>이때 웹스톰의 <code>Rename</code> 리팩터를 활용하면 한번에 모든 지역 변수 이름을 안전하게 변경할 수 있다</strong>.</p>
 
 <figure>
-<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_03.png" alt="Webstorm, Refactoring EX 1-2 : Rename 실행 과정 " title="Webstorm, Refactoring EX 2 : Rename" />
-<figcaption>Webstorm, Refactoring EX 1&#8211;2 : Rename 실행 과정 </figcaption>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_03.png" alt="Webstorm, Refactoring EX 1-2 : Rename 실행 과정 " title="Webstorm, Refactoring EX 2 : Rename" />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;2 : Rename 실행 과정 </figcaption>
 </figure>
 
 <p><strong>리팩터링 실제 과정 : Rename</strong></p>
 
-<p>앞서 리팩터링 Rename과정을 설명한 순서대로, 변경하고자하는 변수명을 오른쪽 클릭후 Refactor - Rename의 순서로 진행하면 된다. 여기까지하고나면 화면에는 우리가 선택한 변수명이 모두 선택되어있는데, 그 상태에서 변경하고자하는 변수명을 입력해주면 지역 변수 내 모든 변경이 동시에 이루어진다.</p>
+<p>앞서 리팩터링 Rename과정을 설명한 순서대로, 변경하고자하는 변수명을 오른쪽 클릭후 <code>Refactor - Rename</code>의 순서로 진행하면 된다. 여기까지하고나면 화면에는 우리가 선택한 변수명이 모두 선택되어있는데, 그 상태에서 변경하고자하는 변수명을 입력해주면 지역 변수 내 모든 변경이 동시에 이루어진다.</p>
 
 <figure>
-<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_04.png" alt="Webstorm, Refactoring EX 1-3 : Rename 실행 후 " title="Webstorm, Refactoring EX 3 : Rename" />
-<figcaption>Webstorm, Refactoring EX 1&#8211;3 : Rename 실행 후 </figcaption>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_04.png" alt="Webstorm, Refactoring EX 1-3 : Rename 실행 후 " title="Webstorm, Refactoring EX 3 : Rename" />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;3 : Rename 실행 후 </figcaption>
 </figure>
 
 <p><strong>리팩터링 실행 결과 : Rename</strong></p>
 
-<p>Rename을 실행하여 해당하는 모든 지역 변수 이름을 한번에 변경했다. 물론 sublime text나 심지어 메모장에서도 replace 기능을 활용해서 치환을 할 수 있으나 웹스톰IDE안에서 믿고 처리할 수 있는 첫 번째 리팩터링 기법이라는 점까지 고려하여 이 기능에 대해 숙지해 두기로 하자.</p>
+<p><code>Rename</code>을 실행하여 해당하는 모든 지역 변수 이름을 한번에 변경했다. 물론 sublime text나 심지어 메모장에서도 replace 기능을 활용해서 치환을 할 수 있으나 웹스톰IDE안에서 믿고 처리할 수 있는 첫 번째 리팩터링 기법이라는 점까지 고려하여 이 기능에 대해 숙지해 두기로 하자.</p>
+<h3>웹스톰 &amp; 리팩터링 실전 예제 3 : 파일 명 변경(Rename File Name)</h3>
 
-<h3 id="웹스톰리팩터링실전예제2:프로퍼티명변경renameproperty">웹스톰 &amp; 리팩터링 실전 예제 2 : 프로퍼티명 변경(Rename Property)</h3>
-
-<p>객체 내부 여러 곳 에서 사용하는 프로퍼티명을 변경하려면 지역 변수이름을 변경하는 것과 마찬가지로 객체 내부 전체를 살펴보면서 하나하나 바꾸거나 서브라임텍스트 등의 Replace기능을 활용했을 것이다. 사실, 방금 살펴본 Rename을 사용할만한 지역변수안에서의 치환작업에서는 오류발생이 거의 일어나지 않는다. <strong>하지만 객체의 프로퍼티명을 변경하려고 한다면 상황은 달라진다. 이는 각각의 다른 파일들을 모두 순서대로 천천히 살펴보아야 할 뿐 아니라, 객체 외부에서 사용중이라면 문제는 꽤나 복잡해지기 마련이다</strong>. </p>
+<p>개발시 종종 파일 명 변경이 필요할 때가 있다. 보통 HTML 파일에서 자바스크립트 파일에 의존하고 있는데 파일명을 변경할 때마다 의존하는 HTML 파일을 하나씩 찾는 것은 매우 귀찮은 작업이다.</p>
 
 <ol>
-<li>rename &gt; Greeter.js 파일 열기</li>
-<li>파일 형태 이해하기</li>
-<li>변경할 프로퍼티 명 오른쪽 클릭</li>
-<li>Refactor &gt; Rename &gt; 새로운 Rename창이 팝업으로 생성됨</li>
-<li>변경할 프로티명 입력 후 ‘Refactor’클릭.</li>
+	<li><p><code>rename &gt; index.html</code> 열기 : <code>index.html</code> 파일은 ‘Categorys.js’파일에 의존하고 있음.</p></li>
+	<li>상황 설정 : <code>Categorys.js</code>을 올바를 표기법인 <code>Categories.js</code>로 변경.
+
+		<ul>
+			<li>변경하지 않는다면 : 그냥 두기엔 꺼림직하다.</li>
+			<li>객체 명(Categorys)만 반영할 경우, <strong>객체명과 파일이름은 통일시킨다는 기본 규칙에 위배된다</strong>.</li>
+		</ul></li>
+	<li><p>웹스톰 Refactoring 의 <code>Rename</code>사용 : 파일 명<em>(이 경우 categorys.js)</em>을 우클릭 후 <code>Refactoring</code> 클릭.</p></li>
 </ol>
 
 <figure>
-<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_05.png" alt="Webstorm, Refactoring EX 1-4 : Property Rename " title="Webstorm, Refactoring EX 3 : Rename" />
-<figcaption>Webstorm, Refactoring EX 1&#8211;4 : Property Rename </figcaption>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_08.png" alt="Webstorm, Refactoring EX 1-7 : FileName Rename " title="Webstorm, Refactoring EX 1-6 : Rename" />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;7 : FileName Rename </figcaption>
 </figure>
 
-<p>리팩터링 실전 예제 2 : 프로퍼티명 변경</p>
+<p><strong>리팩터링 파일명 변경</strong></p>
 
-<p>앞서 소개한 ‘변수명 Rename’예제와 과정은 동일하나, 프로퍼티명에 대한 Rename을 적용하려고하면, 새로운 팝업창이 뜨고, 그 안에서 새로운 프로퍼티명을 입력한다는 점에서 변수명 변경시 사용과정과 차이가 있다.</p>
+<p>이 경우도 마찬가지로 단순히 파일 명 뿐 아니라 의존하는 코드에 안전하게 바뀐 것을 확인할 수 있다. 이 기능은 디렉터리명을 변경할 때도 동일하게 동작한다.</p>
+
+
+<!-- 2 : 이동====================================================== -->
+<h2>웹스톰 &amp; 리팩터링 실전 예제 2 : 이동(Move)</h2>
+
+<p>개발을 하다보면 HTML파일에서 로컬에 위치한 CSS나 Javascript 파일을 로컬경로를 입력하여 로드하는 경우가 많다. 만약 이러한 파일을 모아둔 vendor 폴더의 위치가 변경되었다면 각 HTML파일을 열어 각 라이브러리 파일이 HTML내에서 지정한 경로에 위치하는지를 일일이 확인해주어야 한다.</p>
 
 <figure>
-<img src="imgtest.png" alt="testimg" />
-<figcaption>testimg</figcaption>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_rename_09.png" alt="Webstorm, Refactoring EX 1-8 : Move Rename " title="Webstorm, Refactoring EX 1-6 : Rename" />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;8 : Move Rename </figcaption>
 </figure>
 
-</body>
-</html>
+<p>위 사진에서 보는 바와 같이 대부분의 웹 페이지들은 jQuery 등을 포함한 유용한 라이브러리를 HTML마크업 문서내에 포함시키고있다.</p>
+
+<p><strong>실전 예제</strong></p>
+
+<ol>
+	<li><code>move</code> 디렉터리의 하위 디렉터리인 <code>src/libraries</code>에는 vendor의 라이브러리 파일을 둔다. : 예제에서, <code>index.html</code>, <code>never.Mover.html</code>은 로컬경로로 의존하고있는 파일들이다.</li>
+	<li>프로젝트 뷰에서 이동을 원하는 파일을 선택 후, RC</li>
+	<li><code>Refactor &gt; Move</code> 클릭</li>
+	<li><code>Move</code> 팝업창에서 이동을 원하는 경로를 입력 후 OK 클릭</li>
+</ol>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_move.png" alt="Webstorm, Refactoring EX 1-9 : Refactor, Move " title="Webstorm, Refactoring EX 1-9 : Refactor, Move" />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;9 : Refactor, Move </figcaption>
+</figure>
+
+<p>위 사진과 같이 <code>Move 팝업창</code>을 클릭 후, 원하는 경로로 변경한다음 OK 버튼을 입력해주면 파일이 이동하며, 이 코드에 의존하고있던 <code>index.html</code>, <code>naver.Mover.html</code> 파일 속의 로컬 경로들도 이 파일들에 맞게 수정된다.</p>
+
+<p><strong>단, 책의 저자 주우영씨의 tolcon2015 발표에 따르면, <code>Move</code> 기능은 파일 자체의 위치를 바꾸기때문에, 추천하는 기능은 아니며 실제로 컨퍼런스 발표내용에서도 제외했다</strong>.</p>
+
+<blockquote>
+	<p>기존 d3등 수 많은 로컬 파일과 폴더의 경로명들을 일제히 정리할 수 있는 방법이다.</p>
+</blockquote>
+
+<!-- 3. 안전한 삭제  ====================================================== -->
+
+<h2>웹스톰 &amp; 리팩터링 실전 예제 3 : 안전한 삭제(Safe Delete)</h2>
+
+<p>프로젝트의 규모가 클수록 모든 파일을 검사해 사용 여부를 판단하기란 불가능 하다. 그런 상황에서 코드를 삭제하면 예기치 않은 오류가 만들어 질 수 있다. 하지만 이것이 두려워 불필요한 코드를 계속 보존하면 코드는 망가지게 된다.</p>
+
+<p>_</p>
+
+<p><strong>웹스톰의 안전한 삭제(Safe Delete</strong>)</p>
+
+<p><code>안전한 삭제(Safe Delete)</code>는 메서드 뿐 아니라 변수, 파일 등을 삭제할 때도 사용할 수 있는 리팩터다. 어떤 코드 또는 파일을 삭제하면 안전하지 않은지, 왜 안전하지 않은 지, 의존하고 있는 곳은 어디인지를 알 수 있다. 이 기능을 이용해 안전하게 파일과 코드를 제거할 수 있다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_safeDelete_00.png" alt="Webstorm, Refactoring EX 1-100 : Refactor, Safe Delete " title="Webstorm, Refactoring EX 1-100 : Refactor, Safe Delete " />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;100 : Refactor, Safe Delete </figcaption>
+</figure>
+
+<p>예제에서는 <code>greet</code>이라는 메서드를 삭제하는 과정을 다룬다. 메서드 이름에 커서를 두고 <code>control</code>+<code>T</code> 키를 누르고, <code>safe Delete</code>를 클릭하면, 위 사진에 보이는 창이 뜬다. </p>
+
+<p><strong>Safe Delete 윈도우의 옵션 상세(확인 후 추가 필요)</strong></p>
+
+<ul>
+	<li><code>Search in comments and strings</code> : 내용 추가</li>
+	<li><code>Search for text occurrences</code> : 내용 추가</li>
+</ul>
+
+<p>옵션을 확인한 후, OK를 누른다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_safeDelete_01.png" alt="Webstorm, Refactoring EX 1-10 : Refactor, Safe Delete " title="Webstorm, Refactoring EX 1-10 : Refactor, Safe Delete " />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;10 : Refactor, Safe Delete </figcaption>
+</figure>
+
+<p>“<strong>현재 삭제 하려는 것은 어딘가에서 사용되고 있어요”</strong> - Usage Detected</p>
+
+<p>상황에 따라, 어떤 것을 삭제하느냐에 따라 다르겠지만 이 예제에서 <code>greet</code> 이라는 메서드를 삭제하려고 보면 <code>Usage Detected</code>라는 새로운 알림창이 뜬다.</p>
+
+<p><strong>Usage Detected 상세 옵션</strong></p>
+
+<ul>
+	<li><code>View usages</code> : 삭제 대상이 사용되고 있는 관련 소스 정보를 보여주는 <code>Find Safe Delete</code>윈도우를 연다.</li>
+	<li><code>Delete Anyway</code> : 무시하고 그냥 삭제한다.</li>
+</ul>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_safeDelete_02.png" alt="Webstorm, Refactoring EX 1-11 : Refactor, Safe Delete " title="Webstorm, Refactoring EX 1-11 : Refactor, Safe Delete " />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;11 : Refactor, Safe Delete </figcaption>
+</figure>
+
+<p><strong>Find Safe Delete</strong></p>
+
+<p>삭제대상 코드를 사용중인 파일의 경로와 위치를 보여준다. 이 예제에서는 총 2건에 대한 내용이 나왔는데, 이 <code>Find Safe Delete</code> 윈도우에서 해당 파일을 오른쪽 클릭한 후 <code>Jump to Source</code> 클릭하면 해당 파일 내 사용중인 코드의 위치로 이동할 수 있다. 그 곳에서 코드 삭제의 적절성을 판단하여 삭제를 진행할지, 아니면 중단할지를 판단하면 된다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_safeDelete_03.png" alt="Webstorm, Refactoring EX 1-12 : Refactor, Safe Delete " title="Webstorm, Refactoring EX 1-12 : Refactor, Safe Delete " />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;12 : Refactor, Safe Delete </figcaption>
+</figure>
+
+<p><strong>Jump to Source 기능 사용 결과 화면</strong></p>
+
+<p><code>Jump to Source</code> 기능을 활용하여 삭제 대상이었떤 <code>greet</code> 메서드가 사용중인 파일화면으로 이동한 결과이다. </p>
+
+<p><strong>웹스톰의 Safe Delete 리팩터의 장점</strong></p>
+
+<p>웹스톰의 <code>Safe Delete</code> 리팩터를 이용하면 삭제할 때 안전성을 검증할 수 있을 뿐더러 안전을 보장할 수 없다면 그 사실을 알려주고 안전하게 코드나 파일을 제거할 수 있게 도와준다. 책의 저자 주우영씨는 toolcon2014에서 이 <code>safe delete</code> 기능을 거의 모든 삭제 작업 진행에 사용한다고 말했다.</p>
+
+
+<!-- 4. 시그니처변경  ====================================================== -->
+
+<h1>웹스톰 &amp; 리팩터링 실전 예제 4 : 시그니처 변경(Change Signature)</h1>
+
+<p>함수나 메서드의 시그니처를 변경해야 할 때가 있다. 하지만 변경하려고 하는 함수나 메서드를 이미 사용하고 있을 때 시그니처 변경은 자칫 원치 않는 동작이나 버그를 만들 수 있다. 이때 웹스톰의 <code>Change Signature</code>를 리팩터를 사용하면 안전하게 시그니처를 변경할 수 있다.</p>
+
+<ol>
+	<li><code>Cage_signature &gt; Images.js</code> 파일을 열어본다. : 이 파일 내 <code>Image</code> 객체는 이미지 정보를 데이터베이스에 생성, 조회, 변경, 삭제하는 <strong>DAO객체<sup><a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">1</a></sup>이다</strong>. 이 객체는 파라미터로 <code>url</code>을 요구한다. 또한, 이 Image객체를 app.js 내부 <code>createUser</code>, <code>createArticle</code>함수에서 사용하고 있다.</li>
+	<li>상황 설정 : 어느날 서비스 정책이 변경되어 이미지 정보를 생성해야 할 때 이미지의 타입 정보도 함께 저장하게 됐다고 가정하자. 타입은 이미지의 용도를 나타내며 기존에는 모든 이미지의 용도가 ‘main’이었지만 새로운 정책에서는 ‘contents’용 이미지가 추가된다고 하자.</li>
+</ol>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_changeSignature_01.png" alt="Webstorm, Refactoring EX 1-13 : Refactor, Change Signature " title="Webstorm, Refactoring EX 1-13 : Refactor, Change Signature " />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;13 : Refactor, Change Signature </figcaption>
+</figure>
+
+<p><strong>웹스톰 [Change Signature] 리팩터 기능 활용하기</strong></p>
+
+<ol>
+	<li><code>Change Signature</code> 리팩터를 이용해 <code>Image</code> 객체의 <code>create</code> 메서드에 <code>sType</code>파라미터를 추가하기.</li>
+	<li>create 메서드에서 오른쪽 클릭 후 <code>Refactor &gt; Change Signature</code>를 클릭하면 <code>Change Signature of create()</code> 창이 열린다.</li>
+	<li>가운데에 있는 <code>+</code>를 클릭하면서 시그니처를 추가할 수 있다. <code>Name</code>은 시그니처 명이고 <code>Value</code>는 시그니처의 기본 값이다. 원래는 이미지의 타임이 <code>’main’</code>이었으므로, 기본값으로 ‘<code>main’</code>이라고 하고 <code>refactor</code>를 클릭한다.</li>
+</ol>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_changeSignature_02.png" alt="Webstorm, Refactoring EX 1-14 : Refactor, Change Signature " title="Webstorm, Refactoring EX 1-14 : Refactor, Change Signature " />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;14 : Refactor, Change Signature </figcaption>
+</figure>
+
+<p>사진에서 설명하는 것 처럼 <code>create</code> 메서드에는 새롭게 <code>sType</code> 파라미터가 추가됐을 뿐만 아니라 기본 값인 <code>’main’</code> 역시 자동으로 입력됐다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_changeSignature_03.png" alt="Webstorm, Refactoring EX 1-15 : Refactor, Change Signature " title="Webstorm, Refactoring EX 1-15 : Refactor, Change Signature " />
+	<figcaption>Webstorm, Refactoring EX 1&#8211;15 : Refactor, Change Signature </figcaption>
+</figure>
+
+<p><strong>지역 변수를 넘어, 디렉토리 내 해당 메서드를 사용하고 있는 코드를 추적한다</strong>.</p>
+
+<p>웹스톰의 <code>Change Signature</code> 리팩터는 <code>create</code> 메서드를 사용하고 있는 코드를 추적해 <code>app.js</code>의 <code>createUser</code>, <code>createArticle</code> 함수에 기본 값인 <code>’main’</code>을 사용해 파라미터를 자동으로 추가했다.</p>
+
+<p><strong>웹스톰 리팩터링기법 01 - Change Signature 정리</strong></p>
+
+<ul>
+	<li>메서드나 함수의 시그니처 변경 위험을 최소화하여 리팩터링 할 수 있음</li>
+	<li>예제에서는 파라미터가 추가될 경우를 다뤘지만 기본값이 변경되거나 또 파라미터가 제거되는 경우에도 안전하고 유용하게 변경할 수 있다.</li>
+</ul>
+
+<div class="footnotes">
+	<hr />
+	<ol>
+
+		<li id="fn:1">
+			<p>1 <a href="#fnref:1" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+		</li>
+
+	</ol>
+</div>
+
+
+<!-- 5. 직접 삽입 ====================================================== -->
+<h2>리팩터링 실전 예제 5 : 직접 삽입(Inline)</h2>
+
+<p>읽기 좋은 코드를 고민하며 개발하다 보면 코드가 장황해지기 쉽다. 몇 줄로 설명할 수 있는 것을 주저리주저리 설명하게 된다. 이런 상황은 코드의 가독성이 지나치게 낮은 것 보다는 좋을 수 있지만 코드를 읽고 수정하는 데는 큰 도움이 되지 못한다. 이런 상황에서 코드를 안전하게 리팩터링 하고 싶다면 <code>Inline</code> 리팩터가 도움이 된다.</p>
+
+<p><strong>리팩터링기법 08 직접 삽입(Inline)의 세부 구성</strong></p>
+
+<ul>
+	<li><strong>8&#8211;1</strong> <code>메서드 내용 직접 삽입</code>(Inline Method[Function])</li>
+	<li><strong>8&#8211;2</strong> <code>지역 변수 직접 삽입</code>(Inline Local Variable[Inline Temp])</li>
+</ul>
+
+<p><strong>8&#8211;1 메서드 내용 직접 삽입(Inline Method[Function])</strong></p>
+
+<blockquote>
+	<p>마틴 파울러의 저서 “리팩토링”의 메서드 내용 직접 삽입(Inline Method)에서, “<strong>메서드의 몸체가 메서드의 이름만큼이나 명확할 때는 호출하는 곳에 메서드 몸체를 넣고 메서드를 삭제하라</strong>.”<sup><a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">1</a></sup></p>
+</blockquote>
+
+<ol>
+	<li><code>inline &gt; Spinbox.js</code> 파일 열기 : <code>Spinbox</code> 객체의 <code>setValue</code> 메서드는 <code>_isOverValue</code>, <code>_isUnderValue</code> 메서드를 사용한다.</li>
+</ol>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_01.png" alt="Webstorm, Refactoring inline Method " title="Webstorm, Refactoring - inline Method " />
+	<figcaption>Webstorm, Refactoring inline Method </figcaption>
+</figure>
+
+<p>코드를 살펴보면, 사진에서 설명하고 있는대로 <code>_isOverValue</code>, <code>_isUnderValue</code>는 단순한 로직으로 값의 크기를 비교하는 역할을 수행하고 있다. 코드 가독성은 좋지만, 너무 로직이 너무 단순한 경우라면 웹스톰의 <code>Inline Method</code> 리팩터를 활용해보는 것이 좋다.</p>
+
+<ol>
+	<li><code>setValue</code>의 <code>this.isOverValue</code>에 포인터를 올리고 마우스 오른쪽 버튼을 클릭</li>
+	<li><code>Refactor &gt; Inline</code>을 클릭해 <code>Inline Function</code> 창을 연다.</li>
+</ol>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_02.png" alt="Webstorm, Refactoring Inline Method " title="Webstorm, Refactoring - inline Method " />
+	<figcaption>Webstorm, Refactoring Inline Method </figcaption>
+</figure>
+
+<p><code>Inline Function</code> 팝업 창 상세</p>
+
+<ul>
+	<li>첫 번째 옵션 : <code>inline</code> 대상이 되는 메서드를 삭제해서 리팩터링하는 방식</li>
+	<li>두 번째 옵션 : <code>inline</code> 대상이 되는 메서드의 몸체를 옮겨오고 원본은 그대로 두는 것</li>
+</ul>
+
+<p><strong><code>Inline Function</code> 팝업창의 옵션 선택 기준</strong></p>
+
+<p><code>_isOverValue</code> 메서드는 <code>setValue</code> 메서드에서만 사용하므로 첫 번째 라디오 버튼을 클릭해서 삭제한다. 만약 <code>inline</code> 대상이 되는 메서드를 다른 곳에서 사용할 가능성이 있다면 두 번째 라디오 버튼을 클릭해 리팩터링한 다음 <code>Safe Delete</code> 리팩터를 사용해 코드를 정리하는 편이 안전하다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_03.png" alt="Webstorm, Refactoring Inline Method " title="Webstorm, Refactoring - inline Method " />
+	<figcaption>Webstorm, Refactoring Inline Method </figcaption>
+</figure>
+
+<p><strong>Inline Method 리팩터 적용 전 후 코드 비교</strong></p>
+
+<p><code>Inline Function</code> 창에서 판단 기준에 따라 삭제, 또는 리팩터링과 함께 보존 후 <code>safe delete</code>로 삭제하는 방법이 있었다. 여기서는 첫 번째 방법으로 진행했고, 그에 따라 위 사진과 같은 결과를 볼 수 있다.</p>
+
+<p>기존 <code>_isUnderValue</code> 메서드 바로 위에 위치했던 <code>_isOverValue</code> 메서드는 삭제되었고, 그 대신 <code>setValue</code> 메서드에 <code>_isOverValue</code>메서드가 직접 삽입되었다.</p>
+
+<hr />
+
+<p><strong>8&#8211;2 지역 변수 직접 삽입(Inline Local Variable[Inline Temp])</strong></p>
+
+<blockquote>
+	<p>마틴 파울러의 저서 “리팩토링”의 메서드 임시 변수 내용 직접 삽입(Inline Temp)에서, “<strong>간단한 수식의 결과값을 가지고 있는 임시변수가 있고 그 임시변수가 다른 리팩터링을 하는데 방해된다면 이 임시변수를 참조하는 부분을 모두 원래의 수식으로 바꿔라.</strong>”<sup><a href="#fn:2" id="fnref:2" title="see footnote" class="footnote">2</a></sup></p>
+</blockquote>
+
+<p>보통 임시 변수는 어떤 수식의 결과값을 명확하게 설명하기 위해 작성한다. 이는 코드를 읽기 쉽게 하기 위함이지만, 개발하다 보면 임시 변수에 값을 대입하지 않아도 충분히 목적을 설명하는 경우가 있다.</p>
+
+<p><strong>지역 변수 직접 삽입의 상황을 판단하는 과정</strong></p>
+
+<p><code>Inline &gt; init.js</code> 파일을 열어보자.<br/>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_04.png" alt="Webstorm, Refactoring Inline Local Variable " title="Webstorm, Refactoring Inline Local Variable " /></p>
+
+<p><code>aDirectories</code> 변수는 디렉터리 목록을 원소로 하는 배열을 포함하고 있다. <strong>하지만 각 원소값이 디렉터리 목록임을 나타내고 있어서 임시 변수에 삽입하지 않아도 충분히 의미를 설명할 수 있을 것 같다</strong>.</p>
+
+<p><strong><code>aDirectories</code> 임시 변수를 직접 삽입해 보기</strong></p>
+
+<p><code>aDirectories</code> 변수에 오른쪽 클릭을 한 다음 <code>Refactor &gt; Inline</code> 을 클릭해 <code>Inline Local Variable</code>창을 연다. <code>OK</code>를 클릭하면 <code>aDirectories</code> 임시 변수가 삭제되고 변수를 사용하는곳으로 직접 삽입된다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_05.png" alt="Webstorm, Refactoring Inline Local Variable " title="Webstorm, Refactoring Inline Local Variable " />
+	<figcaption>Webstorm, Refactoring Inline Local Variable </figcaption>
+</figure>
+
+<p>변경하고자 하는 변수 명에서 오른쪽 클릭을 하거나, shortkey를 활용하여 <code>Inline</code>관련 기능을 연다. 새롭게 열린 <code>Inline Local Variable</code> 창에서는 <code>aDirectories</code>가 1개 잡혔다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_inlineMethod_06.png" alt="Webstorm, Refactoring Inline Local Variable " title="Webstorm, Refactoring Inline Local Variable " />
+	<figcaption>Webstorm, Refactoring Inline Local Variable </figcaption>
+</figure>
+
+<p><code>OK</code> 버튼을 누르면 위 사진과 같은 형태로 코드가 정리 될 것이다. 이것이 해당 메서드는 삭제하고, 변수를 직접 사용하고 있는 곳으로 직접 삽입된다.</p>
+
+<div class="footnotes">
+	<hr />
+	<ol>
+
+		<li id="fn:1">
+			<p>주우영 지음, “프런트엔드 개발 시작하기”, 위키북스, 2015, 110쪽, 재인용 <a href="#fnref:1" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+		</li>
+
+		<li id="fn:2">
+			<p>위의 책. <a href="#fnref:2" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+		</li>
+
+	</ol>
+</div>
+
+
+
+
+
+<!-- 6. 추출 ====================================================== -->
+<h2>리팩터링 실전 예제 6 : 추출(Extract)</h2>
+
+<ul>Extract 세부 구성</ul>
+<li> 변수 추출 (Extract Variable)</li>
+<li> 파라미터 추출 (Extract Prameters)</li>
+<li> 메서드 추출 (Extract Method)</li>
+
+
+
+<h3>6-1 변수 추출(Extract Variable)</h3>
+
+<p style="color:darkred;"> 프런트엔트개발 시작하기 114 p 참고하여 내용 추가해야할 부분 </p>
+
+
+
+
+
+<h3>6-2 파라미터 추출(Extract Parameter)</h3>
+
+<p>개발을 하다보면 종종 함수 몸체에 값을 직접 삽입하는 경우가 있다. 처음에는 이 값이 변할 일이 없기 때문에 문제가 없었지만 정책의 변경으로 값이 상황에 따라 바뀌어야 한다고 가정해보자. 이런 변경사항에 쉽게 대처할 수 있는 방법은 직접 삽입한 값을 파라미터로 대체하는 것이다. 이때 <code>Extract Parameter</code> 리팩터를 사용하면 도움이 된다.</p>
+
+<p><strong>[9&#8211;2&#8211;1] <code>Extract &gt; showDanger.js</code> 파일 열기</strong></p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_parameter_02.png" alt="Webstorm, Refactoring - Extract Parameter : showDanger.js파일 구조 " title=" Webstorm, Refactoring - Extract Parameter " />
+	<figcaption>Webstorm, Refactoring - Extract Parameter : showDanger.js파일 구조 </figcaption>
+</figure>
+
+<p><code>showDanger</code> 함수는 ID가 msg-danger인 요소를 찾아 <code>잘못된 시도입니다.</code>라는 문구를 나타낸다. </p>
+
+<p><strong>상황설정</strong></p>
+
+<p>어느 날 요소와 메시지를 상황에 따라 적절하게 바뀌도록 구현해야 한다고 해보자. <strong>이 요구사항을 만족하기위해 직접 삽입한 값을 파라미터로 추출해야한다</strong>.</p>
+
+<p><strong>리팩터링 - Extract Parameter 방법</strong></p>
+
+<ul>
+	<li>먼저 <code>’msg-danger’</code>를 드래그 한다.</li>
+	<li>오른쪽 클릭 후 <code>Refactor &gt; Extract Parameter</code> 클릭.</li>
+</ul>
+
+<p>이 단계를 거치면 아래 사진과 같은 툴팁이 생긴다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_parameter_01.png" alt="Webstorm, Refactoring - Extract Parameter " title=" Webstorm, Refactoring - Extract Parameter " />
+	<figcaption>Webstorm, Refactoring - Extract Parameter </figcaption>
+</figure>
+
+<p><strong>기능 적용후 변동사항</strong></p>
+
+<ul>
+	<li>파라미터와 기본값을 초기화하는 코드가 자동으로 작성 됨
+
+		<ul>
+			<li><code>elementId = elementId || ‘msg-danger’;</code></li>
+		</ul></li>
+	<li>파라미터이름을 수정할 수 있는 모드가 된다.</li>
+</ul>
+
+<p>예제에서는 네이버 코딩 컨벤션에 맞게 헝가리안 표기법<sup><a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">1</a></sup>인 <code>sElementId</code>로 변경한다.</p>
+
+<p><strong>경고메시지를 파라미터로 추출하기</strong></p>
+
+<p><code>’잘못된 시도입니다.’</code>를 파라미터로 추출하는 부분이다.</p>
+
+<ol>
+	<li><code>’잘못된 시도입니다.’</code>를 드래그 한다.</li>
+	<li>오른쪽 클릭 후, <code>Refactor &gt; Extract Parameter</code> 클릭.</li>
+</ol>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_parameter_03.png" alt="Webstorm, Refactoring - Extract Parameter " title=" Webstorm, Refactoring - Extract Parameter " />
+	<figcaption>Webstorm, Refactoring - Extract Parameter </figcaption>
+</figure>
+
+<p><strong>기능 적용후 변동사항</strong></p>
+
+<ul>
+	<li>파라미터와 기본값을 초기화하는 코드가 자동으로 작성 됨
+
+		<ul>
+			<li><code>sMessage = sMessage || ‘잘못된 시도입니다.’;</code></li>
+		</ul></li>
+</ul>
+
+<div class="footnotes">
+	<hr />
+	<ol>
+
+		<li id="fn:1">
+			<p>변수를 선언할 때 타입을 축약해서 접두어로 붙여 변수의 의미를 바로 알 수 있게 하는 표기법을 말한다. <a href="#fnref:1" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+		</li>
+
+	</ol>
+</div>
+
+
+<h3>6-3 메서드 추출(Extract Method)</h3>
+
+<blockquote>
+	<p>“그룹으로 함께 묶을 수 있는 코드 조각이 있으면, 코드의 목적이 잘 드러나도록 메서드의 이름을 지어 별도의 메서드로 추출한다.” - 마틴 파울러의 저서 “리팩토링”의 메서드 추출(Extract Method)에서.<sup><a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">1</a></sup></p>
+</blockquote>
+
+<p><strong>메서드 추출이란</strong>?</p>
+
+<p>개발을 진행하다 보면 함수의 몸체가 커지는 경우가 비일비재하다. 읽기 좋은 코드를 좋아하는 개발자라면 <strong>목적별로 코드를 나누고 이름을 지어 메서드나 함수를 만들어 옮길 것이다. 이런 리팩터링 기법을 <code>메서드 추출</code>이라고 한다.</strong></p>
+
+<p><strong>[9&#8211;3&#8211;1] <code>Extract &gt; Organization.js</code> 파일 열기</strong></p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_method_01.png" alt="Webstorm, Refactoring - Extract Method : Organization.js 파일구조 " title=" Webstorm, Refactoring - Extract method " />
+	<figcaption>Webstorm, Refactoring - Extract Method : Organization.js 파일구조 </figcaption>
+</figure>
+
+<p><code>Organization</code> 메서드는 다음의 3가지 작업을 수행하고 있다.</p>
+
+<ol>
+	<li>AJAX로 조직 리스트 데이터를 요청하는 일</li>
+	<li>반환된 데이터를 순회해 객체화 하는 일</li>
+	<li>객체화된 조직을 순회해 관계를 조합하는 일.</li>
+</ol>
+
+<p><strong>상황설정</strong></p>
+
+<hr />
+
+<p><code>Organization</code> 메서드가 수행하고 있는 3가지 작업을 각각의 메서드로 추출하기.</p>
+
+<p><strong>리팩터링 - Extract Method 방법</strong></p>
+
+<hr />
+
+<ul>
+	<li>추출할 코드 영역을 드래그한다.</li>
+	<li>오른쪽 클릭 후 <code>Refactor &gt; Extract Method</code> 클릭.</li>
+</ul>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_method_02.png" alt="Webstorm, Refactoring - Extract Method : Choose Destination Scope " title=" Webstorm, Refactoring - Extract method " />
+	<figcaption>Webstorm, Refactoring - Extract Method : Choose Destination Scope </figcaption>
+</figure>
+
+<p><code>Choose Destination Scope</code> 윈도우 옵션 설명</p>
+
+<ul>
+	<li><code>global</code> : 추출 함수를 전역에 만드는 것</li>
+	<li><code>object assigned to Organizations.prototype</code> : Organization.prototype의 메서드로 추출함수를 만드는 것</li>
+	<li><code>function execute</code> : execute 메서드 내부로 추출 함수를 만드는 것</li>
+	<li><code>function starting with</code> : 소속된 익명 함수 내부에 추출 함수를 만드는 것</li>
+</ul>
+
+<p><strong>이 예제에서는 <code>assigned to Organization.prototype</code>을 클릭한다.</strong>.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_method_03.png" alt="Webstorm, Refactoring - Extract Method : Extract Function " title=" Webstorm, Refactoring - Extract method " />
+	<figcaption>Webstorm, Refactoring - Extract Method : Extract Function </figcaption>
+</figure>
+
+<p><code>Extract Function 윈도우</code> 창이 열리면 메서드 이름을 <code>_makeOrganizations</code> 라고 입력하고 <code>OK</code>를 누른다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_method_04.png" alt="Webstorm, Refactoring - Extract Method : 실행 전후비교 " title=" Webstorm, Refactoring - Extract method " />
+	<figcaption>Webstorm, Refactoring - Extract Method : 실행 전후비교 </figcaption>
+</figure>
+
+<p><strong>기능 적용후 변동사항</strong></p>
+
+<p>반환된 데이터를 순회해 객체화하는 코드를 <code>_makeOrganizations</code> 메서드로 추출했다.</p>
+
+<p><code>객체화된 조직을 순회해 관계를 조합하는 코드</code>도 같은 방법으로 추출해본다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_method_05.png" alt="Webstorm, Refactoring - Extract Method : 실행 전후비교 2 " title=" Webstorm, Refactoring - Extract method " />
+	<figcaption>Webstorm, Refactoring - Extract Method : 실행 전후비교 2 </figcaption>
+</figure>
+
+<p>객체화된 조직을 순회해 관계를 조합하는 코드도 같은 방법으로 추출했다. 메서드의 이름은 <code>_composeOrganizations</code>로 한다.</p>
+
+<p><strong>웹스톰 <code>Extract Method</code> 리팩터의 자동 파라미터 생성 기능에 대하여</strong></p>
+
+<p>웹스톰의 <code>Extract Method</code> 리팩터는 자동으로 의존하는 변수를 파라미터로 설정한다. <code>htOrganizations</code>는 전달하는 게 맞지만 실행 문맥이 달라 클로저를 이용해 문맥을 전달하는 용도로 사용한 <code>self</code>라는 변수는 <code>_composeOrganizations</code> 메서드로 옮기는 게 맞으므로 코드를 정리한다. <code>Change Signature</code> 리팩터를 사용하면 조금 더 빨리 수정 할 수 있을 것이다.</p>
+
+<p>해당 코드를 다음 사진에서 확인할 수 있다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_method_06.png" alt="Webstorm, Refactoring - Extract Method : self 변수 " title=" Webstorm, Refactoring - Extract method " />
+	<figcaption>Webstorm, Refactoring - Extract Method : self 변수 </figcaption>
+</figure>
+
+<p>self 변수를 왜, 어떤 메커니즘에서 정리하고 있는지에 대해서는 자바스크립트 언어에 대한 이해를 조금 더 한 후에 다시 살펴보기로 하자.</p>
+
+<p>웹스톰 리팩터 기능으로 돌아와서, 3가지 작업 중 마지막 AJAX 코드를 메서드로 추출해보도록한다. 방법은 동일하며, <code>_requestList</code>라는 메서드 명으로 추출한다.</p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_method_07.png" alt="Webstorm, Refactoring - Extract Method : _requsetList수정 " title=" Webstorm, Refactoring - Extract method " />
+	<figcaption>Webstorm, Refactoring - Extract Method : <code>_requsetList</code>수정 </figcaption>
+</figure>
+
+<p>앞에서 사용하고 있는 <code>then</code>은 jQuery의 <code>프로미스 메서드</code>다. 익명 함수 내부에 있는 코드는 프로미스 메서드로 구현할 때 익명 함수를 사용할 필요가 없다. 프로미스의 원리를 이용해 더 읽기 쉽게 아래와 같이 작성한다.</p>
+
+<p><strong>Extract Method - Promise Method 개념 활용</strong></p>
+
+<figure>
+	<img src="http://whiteleo.azurewebsites.net/colony/markdown/refactoring/refactoring_extract_method_08.png" alt="Webstorm, Refactoring - Extract Method : _requsetList수정 " title=" Webstorm, Refactoring - Extract method " />
+	<figcaption>Webstorm, Refactoring - Extract Method : <code>_requsetList</code>수정 </figcaption>
+</figure>
+
+<blockquote>
+	<p><strong>프로미스</strong>란, E 언어<sup><a href="#fn:2" id="fnref:2" title="see footnote" class="footnote">2</a></sup>에서 처음 고안된 프로미스는 병렬로 실행되는 연산 결과를 전달하고 취득하기 위해 처음 고안된 패턴이며 자바, 스칼라, 파이선 등 많은 언어에 존재한다. </p>
+
+	<p><strong>자바스크립트에서의 프로미스는 병렬이 아닌 비동기 처리의 최종 결과를 조금 더 효율적으로 전달하기 위해 고안된 패턴이다</strong>. 프로미스 객체를 데이터 전송 추상화 컨테이너라고도 하는데 이유는 메서드나 함수는 프로미스 객체를 반환할 뿐이며 실제 데이터와 그 데이터를 가공하거나 검증하는 로직 등은 프로미스에서 추상화하고 있기 때문이다.</p>
+</blockquote>
+
+<div class="footnotes">
+	<hr />
+	<ol>
+
+		<li id="fn:1">
+			<p>주우영 지음, “프런트엔드 개발 시작하기”, 2015, 위키북스, 116쪽. (재인용) <a href="#fnref:1" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+		</li>
+
+		<li id="fn:2">
+			<p>http://erights.org/elib/distrib/pipeline.html <a href="#fnref:2" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+		</li>
+
+	</ol>
+</div>
+
+
+
+
+
+
+
+<!-- 7. Find Refactoring Preview 도구 창 ====================================================== -->
+<h2>리팩터링 실전 예제 7 : Find Refactoring Preview 도구 창</h2>
+
+<p>여기까지 웹스톰의 리팩터를 활용해 자바스크립트를 리팩터링 했다. 하지만 코드가 얽혀 있거나 같은 함수명 또는 변수명이 많아 웹스톰에서 의존 관계를 제대로 파악하지 못한다면 <code>Find Refactoring Preview</code>도구 창이 나타날 것이다.</p>
+
+<p>[이미지 영역 - Find Refactoring Preview]</p>
+
+<p>실제 프로젝트에서 리팩터링 기능을 사용할 때 자주 보는 <code>Find Refactoring Preview</code> 도구 창은 웹스톰에서 어느 파일에 어느 코드를 함께 변경하려고 하는지 한눈에 볼 수 있다. 이 기능은 변경 작업에서 제외하거나 변경 작업에 포함할 수 있어서 오류 없이 리팩터링 하는데 큰 도움이 된다.</p>
+
+<p>만약 어떤 코드는 이름만 같고 전혀 상관 없는 코드라면 마우스 오른쪽 버튼을 클릭해 <code>Exclue</code> 메뉴로 제외할 수 있다.</p>
+
+<hr />
+
+<p><strong>웹스톰 리팩토링 정리</strong></p>
+
+<p>지금가지 웹스톰에서 제공하는 리팩터와 함께 자바스크립트에서 활용할 수 있는 리팩터링 기법을 살펴봤다. 리팩터링은 동작하는 코드를 수정하는 것이기 때문에 위험 부담이 크고 비용도 많이 든다.</p>
+
+<p>“<strong>리팩터는 익숙해질수록 힘을 발휘할 것이다</strong>.“</p>
+
+<p>예전 자바스크립트 개발 환경에서는 리팩터링은 거의 불가능했다. 자바스크립트 파일이 많거나 레거시한 코드<sup><a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">1</a></sup>일수록 수정하기가 어려웠다.</p>
+
+<p>이제는 자바스크립트 코드도 꾸준히 관리하고 수정해야하는 시대다. 더 이상 리팩터링으로 인해 발생할 오류를 걱정하며 잘못된 인터페이스를 방치하지 말고 이번 장에서 소개한 웹스톰의 리팩터를 잘 활용해 위험 부담 없이 자유롭게 리팩터링 하길 바란다. </p>
+
+<p><strong>리팩터는 익숙해질수록 힘을 발휘할 것이다</strong>. 처음엔 익숙하지 않더라도 꾸준히 쓰려고 노력한다면 적은 시간을 투자해도 안정적으로 코드를 리팩터링 할 수 있을 것이다.</p>
+
+<div class="footnotes">
+	<hr />
+	<ol>
+
+		<li id="fn:1">
+			<p>이미 작성해서 동작하고 있는 코드다. 과거의 수많은 변경 사항이 반영돼 있어 변경 이력을 알지 못한다면 수정하기란 불가능에 가깝다. <a href="#fnref:1" title="return to article" class="reversefootnote">&#8617;&#xFE0E;</a></p>
+		</li>
+
+	</ol>
+</div>

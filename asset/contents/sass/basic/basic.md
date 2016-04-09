@@ -1,10 +1,14 @@
 
+<table id="meta">
+    <thead><th>160331</th><th>Sass</th><th>김태경</th></thead>
+    <tbody>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    </tbody>
+</table>
 
 # Sass Tutorials - Intro 및 기초내용 이해
-
-- 최초 작성자 : Tad Kim
-- 최종 수정자 : Tad Kim
-- 최종 수정일 : 2016. 3. 31
 
 이 문서는 `Sass Tutorials`를 시작하기에 앞서, 해당 과정에서 바탕으로하는 `Sass-lang.com`페이지에서 제공하는 `Sass Basic` 내용을 바탕으로 Sass의 기본 내용을 이해하기 위해 작성되었다.
 
