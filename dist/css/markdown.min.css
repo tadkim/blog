@@ -102,4 +102,20 @@ tr:hover{background-color: #f7f7f7;}
 /* -- 상단 문서 정보 -- */
 
 
+/* Go to Top  Btn*/
+.go-top {
+  display: none;
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  padding: 1em;
 
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+
+  text-decoration: none;
+  font-size: 12px;
+
+}
+.go-top:hover { background-color: rgba(0, 0, 0, 0.6);  }
+/* -- Go to Top  Btn --*/
