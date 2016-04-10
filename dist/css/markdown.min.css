@@ -99,11 +99,12 @@ tr:hover{background-color: #f7f7f7;}
 .tem p{margin: 0;}
 .tem p:first-child:first-child:before{background: transparent no-repeat; background-position: -5px 0; background-image: url(../../img/sprite.png); display: block; width: 17px; height: 17px; content: ''; float: left; margin:  0.3em 0.25em 0 0; }
 
-.yum{width: 90%; height: auto; background-color: hsl(58, 100%, 69%); border-radius: 0.3em; padding: 1em 5%; margin: 0 0 1.5em 0;}
+.yum{width: 90%; height: auto; background-color: hsl(58, 100%, 70%); border-radius: 0.3em; padding: 1em 5%; margin: 0 0 1.5em 0;}
 .yum p{margin: 0;}
 .yum p:first-child:first-child:before{background: transparent no-repeat; background-position: -22px 0; background-image: url(../../img/sprite.png); display: block; width: 17px; height: 17px; content: ''; float: left; margin:  0.3em 0.25em 0 0; }
 
 /* --윰탬 생각쓰기-- */
+
 /* 상단 문서 정보 */
 #meta {margin-top: 0em; margin-bottom: -5.2em;}
 #meta th, #meta td, #meta, tr:last-child {border: 0px solid #fff;}
@@ -111,6 +112,7 @@ tr:hover{background-color: #f7f7f7;}
 #meta th:first-child{text-align: left;}
 #meta th:last-child{text-align: right;}
 #meta tr:hover{background-color: #fff;}
+
 /* -- 상단 문서 정보 -- */
 
 
