@@ -85,7 +85,7 @@ h5, h6{ font-size: 0.9em; color: #444; margin: 0.5em 0 0 0; }
 
 
 blockquote { padding-left : 1em; border-left: 7px solid #ddd; }
-.footnote{ font-size: 0.6em; font-weight:600; vertical-align : text-bottom; margin-right: 0.15em;}
+.footnote{ font-size: 0.6em; font-weight:600; vertical-align : text-top; margin-right: 0.15em;}
 cite{display: block;font-size: 0.9em;color: #aaa;text-align: right;}
 table{width: 100%;}
 table, th, td{border-bottom : 1px solid #ccc;}
@@ -95,13 +95,13 @@ tr:hover{background-color: #f7f7f7;}
 /* -- Markdown Styling -- */
 
 /* 윰탬 생각쓰기 */
-.tem{width: 90%; height: auto; background-color: hsl(179, 100%, 88%); border-radius: 0.3em; padding: 1em 5%; margin: 0 0 1.5em 0;}
+.tem{width: 90%; height: auto; background-color: hsl(179, 100%, 88%); border-radius: 0.3em; padding: 1em 5%; margin: 0 0 1.5em 0; font-family: 'Noto Sans KR', sans-serif; font-size: 0.9em; line-height: 1.8em;}
 .tem p{margin: 0;}
-.tem p:first-child:first-child:before{background: transparent no-repeat; background-position: -5px 0; background-image: url(../../img/sprite.png); display: block; width: 17px; height: 17px; content: ''; float: left; margin:  0.3em 0.25em 0 0; }
+.tem p:first-child:first-child:before{background: #fff no-repeat; background-position: -43px 0; background-image: url(../../img/sprite.png); display: block; width: 45px; height: 17px; content: ''; float: left; margin:  0.3em 0.5em 0 0; }
 
-.yum{width: 90%; height: auto; background-color: hsl(58, 100%, 70%); border-radius: 0.3em; padding: 1em 5%; margin: 0 0 1.5em 0;}
+.yum{width: 90%; height: auto; background-color: hsl(58, 100%, 70%); border-radius: 0.3em; padding: 1em 5%; margin: 0 0 1.5em 0; font-family: 'Noto Sans KR', sans-serif; font-size: 0.9em; line-height: 1.8em;}
 .yum p{margin: 0;}
-.yum p:first-child:first-child:before{background: transparent no-repeat; background-position: -22px 0; background-image: url(../../img/sprite.png); display: block; width: 17px; height: 17px; content: ''; float: left; margin:  0.3em 0.25em 0 0; }
+.yum p:first-child:first-child:before{background: #fff no-repeat; background-position: -88px 0; background-image: url(../../img/sprite.png); display: block; width: 43px; height: 17px; content: ''; float: left; margin:  0.3em 0.5em 0 0; }
 
 /* --윰탬 생각쓰기-- */
 
