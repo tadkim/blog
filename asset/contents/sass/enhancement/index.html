@@ -12,6 +12,7 @@
     <tr><td></td><td></td><td></td></tr>
     </tbody>
 </table>
+
 <h1 id="sassfortooltip">Sass for tooltip</h1>
 
 <p>이 문서는 다음과 같은 물음에서 시작한다.</p>
@@ -20,19 +21,17 @@
 <p>왜- 우리는 - Sass를 사용하려하는 것일까?</p>
 </blockquote>
 
-<p>나(탬)는 이렇게 생각했다.</p>
+<p>나는 이렇게 생각했다.</p>
 
-<div class="tem">
 <ul>
 <li>우리는 콘텐츠 개발작업의 &#8217;지속가능성&#8217;을 추구한다.</li>
 <li>그동안 콘텐츠 개발작업에 있어 CSS는, &#8217;입에서 불을 내뿜는 용&#8217;과 같았다.</li>
 <li>앞으로도 어떤 형태로든 CSS라는 &#8217;용&#8217;은 존재한다.</li>
 <li>Sass는 CSS라는 용을 다루기위한 전략이자 전술이다.</li>
 </ul>
-</div>
 
 <p>그렇게 Sass를 시작했고, 유투브 영상이 및 Sass Guideline 문서 등을 보면서, Sass의 다양한 활용가능성을 여러가지 면에서 확인하고 있는 중이다. </p>
-<div class="tem">지난 날 나의 d3.js 코드는 일회용 코드들이 대부분이었다.</div>
+
 <p>그리고, 중요한 것은 우리의 작업에 Sass를 직접 끌고 들어와서 풀어놓고 보려는 속셈이다. 지난 날 나의 d3.js 코드는 일회용 코드들이 대부분이었다. 직접 <code>localhost:8888</code>을 통해 확인해보지 않고서야 결과물도 짐작되지 않는. 단순한 재조합의 연속이었다. 그것이 얼마나 괴롭고 비효율적인 작업인지는 수 많은 새벽밤을 지새면서 깨달았기 때문에, 나는 이제는 그러한 일들을 되풀이 하고싶지 않을 뿐이다.</p>
 
 <hr />
@@ -99,7 +98,7 @@
 <p>Sass를 이용한 기존 코드 개선 프로젝트는 다음과 같은 순서로 진행된다.</p>
 
 <ol>
-<li>단독 mixin 활용 : 막대 스타일 변경위한 <code>default theme</code> 작성 후 적용</li>
+<li>단일 mixin 활용 : 막대 스타일 변경위한 <code>default theme</code> 작성 후 적용</li>
 <li>다중 mixin 활용 : 막대 스타일 중, 막대바 color 속성 변경을 위한 믹스인과, 텍스트 속성 변경위한 믹스인을 별개로 작성하여 <code>@inclue</code>하여 진행.</li>
 <li>custom mixin 제작 : 기존 작성된 mixin만을 로드하는 것이 아니라, SCSS내에서 자유롭게 색상을 지정해줄 수 있는 mixin 제작</li>
 <li>NYT 사례에 적용</li>
@@ -107,10 +106,9 @@
 
 <hr />
 
-<h3 id="단독mixin활용"></h3>
+<h3 id="단일mixin활용">단일 mixin 활용</h3>
 
-
-<p>앞서 설명한 내용대로 d3 막대차트의 색상을 변경하기 위해 Sass의 mixin 기능을 활용하여 </p>
+<p>앞서 설명한 내용대로 d3 막대차트의 색상을 변경하기 위해 Sass의 mixin 기능을 활용하여</p>
 
 <p><code>default theme</code> 을 작성하고, 그것을 d3차트에 적용해본다.</p>
 
@@ -136,10 +134,10 @@
 
 <h4 id="실제코드확인하기">실제 코드 확인하기</h4>
 
-<pre class="highlight"><code class="css">
+<pre class="highlight"><code class="scss">
 /* mixin for color setting (svg, bar, mouseover, label) --------------*/
 @mixin theme_default(
-  // 이 default mixin에서는 color를 대상으로 매개변수를 받는다. 매개변수 자체를 Sass의 변수(Variables)를 활용해도 좋지만, 여기서는 코드의 복잡성을 줄이기위해 mixins의 매개변수가 미리 정해둔 색상을 가리키도록 설정했다. 
+  // 이 default mixin에서는 color를 대상으로 매개변수를 받는다. 매개변수 자체를 Sass의 변수(Variables)를 활용해도 좋지만, 여기서는 코드의 복잡성을 줄이기위해 mixins의 매개변수가 미리 정해둔 색상을 가리키도록 설정했다.
   $col_svg:hsl(176, 66%, 36%), //svg 배경 색상
   $col_bar:hsl(340, 10%, 50%), // 막대 바 색상
   $col_bar_hover:hsl(340, 76%, 50%), //막대 바 mouseover시 색상
@@ -165,17 +163,95 @@
 
 <p></iframe></p>
 
-<hr/>
-<h3 id="다중mixin활용"></h3>
+<hr />
 
-<hr/>
-<h3 id="custom mixin제작"></h3>
+<h3 id="다중mixin활용">다중 mixin 활용</h3>
 
+<p>위에서 Sass의 <code>@mixins</code> 기능을 활용하여 d3의 style속성을 변경하는 <code>theme_default</code> 믹스인을 작성, 활용했다.</p>
+ <pre class="highlight"><code class="css">
 
-<hr/>
-<h3 id="NYT 사례에 적용"></h3>
+<p>/* 단일 mixins 활용 코드 /*</p>
 
-<hr/>
+<p>@mixin theme_default(</p>
+
+<p>$col_svg:hsl(176, 66%, 36%), //svg 배경 색상</p>
+
+<p>$col_bar:hsl(340, 10%, 50%), // 막대 바 색상</p>
+
+<p>$col_bar_hover:hsl(340, 76%, 50%), //막대 바 mouseover시 색상</p>
+
+<p>$col_text:hsl(0, 0%, 100%) // 막대차트 라벨(text) 색상</p>
+
+<p>){</p>
+
+<p>svg{ background-color:$col_svg; }</p>
+
+<p>.bar{ fill:$col_bar; }</p>
+
+<p>.bar_mouseover{ fill:$col_bar_hover; }</p>
+
+<p>.label{ font-size:12px; fill:$col_text; text-anchor:middle;} //lable영역. 이부분을 컨트롤하는 별개의 mixin을 작성한다.</p>
+
+<p>}</p>
+
+<p></code></pre></p>
+
+<p><code>단일 mixin 활용</code> 에서 작성했던 코드 중 가장 아래에 보면 <code>.label</code>이라는 클래스를 정의하는 부분이 있다. 사실, 위에서는 색상에 대한 내용만 정의하고 넘어가느라 이부분에 대해서는 재사용이 힘든형태로 남겨두었다. 이 단계에서는 이부분에 대해 다루려고 한다.</p>
+
+<ul>
+<li><del><em>단일 mixin 활용 : 색상관련 믹스인 정의 및 활용</em></del></li>
+<li>다중 mixin 활용 : 단일 mixin 에서 작성한 코드에 새로운 mixin을 추가하여 재사용 가능한 코드 만들기.</li>
+</ul>
+
+<h4 id="새롭게추가할mixin">새롭게 추가할 Mixin</h4>
+
+<ul>
+<li>단일 mixin 코드의 <code>.label</code> 영역에 적용할 mixin.</li>
+<li>text 관련 속성을 하나의 mixin으로 작성 후, 기존 테마 mixin에서 <code>@include</code>하여 사용하기</li>
+</ul>
+
+<h4 id="작업진행에사용할css선택자정리">작업 진행에 사용할 CSS 선택자 정리</h4>
+
+<ul>
+<li>SVG의 배경색상 : <code>svg{ ... }</code></li>
+<li>막대 차트의 막대 색상 : <code>.bar{ ... }</code></li>
+<li>막대 차트의 막대 이벤트(mouseover)시 강조 색상 <code>.bar_mouseover{ ... }</code></li>
+<li>막대 차트의 라벨(text)색상 : <code>.label{ ... }</code></li>
+</ul>
+
+<pre class="highlight"><code class="css">
+/* mixin for graph label(text) --------------*/
+@mixin theme_custom_text($font-family:$ft_hanna, $label_size:12px, $label_anchor:middle){
+  font-family: $font-family;
+  font-style: italic;
+  font-size:$label_size;
+  text-anchor:$label_anchor;
+}
+/*
+사용 방법1 : @include theme_custom_text; //기본
+사용 방법2 : @include theme_custom_text($ft_hallasan); //폰트만 hallasan으로 변경
+사용 방법3 : @include theme_custom_text($ft_hallasan, 20px); //폰트 hallasan, 폰트크기 20px로 변경
+사용 방법4 : @include theme_custom_text($ft_hallasan, 20px, middle); //폰트 hallasan, 폰트크기 20px, 텍스트기준점(중간)으로 변경
+*/
+</code></pre>
+
+<hr />
+
+<h4 id="전체코드확인하기">전체 코드 확인하기</h4>
+
+<p>백문이 불여일견. 전체코드를 맥락 위에서 이해하는 것이 어쩌면 가장 쉽고 간단한 방법일 수 있다.</p>
+
+<p><iframe height='268' scrolling='no' src='//codepen.io/colony-tad/embed/YqapRd/?height=268&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/colony-tad/pen/YqapRd/'>d3_sass_multiple_mixins</a> by tadkim (<a href='http://codepen.io/colony-tad'>@colony-tad</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+
+<p></iframe></p>
+
+<hr />
+
+<h3 id="custommixin제작및활용">Custom mixin 제작 및 활용</h3>
+
+<hr />
+
+<h3 id="nytstylemixin제작및활용">NYT style mixin 제작 및 활용</h3>
 
 </body>
 </html>
