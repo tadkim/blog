@@ -133,22 +133,8 @@ _ _ _
 
 위에서 Sass의 `@mixins` 기능을 활용하여 d3의 style속성을 변경하는 `theme_default` 믹스인을 작성, 활용했다.
 
- <pre class="highlight"><code class="css">
- /* 단일 mixins 활용 코드 /*
-@mixin theme_default(
-  $col_svg:hsl(176, 66%, 36%), //svg 배경 색상
-  $col_bar:hsl(340, 10%, 50%), // 막대 바 색상
-  $col_bar_hover:hsl(340, 76%, 50%), //막대 바 mouseover시 색상
-  $col_text:hsl(0, 0%, 100%) // 막대차트 라벨(text) 색상
-  ){
-  svg{ background-color:$col_svg; }
-  .bar{ fill:$col_bar; }
-  .bar_mouseover{ fill:$col_bar_hover; }
-  .label{ font-size:12px; fill:$col_text; text-anchor:middle;} //lable영역. 이부분을 컨트롤하는 별개의 mixin을 작성한다.
-}
- </code></pre>
-
- `단일 mixin 활용` 에서 작성했던 코드 중 가장 아래에 보면 `.label`이라는 클래스를 정의하는 부분이 있다. 사실, 위에서는 색상에 대한 내용만 정의하고 넘어가느라 이부분에 대해서는 재사용이 힘든형태로 남겨두었다. 이 단계에서는 이부분에 대해 다루려고 한다.
+`단일 mixin 활용` 에서 작성했던 코드 중 가장 아래에 보면 `.label`이라는 클래스를 정의하는 부분이 있다. 사실, 위에서는 색상에 대한
+내용만 정의하고 넘어가느라 이부분에 대해서는 재사용이 힘든형태로 남겨두었다. 이 단계에서는 이부분에 대해 다루려고 한다.
 
 
   - ~~*단일 mixin 활용 : 색상관련 믹스인 정의 및 활용*~~
