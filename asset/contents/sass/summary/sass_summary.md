@@ -1,5 +1,5 @@
 <table id="meta">
-    <thead><th>160406</th><th>Sass</th><th>김태경</th></thead>
+    <thead><th>160413</th><th>Sass</th><th>김태경</th></thead>
     <tbody>
     <tr><td></td><td></td><td></td></tr>
     <tr><td></td><td></td><td></td></tr>
@@ -68,83 +68,130 @@ _ _ _
 _ _ _
 ## Sass 를 활용한 기존 코드 개선
 
+Sass를 이용한 기존 코드 개선 프로젝트는 다음과 같은 순서로 진행된다.
+
+1. 단일 mixin 활용 :  막대 스타일 변경위한  `default theme` 작성 후 적용
+2. 다중 mixin 활용 : 막대 스타일 중, 막대바 color  속성 변경을 위한 믹스인과, 텍스트 속성 변경위한 믹스인을 별개로 작성하여 `@inclue`하여 진행.
+3. custom mixin 제작 : 기존 작성된 mixin만을 로드하는 것이 아니라, SCSS내에서 자유롭게 색상을 지정해줄 수 있는 mixin 제작
+4. NYT 사례에 적용
 
 
-###이슈1 스타일적용 우선순위 (with d3.js)
-d3에서 `.style()`과 `.attr()`의 차이를 이해해야한다.
-<pre class="highlight"><code class="js">
 
-//...
-//그래프에서 텍스트 라벨을 추가하는 영역예시
-    svg.selectAll("text")
-        .data(dataset)
-        .enter()
-        .append("text")
-        .attr("class", "textInfo")
-        .text(function(d) { return d; })
-        .attr("x", function(d, i) { return xScale(i) + xScale.rangeBand() / 2; })
-        .attr("y", function(d) { return h - yScale(d) + 14; })
-        .attr("font-size", "21px") //font-size를 .attr()로 설정하는 방식
-        .style("font-size", "21px") //font-size를 .style()로 설정하는 방식
-        .attr("fill", "white");
 
+
+ _ _ _
+
+### 단일 mixin 활용
+ 앞서 설명한 내용대로 d3 막대차트의 색상을 변경하기 위해 Sass의 mixin 기능을 활용하여
+  `default theme` 을 작성하고, 그것을 d3차트에 적용해본다.
+<div class="tem">여기서 복잡복잡한 믹스인을 중첩하여 사용하면 이해도하기 전에 복잡함에 겁을 먹을 수 있다. 그래서 우선은 d3 차트의 색상만 다루는 믹스인을 작성해보기로한다.</div>
+
+
+#### Sass의 Mixin기능을 적용할 영역은 크게 4곳이다.
+- SVG의 배경색상
+- 막대 차트의 막대 색상
+- 막대 차트의 막대 이벤트(mouseover)시 강조 색상
+- 막대 차트의 라벨(text)색상
+
+#### 작업 진행에 사용할 CSS 선택자 정리
+- SVG의 배경색상 : `svg{ ... }`
+- 막대 차트의 막대 색상 : `.bar{ ... }`
+- 막대 차트의 막대 이벤트(mouseover)시 강조 색상 `.bar_mouseover{ ... }`
+- 막대 차트의 라벨(text)색상 : `.label{ ... }`
+
+
+#### 실제 코드 확인하기
+
+<pre class="highlight"><code class="scss">
+/* mixin for color setting (svg, bar, mouseover, label) --------------*/
+@mixin theme_default(
+  // 이 default mixin에서는 color를 대상으로 매개변수를 받는다. 매개변수 자체를 Sass의 변수(Variables)를 활용해도 좋지만, 여기서는 코드의 복잡성을 줄이기위해 mixins의 매개변수가 미리 정해둔 색상을 가리키도록 설정했다.
+  $col_svg:hsl(176, 66%, 36%), //svg 배경 색상
+  $col_bar:hsl(340, 10%, 50%), // 막대 바 색상
+  $col_bar_hover:hsl(340, 76%, 50%), //막대 바 mouseover시 색상
+  $col_text:hsl(0, 0%, 100%) // 막대차트 라벨(text) 색상
+  ){
+  svg{ background-color:$col_svg; }
+  .bar{ fill:$col_bar; }
+  // .bar:hover{ fill:$col_bar_hover; }  //hover는 모바일, IE7이하 지원 문제로 권장가이드에서 제외하였음.
+  .bar_mouseover{ fill:$col_bar_hover; }
+  .label{ font-size:12px; fill:$col_text; text-anchor:middle;} //lable영역 역시, 아래에서 따로 다루기때문에 지금은 '있다'정도만 보고 지나가자.
+}
 </code></pre>
 
+사실 이와 관련하여 `:hover`에 대한 이슈가 있었다. d3js의 스타일을 CSS에서 컨트롤한다는 점에서 `:hover`는 매우 매력적인 CSS 기능이다. 그러나 `:hover`의 경우 위 코드의 주석에서도 지적했던대로 `IE7`이하를 지원하지 않는데다가, 무엇보다 스마트폰에서 동작하지 않는다. 따라서, `:hover`보다는 d3에서의 코드컨트롤이나 자바스크립트 전반에서 이롭도록, `bar_mouseover` 라는 클래스명을 정의하여 d3내에서 해당 요소를 스크립트를 활용해 컨트롤하도록 한다.
 
-만약 이 그래프를 표현하는 `css`파일에서 `.textInfo`클래스에 대해 다음과 같이 스타일 설정이 되어 있다면 어느것이 우선할까?
-<pre class="highlight"><code class="css">
-.textInfo{ font-size:10px; color:white; }
-</code></pre>
+_ _ _
+#### 전체 코드 확인하기
+백문이 불여일견. 전체코드를 맥락 위에서 이해하는 것이 어쩌면 가장 쉽고 간단한 방법일 수 있다.
 
+<iframe height='382' scrolling='no' src='//codepen.io/colony-tad/embed/MyVjBN/?height=382&theme-id=0&default-tab=css' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/colony-tad/pen/MyVjBN/'>d3 style (with Sass)</a> by tadkim (<a href='http://codepen.io/colony-tad'>@colony-tad</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
 
-[<생활 웹디자인 - CSS적용 우선순위>](https://opentutorials.org/course/1237/4149)에서 정리한 내용에 따르면 우선순위는 다음과 같다.
+_ _ _
+### 다중 mixin 활용
 
-1. 원천 소스중 사용자 스타일시트가 가장 우선한다.
-2. 선택자 우선순위를 계산하여 값이 높은 순서대로 적용한다.
-3. 가장 마지막에 지정된 스타일을 우선적으로 적용한다.
+위에서 Sass의 `@mixins` 기능을 활용하여 d3의 style속성을 변경하는 `theme_default` 믹스인을 작성, 활용했다.
 
-
-###이슈1 스타일적용 우선순위 (with d3.js) 풀이
-
-우선순위가 높은 순서로 정리해본다.
-
-1. `d3.js`코드 내 `.style()`
-    - `2`,`3`번 에서 `!important`를 사용해도 인라인스타일로 적용되는 `.style()`이 우선순위가 높음.
-2. `css`파일의 `.textInfo`클래스 스타일
-3. `d3.js`코드 내 `.attr()`
-    - 보통 `.style()`및 `css`에서의 스타일지정이 이루어지지 않은경우 이 코드가 반영 된다.
- 
-<div class="tem">   
-**즉, Sass의 `@mixin`으로 `d3.js`의 클래스를 통제하여 테마를 작성하는 경우, 다음과 같은 규칙 안에서 작성되어야 한다.**
-- `d3.js`코드 작성시, `@mixin`컨트롤 고려하여 클래스명을 부여한다.
-- `d3.js`코드 작성시, `.style()`로의 스타일 속성 부여는 최대한 자제한다.
-    - 여러가지 사항을 검토하여 `.style()`사용이 불가피할 경우, 목적과, 활용 지점에 대한 설명을 주석으로 작성해놓는다.
-</div>
-
-
-[<CanIuse-CSS 2.1 selectors>](http://caniuse.com/#feat=css-sel2)에서 `:hover`의 브라우저별 지원 관련 정보를 확인 해 본 결과, `IE7`이하 버전에서는 사용하지 못하고, 그이후 버전dls `IE8`버전 부터는 자유롭게 사용가능한 것으로 보인다.
-
-* 또한 `:hover`
-
-
-
-
-
-### d3.js에서의 색상 스타일 지정시 주의사항
-
-<pre class="highlight"><code class="js">
-svg.append("text")
-    .data(dataset)
-    .enter()
-    .append("text")
-    .text(function(d); 
-.style("fill", "blue")'
-.style("color", "red");
-</code></pre>
-
-### d3.js에서  색상을 컨트롤 하는 3 가지 방법에 대한 예제
- <pre class="highlight"><code class="js">
- .style("color", "blue") //.style
- .attr("class", "textInfo") //.attr
- .attr("fill", "white");// class
+ <pre class="highlight"><code class="css">
+ /* 단일 mixins 활용 코드 /*
+@mixin theme_default(
+  $col_svg:hsl(176, 66%, 36%), //svg 배경 색상
+  $col_bar:hsl(340, 10%, 50%), // 막대 바 색상
+  $col_bar_hover:hsl(340, 76%, 50%), //막대 바 mouseover시 색상
+  $col_text:hsl(0, 0%, 100%) // 막대차트 라벨(text) 색상
+  ){
+  svg{ background-color:$col_svg; }
+  .bar{ fill:$col_bar; }
+  .bar_mouseover{ fill:$col_bar_hover; }
+  .label{ font-size:12px; fill:$col_text; text-anchor:middle;} //lable영역. 이부분을 컨트롤하는 별개의 mixin을 작성한다.
+}
  </code></pre>
+
+ `단일 mixin 활용` 에서 작성했던 코드 중 가장 아래에 보면 `.label`이라는 클래스를 정의하는 부분이 있다. 사실, 위에서는 색상에 대한 내용만 정의하고 넘어가느라 이부분에 대해서는 재사용이 힘든형태로 남겨두었다. 이 단계에서는 이부분에 대해 다루려고 한다.
+
+
+  - ~~*단일 mixin 활용 : 색상관련 믹스인 정의 및 활용*~~
+  - 다중 mixin 활용 : 단일  mixin 에서 작성한 코드에 새로운 mixin을 추가하여 재사용 가능한 코드 만들기.
+
+
+#### 새롭게 추가할 Mixin
+- 단일 mixin 코드의 `.label` 영역에 적용할 mixin.
+- text 관련 속성을 하나의 mixin으로 작성 후, 기존 테마 mixin에서 `@include`하여 사용하기
+
+
+#### 작업 진행에 사용할 CSS 선택자 정리
+- SVG의 배경색상 : `svg{ ... }`
+- 막대 차트의 막대 색상 : `.bar{ ... }`
+- 막대 차트의 막대 이벤트(mouseover)시 강조 색상 `.bar_mouseover{ ... }`
+- 막대 차트의 라벨(text)색상 : `.label{ ... }`
+
+<pre class="highlight"><code class="css">
+/* mixin for graph label(text) --------------*/
+@mixin theme_custom_text($font-family:$ft_hanna, $label_size:12px, $label_anchor:middle){
+  font-family: $font-family;
+  font-style: italic;
+  font-size:$label_size;
+  text-anchor:$label_anchor;
+}
+/*
+사용 방법1 : @include theme_custom_text; //기본
+사용 방법2 : @include theme_custom_text($ft_hallasan); //폰트만 hallasan으로 변경
+사용 방법3 : @include theme_custom_text($ft_hallasan, 20px); //폰트 hallasan, 폰트크기 20px로 변경
+사용 방법4 : @include theme_custom_text($ft_hallasan, 20px, middle); //폰트 hallasan, 폰트크기 20px, 텍스트기준점(중간)으로 변경
+*/
+</code></pre>
+_ _ _
+#### 전체 코드 확인하기
+백문이 불여일견. 전체코드를 맥락 위에서 이해하는 것이 어쩌면 가장 쉽고 간단한 방법일 수 있다.
+
+<iframe height='268' scrolling='no' src='//codepen.io/colony-tad/embed/YqapRd/?height=268&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/colony-tad/pen/YqapRd/'>d3_sass_multiple_mixins</a> by tadkim (<a href='http://codepen.io/colony-tad'>@colony-tad</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
+
+_ _ _
+### Custom mixin 제작 및 활용
+
+
+
+_ _ _
+### NYT style mixin 제작 및 활용
