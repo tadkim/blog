@@ -20,6 +20,9 @@ $(function(){
             $('pre code').each(function(i, block) {
                 hljs.highlightBlock(block);
             });
+            //callback : 로드 완료하면 스크롤 위치를 최 상단으로 이동한다.
+            window.scrollTo(500, 0);
+
         }).hide().fadeIn('slow');
 
     });
