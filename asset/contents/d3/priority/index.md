@@ -89,4 +89,4 @@ coding convention 문서 제작에 대한 논의가 본격적으로 이루어지
 <iframe height='268' scrolling='no' src='//codepen.io/colony-tad/embed/GZQaOL/?height=268&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/colony-tad/pen/GZQaOL/'>d3 color command Test</a> by tadkim (<a href='http://codepen.io/colony-tad'>@colony-tad</a>) on <a href='http://codepen.io'>CodePen</a>.
 </iframe>
 
-<p>[^1]:제이슨 크랜포드 티그 지음 유윤선 옮김, "쉽고 빠르게 익히는 CSS3", 위키북스, 2011, p.111</p>
+<[^1]:제이슨 크랜포드 티그 지음 유윤선 옮김, "쉽고 빠르게 익히는 CSS3", 위키북스, 2011, p.111</p>

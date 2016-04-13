@@ -32,7 +32,7 @@
 <h4>rect</h4>
 
 <pre class="highlight"><code class="html">
-<rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)">
+&lt;rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)"&gt;
 </code></pre>
 
 <p><code>rect</code>요소는 축-정렬(axis-aligned)사각형을 정의한다. 사각형의 <code>top-left corner</code>는 <code>x</code>,<code>y</code>좌표의 위치에 기준이 된다. 반면 <code>rect</code>의 크기는 <code>width</code>와 <code>height</code>속성에 의해 정의된다. 또한 둥근 사각형(Rounded Rectangle)은 <code>rx</code>와 <code>ry</code>라는 속성을 사용하여 정의할 수 있다.</p>
@@ -40,7 +40,7 @@
 <h4>circle</h4>
 
 <pre class="highlight"><code class="html">
- <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+  &lt;circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /&gt;
 </code></pre>
 
 <p><code>circle</code>요소는 중심점 및 <code>radius</code>에 의해 정의된다. <code>circle</code>요소의 <code>cx</code>, <code>cy</code>가 위치를 잡는데 사용되고, <code>r</code>속성이 크기를 정의하는데 사용된다.</p>
@@ -48,9 +48,9 @@
 <h4>ellipse</h4>
 
 <pre class="highlight"><code class="html">
-<ellipse cx="240" cy="100" rx="220" ry="30" style="fill:purple" />
-<ellipse cx="220" cy="70" rx="190" ry="20" style="fill:lime" />
-<ellipse cx="210" cy="45" rx="170" ry="15" style="fill:yellow" />
+  &lt;ellipse cx="240" cy="100" rx="220" ry="30" style="fill:purple" /&gt;
+  &lt;ellipse cx="220" cy="70" rx="190" ry="20" style="fill:lime" /&gt;
+  &lt;ellipse cx="210" cy="45" rx="170" ry="15" style="fill:yellow" /&gt;
 </code></pre>
 
 <p><code>ellipse</code>요소는 축 중심(axis-aligned) 타원으로, 중심점 및 두 <code>radius</code>의해 정의된다. 위치는 <code>cx</code>,<code>cy</code>에 의해 정의되며 <code>rx</code>,<code>ry</code>를 명시함으로 크기와 형태를 정할 수 있게 된다.</p>
@@ -58,7 +58,7 @@
 <h4>line</h4>
 
 <pre class="highlight"><code class="html">
-<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
+  &lt;line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" /&gt;
 </code></pre>
 
 <p><code>line</code>요소는 시작점과 끝점을 기준으로 정의된다. 시작 점은 <code>x1</code>과 <code>y1</code>속성에 의해 정의되고, 끝점은 <code>x2</code>, <code>y2</code>에 의해 정의된다. </p>
@@ -66,7 +66,7 @@
 <h4>polyline</h4>
 
 <pre class="highlight"><code class="html">
-<polyline points="20,20 40,25 60,40 80,120 120,140 200,180" style="fill:none;stroke:black;stroke-width:3" />
+  &lt;polyline points="20,20 40,25 60,40 80,120 120,140 200,180" style="fill:none;stroke:black;stroke-width:3" /&gt;
 </code></pre>
 
 <p><code>polyline</code>요소는 연결된 직선 segment의 세트에 의해 정의 된다. 
@@ -79,7 +79,7 @@
 <h4>polygon</h4>
 
 <pre class="highlight"><code class="html">
-<polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" />
+  &lt;polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" /&gt;
 </code></pre>
 
 <p><code>polygon</code>요소는 연결된 직선 세그먼트의 세트로 이루어지는 닫힌 도형을 정의한다. 다각형을 구성하는 점에 대한 속성을 사용가능 하다.</p>
@@ -91,7 +91,7 @@
 <h4>text</h4>
 
 <pre class="highlight"><code class="html">
-<text x="0" y="15" fill="red">I love SVG!</text>
+  &lt;text x="0" y="15" fill="red">I love SVG!</text>
 </code></pre>
 
 <p><code>text</code>요소는 텍스트로 이루어져있는 그래픽 요소로 정의된다. 텍스트 요소 (위 참고 항목의 텍스트 콘텐츠는 텍스트 연산자) 문자가 렌더링되도록 정의한다. <code>x</code>,<code>y</code>요소에의해 <code>text</code>요소의 앵커 위치가 제어된다. <code>dx</code>, <code>dy</code> 속성을 사용함으로써 앵커로프터 상쇄(offset)할 수 있다. 또한, 우리는 아주 편리하게 -  글꼴의 크기를 기준으로 <code>em</code>단위를 사용하여 텍스트의 <code>margin</code>과 <code>baseline</code>을 조정할 수 있다.  </p>
@@ -99,15 +99,15 @@
 <p>수평 텍스트 정렬(horizontal text alignment)은 <code>text-anchor</code>속성을 활용하여 텍스트의 정렬을 실행한다. 몇 가지 예를 살펴보도록 하자.</p>
 
 <pre class="highlight"><code class="html">
-<svg:text text-anchor="start">left-align, bottom-baseline</svg:text>
-<svg:text text-anchor="middle">center-align, bottom-baseline</svg:text>
-<svg:text text-anchor="end">right-align, bottom-baseline</svg:text>
-<svg:text dy=".35em" text-anchor="start">left-align, middle-baseline</svg:text>
-<svg:text dy=".35em" text-anchor="middle">center-align, middle-baseline</svg:text>
-<svg:text dy=".35em" text-anchor="end">right-align, middle-baseline</svg:text>
-<svg:text dy=".71em" text-anchor="start">left-align, top-baseline</svg:text>
-<svg:text dy=".71em" text-anchor="middle">center-align, top-baseline</svg:text>
-<svg:text dy=".71em" text-anchor="end">right-align, top-baseline</svg:text>
+  &lt;svg:text text-anchor="start">left-align, bottom-baseline&lt;/svg:text&gt;
+&lt;svg:text text-anchor="middle">center-align, bottom-baseline&lt;/svg:text&gt;
+&lt;svg:text text-anchor="end">right-align, bottom-baseline&lt;/svg:text&gt;
+&lt;svg:text dy=".35em" text-anchor="start">left-align, middle-baseline&lt;/svg:text&gt;
+&lt;svg:text dy=".35em" text-anchor="middle">center-align, middle-baseline&lt;/svg:text&gt;
+&lt;svg:text dy=".35em" text-anchor="end">right-align, middle-baseline&lt;/svg:text&gt;
+&lt;svg:text dy=".71em" text-anchor="start">left-align, top-baseline&lt;/svg:text&gt;
+&lt;svg:text dy=".71em" text-anchor="middle">center-align, top-baseline&lt;/svg:text&gt;
+&lt;svg:text dy=".71em" text-anchor="end">right-align, top-baseline&lt;/svg:text&gt;
 </code></pre>
 
 <p>이에 대한 더 좋은 방법으로, SVG의  <a href="http://www.w3.org/TR/SVG/text.html#BaselineAlignmentProperties">baseline alignment properties</a>속성을 사용하는 방법이 있긴하다. 그러나, 이것은 다양한 브라우저에서 유연하게 적용하기에는 어려움이 있다.</p>
@@ -118,7 +118,7 @@
 
 <pre class="highlight"><code class="html">
 <!-- svg:path d="" transform=""-->
-<path d="M150 0 L75 200 L225 200 Z" />
+&lt;path d="M150 0 L75 200 L225 200 Z" /&gt;
 </code></pre>
 
 <p><code>path</code>요소는 <code>shape</code>레이아웃의 외곽선을 표현한다. 이것은 채우기(fill)이나 선 스타일 지정(stroke), 그리고 클리핑패스(cliping path)등의 기능을 적용가능하며 이 세 가지 기능을 조합해서도 적용기 가능하다.</p>
