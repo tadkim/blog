@@ -141,4 +141,10 @@ svg.append("text")
 .style("fill", "blue")'
 .style("color", "red");
 </code></pre>
- 
+
+### d3.js에서  색상을 컨트롤 하는 3 가지 방법에 대한 예제
+ <pre class="highlight"><code class="js">
+ .style("color", "blue") //.style
+ .attr("class", "textInfo") //.attr
+ .attr("fill", "white");// class
+ </code></pre>
