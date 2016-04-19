@@ -1,0 +1,377 @@
+
+<table id="meta">
+ <thead><th>160418</th><th>LAB</th><th>Tad Kim</th></thead>
+ <tbody>
+ <tr><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+
+<h1> Profile3.0</h1>
+<p>이 문서는 다음과 같은 순서로 분석, 정리된다.</p>
+
+<ol>
+<li>HTML
+
+<ul>
+<li>1.1 사용되는 코드</li>
+<li>1.2 &lt;canvas&gt; 알고 넘어가기</li>
+</ul></li>
+<li>CSS(SCSS)</li>
+<li>Javascript</li>
+<li>All</li>
+<li>참고 자료</li>
+</ol>
+
+<hr />
+
+<h2 id="1.html">1. HTML</h2>
+
+<h3 id="1.1사용되는코드">1.1 사용되는 코드</h3>
+
+<pre><code>
+
+<figure></figure>
+&lt;canvas id=eye-l width=800 height=668&gt; &lt;/canvas&gt;
+&lt;canvas id=eye-r width=800 height=668 &gt; &lt;/canvas&gt;
+&lt;canvas id=mouth width=800 height=668&gt; &lt;/canvas&gt;
+</code></pre>
+
+<p>HTML은 굉장히 간단하다. 세 개의 <code>canvas</code>태그로 이루어져 있다. 그런데&#8230; <code>canvas</code>태그가 아직 어색하기때문에, 정의를 분명하게 짚고넘어가자.(할때 제대로 하자 정신.)</p>
+
+<h3 id="1.2html5의ltcanvasgt알고넘어가기">1.2 HTML5의 &lt;canvas&gt; 알고 넘어가기</h3>
+
+<p>일단 모르겠으니, <a href="http://www.w3schools.com/tags/ref_canvas.asp">W3school-canvas</a>에서 설명한 내용을 발 번역 해본다.</p>
+ <blockquote>
+<b>HTML5 &amp;ltcanvas&gt; Description</b></p>
+<p>HTML5의 &lt;canvas&gt;태그는 즉석에서(on the fly, 주로 자바스크립트를 활용하여 )그래픽을 그리는데 사용된다. &lt;canvas&gt; 자체는 그래픽을 그리는 기능을 하는 것이아니라, &#8220;그래픽을 담는 태그&#8221;이다. 우리는 스크립트를 활용하여 이 &lt;canvas&gt;안에 그림을 그려야 한다. The <code>getContext()</code> 메서드는 &lt;canvas&gt;에 그리기위해 필요한 속성과 메서드를 담당(?)하는 객체를 리턴한다.</p>
+
+<p>이 레퍼런스는 <code>getContext(&quot;2d&quot;)</code>라는 프로퍼티 또는 메서드만을 다루며, 이외에도 텍스트(text), 선(line), 박스(boxes), 원형(circles)를 포함한 여러 형태들을 &lt;canvas&gt;에 그릴 수 있다.</p>
+
+</blockquote>
+
+<p>크게 중요한 부분만 짚자면, HTML5의 <code>cavas</code>는 &#8220;그래픽을 담는 태그&#8221;라고 할 수 있다.</p>
+
+<div class="tem">
+나머지 부분은 과감하게(?) 넘어가보자. 나도모르겠는데, 일단 써보면서 알아가면 된다고 생각한다. - 탬
+</div>
+
+<h2 id="2.cssscss">2. CSS(SCSS)</h2>
+
+<h3 id="2.1사용되는코드">2.1 사용되는 코드</h3>
+
+<p>이번 콘텐츠에 사용되는 CSS파일은 <code>SCSS</code> 문법으로 구성되어있다. 코드내용은 다음과 같다.</p>
+
+<pre class="highlight"><code class="scss">
+$scale: 0.5;
+$width: 800px * $scale;
+$height: 668px * $scale;
+
+figure {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/ja-face-bg-full.png"); /*전체 얼굴사진 */
+  background-size: contain; /* 정의된 영역 크기에 맞추어 사진 표현 */
+  background-position: center; /* 알아봐야할 CSS property  */
+  margin: 0;
+}
+
+
+figure,
+canvas {
+  width: $width;
+  height: $height;
+  position: absolute;
+  bottom: -1px;
+  left: 50%; /* 실제로 테스트해보면서 확인해볼 property  */
+  transform: translateX(-50%); /* 알아봐야할 CSS property  */
+}
+/* html 및 body 기본 설정 CSS */
+html,body { height: 100%; }
+body { background: #fff; overflow: hidden; }
+
+</code></pre>
+
+<p>기본적으로 위에서 제시한 <code>SCSS</code> 코드가 컴파일 된 형태는 아래와 같다.</p>
+
+<pre class="highlight"><code class="css">
+figure {
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/ja-face-bg-full.png");
+  background-size: contain;
+  background-position: center;
+  margin: 0; }
+
+figure,
+canvas {
+  width: 400px;
+  height: 334px;
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%); }
+
+html, body {
+  height: 100%; }
+
+body {
+  background: #fff;
+  overflow: hidden; }
+
+/*# sourceMappingURL=app.css.map */
+
+</code></pre>
+
+<hr />
+
+<h2 id="3.js">3. JS</h2>
+
+<h3 id="3.1사용되는코드">3.1 사용되는 코드</h3>
+
+<p>JavaScript 코드에서는 <code>Promise</code> 패턴이 등장하는데, 이 개념에 대해서는 스튜디오 블로그에 따로 정리했다.</p>
+
+
+<blockquote>스튜디오블로그 &gt; JS &gt; Promise</blockquote>
+
+
+<p>이 Profile 3.0 콘텐츠에서 적용하고 있는 자바스크립트 코드는 다음과 같다. 이해를 돕기위해 눈(eyes)와 입(mouth)중, 눈은 삭제하고 입의 적용에 대한 코드로만 설명한다.</p>
+
+<pre class="highlight"><code class="js">
+
+//생성자 함수를 `ja_face'라는 변수에 지정한다.
+var ja_face = new JAFace();
+
+function JAFace() {
+    //함수 스코프안에서의 전역객체
+    var JAF = {};
+    init();     //초기화
+    return JAF; // 'JAF'를 반환
+
+    function init() {
+        loadGlobals(); // JAF의 프레임(10), 인덱스번호(0), 방향을 설정(up)
+        loadCanvases(); // 입cvs, 입 ctx, 왼쪽 눈 cvs, 왼쪽 눈 ctx, 오른쪽 눈 cvs, 오른쪽 눈 ctx, JAF의 너비(800), 높이(668) 설정  (cvs들은 선택자
+        var load_images = loadImages();
+
+        load_images.then(function(r) {
+            console.log(r);
+            // resetEyes();
+            frameUpdate();
+        }, function(e) {
+            console.error(e);
+        })
+    }
+
+    function loadGlobals() {
+        JAF.frames = 10;
+        JAF.index = 0;
+        // JAF.direction = 'up';
+    }
+
+    function loadCanvases() {
+        JAF.cvs_mouth = document.getElementById("mouth"); //선택자
+        JAF.ctx_mouth = JAF.cvs_mouth.getContext("2d"); //선택자에 getContext("2d")기능 적용
+
+        JAF.width = 800;
+        JAF.height = 668;
+    }
+
+    // Promise 패턴 선언
+    function loadImages() {
+        //JAF.imges  겍체에 대한 선언
+        JAF.images = {
+            mouth: {},
+            eyes: {}
+        };
+        //Promise 객체를 리턴하도록 함
+        return new Promise(function(res, rej) {
+            // https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/ja-face-bg-full.png");
+            // var url = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/",
+
+            var url = "img/",
+                prefix = "ja-face-",
+                file_type = "png",
+            // 프레임을 설정하는 부분 --- 아직 정확히 메커니즘을 이해하지는 못함
+                frames = JAF.frames, //기본 값은 10
+            // total_frames = 10 * 2 * 4 + 10
+                total_frames = 10,
+                loaded = 0;
+
+            // 기본 값 :  0부터 9까지 (총 10회)루프
+            for(var i = 0; i < frames; i++) {
+                //"https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/ "+ "ja-face-" + "mouth-0" + "." + png
+                // ===== mouth img loop  =====
+                var mouth_file_name = url + prefix + "mouth-0" + i + "." + file_type;
+                var mouth_img = new Image();
+                mouth_img.setAttribute("data-mouth-index", i);
+                mouth_img.src = mouth_file_name;
+                mouth_img.crossOrigin = "Anonymous";
+                mouth_img.addEventListener("load", function(e) {
+                    loaded++;
+                    JAF.images.mouth[e.target.getAttribute("data-mouth-index")] = e.target;
+                    if(loaded === total_frames) {
+                        res(JAF.images);
+                    }
+                });
+
+            } // end for i
+        }); //end return Promise 객체
+    } // end loadImages() Function
+
+    function frameUpdate() {
+        drawParts();
+        // updateIndex();
+        window.requestAnimationFrame(function() {
+            frameUpdate();
+        });
+    }
+
+    function drawImage(context, image, x, y) {
+        context.clearRect(0, 0, JAF.width, JAF.height); //지정영역만큼의 깨끗한 공간을 만든다.
+        context.drawImage(image, x, y)
+    }
+
+    function drawParts() {
+        drawImage(JAF.ctx_mouth, JAF.images.mouth[JAF.index], JAF.width / 4, JAF.height / 2);
+        // drawImage(JAF.ctx_eye_l, JAF.left_eye[JAF.index], 200, 0);
+        // drawImage(JAF.ctx_eye_r, JAF.right_eye[JAF.index], JAF.width / 2, 0);
+    }
+} //END JAFace()
+
+</code></pre>
+
+<p>코드가 꽤 복잡하고, 처음 맞이하는(?) Promise 패턴도 보인다. 바로 코드를 보기보다 전체 매커니즘을 훑고 가자.</p>
+
+<p><img src="http://yumm.co.kr/blogs/asset/img/js/promise_profile_01.png" alt="콘텐츠에서 사용하는 img파일 구조" title="콘텐츠에서사용하는 img파일구조" /></p>
+
+<p>위 사진에서 볼 수 있 듯, 이 콘텐츠는 입(mouth)과 눈(eyes)라는 객체를 활용하여 레이아웃을 구성한다.</p>
+
+<p><img src="http://yumm.co.kr/blogs/asset/img/js/promise_profile_02.png" alt="콘텐츠에서 사용하는 img파일 구조" title="콘텐츠에서사용하는 img파일구조" /></p>
+
+<p>입(mouth)에는 10장의 이미지 파일이 있는 모습이고, 눈(eyes)는 다중 객체의 형태로 구성되어있다. 이 구조를 가지고 어떻게 움직임을 만들어 내는지에 대해서 살펴보자. 이해를 돕기위해 이미지를 파일을 첨부했다.</p>
+
+<p><img src="http://yumm.co.kr/blogs/asset/img/js/promise_profile_02.png" alt="콘텐츠의 img파일 처리 흐름" title="콘텐츠의 img파일 처리 흐름" /></p>
+
+<p>앞서 살펴봤던 것 처럼 입(mouth)에 해당하는 이미지는 총 10장이다. 콘텐츠에서는 <code>for()</code> 반복문을 활용하여 10장의 이미지를 순회하여 처리한다.</p>
+
+<h4 id="코드쪼개기">코드 쪼개기</h4>
+
+<p>위에서 메커니즘을 알았다면, 코드를 단위로 쪼개어 기능과 메서드, 프로퍼티에 대해서 살펴보자</p>
+
+<pre class="highlight"><code class="js">
+//생성자 함수를 `ja_face'라는 변수에 지정한다.
+var ja_face = new JAFace();
+</code></pre>
+
+<p>이 콘텐츠는 <code>JAFace()</code>라는 함수에 의해서 동작한다. 위 코드는 <code>JAFace()</code>함수를 생성자 형태로 사용하는 것이다. 여기서 단순히 결과물의 형태변경만을 원하는 경우, 생성자 함수를 몰라도 그냥 지나가자.</p>
+
+<pre class="highlight"><code class="js">
+
+function JAFace() {
+    //함수 스코프안에서의 전역객체
+    var JAF = {};
+    init();     //초기화
+    return JAF; // 'JAF'를 반환
+
+    function init() {
+        loadGlobals(); // JAF의 프레임(10), 인덱스번호(0), 방향을 설정(up)
+        loadCanvases(); // 입cvs, 입 ctx, 왼쪽 눈 cvs, 왼쪽 눈 ctx, 오른쪽 눈 cvs, 오른쪽 눈 ctx, JAF의 너비(800), 높이(668) 설정  (cvs들은 선택자
+        var load_images = loadImages();
+
+        load_images.then(function(r) {
+            console.log(r);
+            // resetEyes();
+            frameUpdate();
+        }, function(e) {
+            console.error(e);
+        })
+    }
+
+    function loadGlobals() {
+        JAF.frames = 10;
+        JAF.index = 0;
+        // JAF.direction = 'up';
+    }
+
+    function loadCanvases() {
+        JAF.cvs_mouth = document.getElementById("mouth");
+        JAF.ctx_mouth = JAF.cvs_mouth.getContext("2d");
+        // JAF.cvs_eye_l = document.getElementById("eye-l");
+        // JAF.ctx_eye_l = JAF.cvs_eye_l.getContext("2d");
+        // JAF.cvs_eye_r = document.getElementById("eye-r");
+        // JAF.ctx_eye_r = JAF.cvs_eye_r.getContext("2d");
+        JAF.width = 800;
+        JAF.height = 668;
+    }
+
+    // Promise 패턴 선언
+    function loadImages() {
+        //JAF.imges  겍체에 대한 선언
+        JAF.images = {
+            mouth: {},
+            eyes: {}
+        };
+        //Promise 객체를 리턴하도록 함
+        return new Promise(function(res, rej) {
+            // https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/ja-face-bg-full.png");
+            // var url = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/",
+
+            var url = "img/",
+                prefix = "ja-face-",
+                file_type = "png",
+            // 프레임을 설정하는 부분 --- 아직 정확히 메커니즘을 이해하지는 못함
+                frames = JAF.frames, //기본 값은 10
+            // total_frames = 10 * 2 * 4 + 10
+                total_frames = 10,
+                loaded = 0;
+
+            // 기본 값 :  0부터 9까지 (총 10회)루프
+            for(var i = 0; i < frames; i++) {
+                //"https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/ "+ "ja-face-" + "mouth-0" + "." + png
+                // ===== mouth img loop  =====
+                var mouth_file_name = url + prefix + "mouth-0" + i + "." + file_type;
+                var mouth_img = new Image();
+                mouth_img.setAttribute("data-mouth-index", i);
+                mouth_img.src = mouth_file_name;
+                mouth_img.crossOrigin = "Anonymous";
+                mouth_img.addEventListener("load", function(e) {
+                    loaded++;
+                    JAF.images.mouth[e.target.getAttribute("data-mouth-index")] = e.target;
+                    if(loaded === total_frames) {
+                        res(JAF.images);
+                    }
+                });
+
+            } // end for i
+        }); //end return Promise 객체
+    } // end loadImages() Function
+
+    function frameUpdate() {
+        drawParts();
+        // updateIndex();
+        window.requestAnimationFrame(function() {
+            frameUpdate();
+        });
+    }
+
+    function drawImage(context, image, x, y) {
+        context.clearRect(0, 0, JAF.width, JAF.height); //지정영역만큼의 깨끗한 공간을 만든다.
+        context.drawImage(image, x, y)
+    }
+
+    function drawParts() {
+        drawImage(JAF.ctx_mouth, JAF.images.mouth[JAF.index], JAF.width / 4, JAF.height / 2);
+        // drawImage(JAF.ctx_eye_l, JAF.left_eye[JAF.index], 200, 0);
+        // drawImage(JAF.ctx_eye_r, JAF.right_eye[JAF.index], JAF.width / 2, 0);
+    }
+} //END JAFace()
+</code></pre>
+
+<p>애니메이션을 구현할 때는 CSS3, 자바스크립트(requestAnimationFrame, setTimeout, setInterval)을 사용한다.</p>
+
+<p>이중 가능하면 다른 간섭을 받지 않게 하기 위해 UI(Main) Thread을 사용하지 않는 CSS3을 사용하지만 여러가지 문제로 인하여 애니메이션을 자바스크립트로 구현한다. 자바스크립트 애니메이션 방법에도 requestAnimationFrame[링크] , setTimeout, setInterval방식이 있는데 가능하면 이 중 적절한 Frame(16fps)을 보장하면서 실행시켜주는 resquestAnimationFrame을 사용한다</p>
+
+<h2 id="all">ALL</h2>
+
+<hr />
+
+<h2 id="참고자료">참고자료</h2>
+
+<ul>
+<li><a href="http://programmingsummaries.tistory.com/325">감성프로그래밍 - 바보들을 위한 Promise 강의</a></li>
+</ul>
