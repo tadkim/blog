@@ -55,8 +55,9 @@ body{ background-color: #efefef; font-size: 16px; font-family:  'Nanum Myeongjo'
 
 /*#wrap{ background-color: #fff; width: 80%; min-width: 660px; margin: 3em 0 3em auto ; padding: 1em 3em; float: right;}*/
 table, pre, blockquote, p, ul, ol, img{ margin: 0 0 1.5em 0; }
-img{ width: 100%; height: auto; }
-figcaption{ font-family: 'Noto Sans KR', sans-serif; font-size: 0.8em; margin : -2.5em 0 1.5em 0; text-align: left; color: #000;}
+img{ width: 100%; height: auto;}
+.small_img{ width: 100%; height: auto; text-align: center; padding: 0 3em;}
+figcaption{ font-family: 'Noto Sans KR', sans-serif; font-size: 0.8em; margin : -2.5em 0 2em 0; text-align: center; color: #888; font-style: italic;}
 body#the-body{ width: 560px; height: 500px;}
 
 
@@ -97,11 +98,11 @@ tr:hover{background-color: #f7f7f7;}
 /* 윰탬 생각쓰기 */
 .tem{width: 90%; height: auto; background-color: hsl(179, 100%, 88%); border-radius: 0.3em; padding: 1em 5%; margin: 0 0 1.5em 0; font-family: 'Noto Sans KR', sans-serif; font-size: 0.9em; line-height: 1.8em;}
 .tem p{margin: 0;}
-.tem p:first-child:first-child:before{background: #fff no-repeat; background-position: -43px 0; background-image: url(../../img/sprite.png); display: block; width: 45px; height: 17px; content: ''; float: left; margin:  0.3em 0.5em 0 0; }
+.tem p:first-child:first-child:before{background: #fff no-repeat; background-position: -43px 0; background-image: url(http://yumm.co.kr/blogs/img/sprite.png); display: block; width: 45px; height: 17px; content: ''; float: left; margin:  0.3em 0.5em 0 0; }
 
 .yum{width: 90%; height: auto; background-color: hsl(58, 100%, 70%); border-radius: 0.3em; padding: 1em 5%; margin: 0 0 1.5em 0; font-family: 'Noto Sans KR', sans-serif; font-size: 0.9em; line-height: 1.8em;}
 .yum p{margin: 0;}
-.yum p:first-child:first-child:before{background: #fff no-repeat; background-position: -88px 0; background-image: url(../../img/sprite.png); display: block; width: 43px; height: 17px; content: ''; float: left; margin:  0.3em 0.5em 0 0; }
+.yum p:first-child:first-child:before{background: #fff no-repeat; background-position: -88px 0; background-image: url(http://yumm.co.kr/blogs/img/sprite.png); display: block; width: 43px; height: 17px; content: ''; float: left; margin:  0.3em 0.5em 0 0; }
 
 /* --윰탬 생각쓰기-- */
 
