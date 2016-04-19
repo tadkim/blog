@@ -1,0 +1,251 @@
+<table id="meta">
+    <thead><th>160420</th><th>TED</th><th>Tad Kim</th></thead>
+    <tbody>
+    <tr><td></td><td></td><td></td></tr>
+    </tbody>
+</table>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="pythoncrawling">Python Crawling</h1>
+
+<p>이 글은 <TED>프로젝트 진행하면서 사용했던 코드 및 회고를 위해 작성하는 문서이다. </p>
+
+<div class="tem">
+이 문서는 지금 느끼는 '귀찮음'만큼이나 꼭 필요한 것이다. 항상, 매번 개인 프로젝트나 팀 프로젝트에서 이전에 작성했던 크롤링 코드를 뒤적거려왔다. 그 과정에서 매번 BeautifulSoup API문서를 뒤적거렸고, stack of flow도 찝적댔던 것을 솔직하게 인정한다. 또한, '끝나면 코드개선해야지'라고 생각했던 수 많은 시간들에 대해 반성한다. 이것이 첫 시작점이라고 보면 된다.
+</div>
+
+<h2 id="index">Index</h2>
+
+<p>이 문서는 다음과 같이 구성되어있다.</p>
+
+<ol>
+<li>Index</li>
+<li>Python과 BeautifulSoup</li>
+<li>개선점</li>
+<li>기타</li>
+<li>자료출처 및 URL</li>
+</ol>
+
+<h2 id="2.python과beautifulsoup">2.Python과 BeautifulSoup</h2>
+
+<p>이번 섹션에서는 데이터 수집도구로서의 Python과 실제 사용했던 라이브러리인 <code>BeautifulSoup</code>, 그리고 실제 접근 방법 및 코드들에 대해서 살펴보고자한다. </p>
+
+<div class="tem">
+이 문서는 '웹 크롤링의 정석'을 말하고자하는 것이 아니며, 스튜티오 팀원이라면 더 나은 개선방안을 제시할 수 있습니다. 이 코드역시 필요에따라 조합되어진 코드이며, 향후 개인적으로도 보완해나갈 부분입니다. <br/>
+- 탬
+</div>
+
+<p>2&#8211;1. 크롤링 실행환경</p>
+
+<p>2&#8211;2. 크롤링 실행코드 정리</p>
+
+<p>2&#8211;3. 관련 결과 및 활용방법 정리</p>
+
+<hr />
+
+<h3 id="2-1.크롤링실행환경">2&#8211;1. 크롤링 실행환경</h3>
+
+<p>이번 프로젝트 실행환경은 다음과 같다.</p>
+
+<ul>
+<li>OS : OS X El Capitan(10.11.4)</li>
+<li>Python (ver) : 2.74</li>
+<li>BeautifulSoup (ver) : 3.2.1</li>
+<li>iPython Nootebook : Jupyter 실행환경(IDE)</li>
+</ul>
+
+<hr />
+
+<h3 id="2-2.크롤링실행코드정리">2&#8211;2. 크롤링 실행코드 정리</h3>
+
+<h4 id="크롤링대상">크롤링 대상</h4>
+
+<ul>
+<li>URL : www.ted.com</li>
+<li>상세 목표 : TED 사이트의 모든 강연 목록(2,187건)및 세부 요소들을 수집 후 데이터셋으로 정제</li>
+<li>작업 기간 : 총 3일</li>
+</ul>
+
+<h4 id="크롤링방법">크롤링 방법</h4>
+
+<ul>
+<li>간단 요약 : 해당 사이트에서 규칙을 찾은 뒤, Python과 BeautifulSoup 라이브러리를 활용하여 전체 요소에 대한 데이터 수집</li>
+</ul>
+
+<h4 id="크롤링실행코드">크롤링 실행코드</h4>
+
+<p>먼저 웹 크롤링을 하기위해 필요한 인코딩 설정 및 라이브러리를 로드 해야한다. 다음코드를 살펴보자.</p>
+
+<pre class="highlight"><code class="python">
+#-*- coding:utf-8 -*- # 인코딩 부분. 한글 크롤링시 필수.
+from bs4 import BeautifulSoup # BeautifulSoup 라이브러리 Import
+import urllib2 # urllib2 기능? 라이브러리? Import
+import requests # piper로 부터 알게된 라이브러리 인코딩 문제로 삽입 했던듯.
+</code></pre>
+
+<p>아마 주석을 통해 얼마나 코드가 조잡하게 쓰이고 있는지 알 수 있을 것이다. </p>
+
+<div class="tem">
+적어도, 개선할 목적이라면 전혀 부끄러울 것이 없다.<br/>
+- 탬
+</div>
+
+<p>그다음 코드를 살펴보자.</p>
+
+<pre class="highlight"><code class="python">
+url = "http://www.ted.com/talks?page=" + str(페이지변호) # 크롤링할 웹사이트 주소를 입력한다.
+req = requests.get(url) # 인코딩 기적(?)을 실현해줄 req.
+html = req.text.encode(req.encoding) # 일단 한번 인코딩하고 로드한다는 말이다.
+soup = BeautifulSoup(html,'html.parser') # 뷰티풀스프의 등장.
+
+pagelink = soup.find_all("a", { "class" : "" }) # 뷰티풀수프 라이브러리를 활용해 원하는 요소만 선택자로 선택한다.
+</code></pre>
+
+<p>위 코드에서 <code>soup.find_all(&quot;태그이름&quot;, {&quot;class&quot;:&quot;클래스명&quot;})</code>부분이 우리가 수 천줄에 이르는 HTML 마크업에서 가져오고자하는 영역(혹은 요소)을 선택하는 부분이다. 우리는 여기서 <code>&amp;lt;a&amp;gt;</code>를 가져오는데, 이것은 TED의 페이지 내에 올라와있는 36개의 콘텐츠에서 (클릭하면 넘거어가는) 해당 페이지 영역의 URL을 가져오기 위함이다. </p>
+
+<p><code>BeautifulSoup</code>의 <code>find_all(&quot;태그이름&quot;)</code>은 주어진 조건에 부합하는 요소 모두를 &#8220;리스트&#8221;형태로 리턴한다.</p>
+
+<div class="tem">
+`soup.find_all("a")` 라는 형태로도 모든 a태그를 가져올 수 있지만, TED의 경우 클래스가 먹여진 다른 a 태그도 존재했기때문에, 임의로 판단하여 '클래스가 없는'의 조건을 부여했다. 더 좋은 방법이 있을수도 있지만, 여기서는 스킵 했다. - 탬
+</div>
+
+<p>출력해보면 다음과 같은 형태로 결과물이 나오는 것을 확인할 수 있다.</p>
+
+<pre class="highlight"><code class="python">
+#위에서 수집 된 데이터 리스트에서 임의로 하나의 행을 출력한다.
+print pageDiv[1]['href'] 
+#출력결과 : /talks/robert_muggah_how_to_protect_fast_growing_cities_from_failing
+</code></pre>
+
+<p>우리는 앞서 <code>BeautifulSoup</code>의 <code>find_all</code>메서드가 &#8220;주어진 조건을 만족하는 모든 요소를 리스트 형태로 리턴한다&#8221;는 내용을 살펴봤다. 우리는 이제 각 페이지마다 존재하는 36개의 콘텐츠에 대한 URL에 대해 알 수 있게 되었다. 그 다음으로는 각 URL내부(각 콘텐츠)의 요소들을 선택해 변수화 하고, 엑셀이나 넘버스에 추가하기쉬운 형태로 콘솔창에 출력하는 방법으로 데이터셋을 만들어낼 것이다.</p>
+
+<div class="tem">
+한가지 더 이야기하자면, `soup.find_all()`의 형태는 `soup.findAll()`의 형태로도 쓰이는데, 이는 `BeautifulSoup`라이브러리의 버전에 따라 다르다. 둘다 큰 차이는 없으니 버전이 다르다고 새로 깔지말고, API Document 문서를 참고해보자 - 탬
+</div>
+
+<ul>
+<li><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup API Document</a></li>
+</ul>
+
+<p>아래에서 본격적으로 각 콘텐츠에대해 어떻게 접근하고, 개별 요소를 어떻게 선택하여 구조화 하는지에 대해 살펴볼 것이다. 아직 아래 코드는 더럽고, 여러가지 요소중 특정 요소만 가져오도록 설정되어있지만, 위에서 얻은 URL리스트를 가지고 어떻게 한번 더 각 페이지로 들어가 원하는 요소에 접근하는지 이해하는데는 충분할 것이다.</p>
+
+<pre class="highlight"><code class="python">
+</code></pre>
+
+<p>for index_main in range(1, 62):</p>
+
+<pre><code>url = &quot;http://www.ted.com/talks?page=&quot; + str(index_main)
+req = requests.get(url)
+html = req.text.encode(req.encoding)
+soup = BeautifulSoup(html,'html.parser')
+pageDiv = soup.find_all(&quot;a&quot;, { &quot;class&quot; : &quot;&quot; })
+
+contentCounter = 0
+
+
+for index in range(1, 72):
+
+    if(index%2 != 0):
+        url_inner = &quot;http://www.ted.com&quot; + pageDiv[index]['href']
+
+        try:
+            req_inner = requests.get(url_inner)
+</code></pre>
+
+<h1 id="printurl_inner">print url_inner</h1>
+
+<pre><code>        except:
+            print url_inner
+            continue
+
+        html_inner = req_inner.text.encode(req_inner.encoding)
+        soup_inner = BeautifulSoup(html_inner, 'html.parser')
+
+        contentCounter = contentCounter+1
+        e_topics = soup_inner.find(&quot;ul&quot;, {&quot;class&quot; : &quot;talk-topics__list&quot;}).text.replace(&quot;\n&quot;, &quot;_&quot;).replace('__Similar topics____','') #유사주제
+
+        print e_topics + &quot;\t&quot; + &quot;p.&quot; + str(index_main) + &quot;-&quot; + str(contentCounter)
+</code></pre>
+
+<p></code></pre></p>
+
+<p>이 코드는 프로젝트가 마무리 되어가는 과정 중에, 반드시 정리하여 깔끔하게 유지될 것이다. 따라서 여기서는 전체적인 <code>for</code> 루프 안에서의 요소 접근 흐름 위주로 살펴보고 넘어가도록하자.</p>
+
+<p>이렇게 Python과 BeautifulSoup을 사용하여 특정 홈페이지 콘텐츠의 세부정보를 가져오는 작업은 귀찮지만, 다른 서비스들을 활용한 기능들(예를들어 구글스프레드시트의 ImportXML, ImportHTML등의 기능)보다 훨씬 더 정확하고 세부적으로 컨트롤할 수 있다는 장점이있다. 무엇보다 문법을 활용하여 구조를 만들어나가는 과정이기때문에, 다른 서비스에 의존하여 몇글자씩 변경해나가는 작업보다 훨씬 상황통제가 가능한 방법이라고 할 수 있다.</p>
+
+<div class="tem">
+여기서 말하는 '상황통제'란, 프로젝트 개발 단계에서 '무엇이 가능하고, 무엇이 가능하지 않은지' 알고있는 것을 말한다. 적어도 데이터 수집과 관련해서는 Python의 BeautifulSoup는 권장할만한 방법이라고 생각한다.
+</div>
+
+<hr />
+
+<h3 id="2-3.관련결과및활용방법정리">2&#8211;3. 관련 결과 및 활용방법 정리</h3>
+
+<hr />
+
+<h2 id="3.개선해야할것들">3.개선해야할 것들</h2>
+
+<p>개선해야할 점에 대해서는 다음과 같이 나누어 이야기해볼 수 있을 것 같다.</p>
+
+<ul>
+<li>3&#8211;1. 수집과정</li>
+<li>3&#8211;2. 정제과정</li>
+<li>3&#8211;4. 분석과정</li>
+</ul>
+
+<h3 id="3-1.수집과정">3&#8211;1. 수집과정</h3>
+
+<p>수집과정에서 개선해야할 점은 다음과 같다.</p>
+
+<ul>
+<li>크롤링 해야할 요소를 분명하게 정해서 리스트업하기</li>
+<li>크롤링 요소가 많다면, 우선순위를 나누기</li>
+<li>가능하다면 메인 개발 컴퓨터 외에, 서브 컴퓨터에서 돌릴 수 있도록 하기</li>
+<li>수집 과정에서 일어나는 문제에 대한 논의 방안에 대해 생각하기.</li>
+<li>수집과정에 전적으로 참여하지 않는 사람의 경우를 고려하기(수집 데이터가 존재하지 않을 때 프로젝트 기획이나 아이데이션을 진행하기 큰 어려움이 있다.)</li>
+</ul>
+
+<h3 id="3-2.정제과정">3&#8211;2. 정제과정</h3>
+
+<ul>
+<li>삽질(?)하는 방법도 좋지만, 가능하다면 R, Python등의 언어를 활용하여 정제를 진행하고, 정제를 진행하는 과정을 Markdown 형태로 꼼꼼하게 기록하여 작성자 뿐만 아니라 이후 스튜디오에 합류하게될 사람들도 문서를 참고할 수 있도록 한다.</li>
+<li>정제 작업을 어느정도의 강도로 진행할지 정해야한다. 혹은 전체 프로젝트 일정을 고려하여 몇 일, 몇 시간 정도로 잡을지 대략적인 계획을 세우는 것이 필요하다. 그렇지 않으면 너무 느슨해지거나, 과다한 범위에 대한 탐색이 이루어질 수 있다.</li>
+<li>정제할 변수의 우선순위를 둘 필요가 있다.</li>
+</ul>
+
+<h3 id="3-4.분석과정">3&#8211;4. 분석과정</h3>
+
+<ul>
+<li>분석과정에 필요한 이론에 대해 어느정도 감은 잡고 있어야한다.</li>
+<li>분석과정에 필요한 이론을 모두 알지 않더라도, 해당 방법이나 이론을 사용할 때 어떤 부분을 조심해야하는지 정도는 알아볼 수 있을 것이다.</li>
+<li>이 부분에 대해서 우리가 항상 붙잡고 있을 수가 없다면, 주위에 이런 부분을 물어볼 수 있는 네트워크를 두는 것이 좋다.</li>
+<li>관련 서적을 구비하거나 인쇄하는 방법이 있다.
+
+<ul>
+<li>월스트리트저널의 데이터시각화</li>
+<li>나쁜데이터 핸드북</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h2 id="4.기타">4. 기타</h2>
+
+<ul>
+<li>팀원 모두가 이 문서를 확인하고 의견을 자유롭게 추가할 수 있도록 한다.</li>
+</ul>
+
+<hr />
+
+<h2 id="5.자료출처및url">5. 자료출처 및 URL</h2>
+
+<ul>
+<li><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup API Document</a></li>
+</ul>
+
+</body>
+</html>
