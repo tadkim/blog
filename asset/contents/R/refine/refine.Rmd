@@ -1,0 +1,114 @@
+---
+title: "Refine0.1"
+author: "tadkim"
+date: "2016년 4월 20일"
+output:
+  html_document:
+    highlight: zenburn
+    theme: cosmo
+    toc: yes
+  pdf_document:
+    latex_engine: xelatex
+---
+<br/><br/>
+# R - EDA
+
+
+___
+이 문서는 Colony Studio의 데이터 정제 과정을 기록하기위해 만든 문서입니다.
+*dplyr, %>%, select, arrange, mutate, filter, groupby, summarise*
+
+
+## import library
+정제 문서 실행하기 위한 라이브러리 삽입
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+<br/><br/>
+
+___
+
+
+
+## setting
+예제 위한 데이터셋 구성
+```{r}
+iris_ex = filter(iris, Sepal.Length >6.5)
+```
+<br/><br/>
+
+___
+
+## select
+iris 라는 dataset에서 Sepal.Length, Species라는 열을 선택하여 출력
+```{r}
+# select
+select(iris_ex, Sepal.Length, Species)
+
+#iris_ex %>%
+#  select(Sepal.Length, Species)
+```
+<br/><br/>
+
+___
+
+## filter
+filter로간단하게 필터 적용하기
+```{r}
+filter(iris_ex, Sepal.Length > 7)
+#iris_ex %>%
+#  filter(Sepal.Length > 7)
+```
+<br/><br/>
+
+___
+
+## mutate
+mutate 활용하기
+iris_ex데이터셋에 Sepal.Length와 Petal.Length을 더한 값을 나타내는 length라는coloumn을 추가한다.
+```{r}
+mutate(iris_ex, length = Sepal.Length + Petal.Length)
+
+#iris_ex %>%
+#  mutate(length = Sepal.Length + Petal.Length)
+```
+<br/><br/>
+
+### mutate 응용
+mutate로 mean값 구하고, 결과를 dataset의 column으로 추가하기 
+```{r}
+mutate(iris_ex, length = mean(Sepal.Length + Petal.Length))
+
+#iris_ex %>%
+#  mutate(length = mean(Sepal.Length + Petal.Length))
+```
+<br/><br/>
+
+___
+
+## arrange
+오름차순, 내림차순, 두개의 순서주기
+```{r}
+arrange(iris_ex, Sepal.Length) #default는 오름차순
+arrange(iris_ex, desc(Sepal.Length)) #내림차순으로 설정
+arrange(iris_ex, desc(Sepal.Length), desc(Petal.Length)) # 첫번째 파라미터 우선 정렬후 동값에대해서는 두번째 파라미터기준으로 판단하여 정렬
+
+#iris_ex %>%
+#  arrange(desc(Sepal.Length), desc(Petal.Length))
+```
+<br/><br/>
+
+___
+
+## group_by
+그룹별로 요약해보기. 데이터셋에서 어떤 그룹을 특정하고, 그 그룹의 maen, max등을 각 column별로 구해보고 싶을 때.
+```{r}
+# group_by + summarise
+summarise(group_by(iris_ex, Species), mean(Sepal.Length), mean(Petal.Length))
+
+#iris_ex %>%
+#  group_by(Species) %>%
+#  summarise(mean(Sepal.Length), mean(Petal.Length))
+```
+
