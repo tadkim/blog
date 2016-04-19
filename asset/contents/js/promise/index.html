@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<table id="meta">
+  <thead><th>160418</th><th>JS</th><th>Tad Kim</th></thead>
+  <tbody>
+  <tr><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+<h1 id="promise">Promise</h1>
+
+<p>이 글은 <a href="#">코드분석 - Profile 3.0</a>에서 <code>Promise</code>개념이 나와 정리를하다, 너무 길어져 별도의 문서로 정리한 것이며, 다음 과 같은 형태로 구성되어 있다.</p>
+
+<ol>
+<li>Introduction
+
+<ul>
+<li>1.1 Promise 개념</li>
+<li>1.2 Promise 장점</li>
+</ul></li>
+<li>Basic</li>
+<li>참고 자료</li>
+</ol>
+
+<hr />
+
+<h2 id="1.introduction">1. Introduction</h2>
+
+<p>우선 어렵지않게, 가벼운 예제를 포함한 Promise 개념에 대해서 살펴보자.</p>
+
+<hr />
+
+<h3 id="1.1promise개념">1.1 Promise 개념</h3>
+
+<p>Javascript로 만들어지는 거의 대부분의 작업들은 &#8217;비동기&#8217;로 이루어진다.</p>
+
+<div class="tem">
+'비동기식' 작업이란, 어떤 작업을 요청하면서 콜백 함수를 등록하면 작업이 수행된 이후에 결과를 '콜백 함수'를 통해 알려주는 형태를 말한다. 실제 비동기 작업이 아니더라도 JavaScript의 세계에서는 결과를 콜백으로 알려주는 패턴이 매우 흔히 사용되어왔다.
+</div>
+
+<p>초기의 JavaScript의 경우 버튼을 클릭(이벤트 발생)시 특정 작업을 수행(콜백 함수 호출)하는 정도였기 때문에 복잡도가 높지 않았으나, 최근에는 프론트엔드 규모가 상당히 커져서 JavaScript로 작성하는 코드를 단순하게 바라볼 수준을 넘어선지 오래다.</p>
+
+<h4 id="콜백의중첩nesting이렇게복잡도가높아지는상황에서어려워지는케이스">콜백의 중첩(Nesting) = 이렇게 복잡도가 높아지는 상황에서 어려워지는 케이스</h4>
+
+<pre class="highlight"><code class="js">
+async(1, function(){
+    async(2, function(){
+        async(3, function(){
+            async(4, function(
+                async(5, function){
+                    console.log("콜백지옥 작업완료???");
+                });
+            });
+        });
+    });
+});
+</code></pre>
+
+<p>이런 상황을 극복하기위해 만들어진 것이 바로 <code>Promise</code> 이다</p>
+
+<blockquote>
+jQuery에서도 `Deferred`라는 이름으로 완벽하지는 않지만 `Promise` 패턴이 사용되었고, 그 외에도 `Q`, `Vow`, `Bluebird` 등 다양한 라이브러리를 통해 `Promise` 패턴을 구현해서 콜백 중첩으로 인한 어려움들을 해소해왔다.
+</blockquote>
+
+<hr />
+
+<h3 id="1.2promise사용시장점">1.2 Promise 사용 시 장점</h3>
+
+<ul>
+<li>코드 컨트롤 용이 : Promise 패턴을 사용하면 비동기 작업들을 순차적으로 진행하거나, 병렬로 진행하는 등의 컨트럴이 보다 수월해진다.</li>
+<li>코드 가독성에 도움 : 코드 가독성은 작성자가 물론 잘짜야 하겠지만, 또 내부적으로 예외처리에 대한 구조가 탄탄하기 때문에 오류가 발생했을때 오류 처리 등에 대해 보다 가시적으로 관리해줄 수 있는 장점이 있다</li>
+</ul>
+
+<blockquote>
+현재 Promise 패턴은 ECMA Script 6 스펙에 정식 포함되었고 2013년 12월 경 Chrome 브라우저에서도 32 버전 부터 본격적으로 native promise 가 지원되기 시작했다.
+<br/>
+Node.js의 경우 0.11.13 버전 이후부터 native promise를 지원할 예정이다 0.11 버전 공식 릴리즈가 되기 전이라도 `bluebird`와 같은 모듈 설치를 통해 Node.js에서도 Promise를 동일하게 사용 가능하며 Native Promise 에 비해 bluebird 같은 모듈은 추가적인 API도 지원하고 있기 때문에 사용성면에서 더 추천할 만 하다. - 감성프로그래밍 블로거
+</blockquote>
+
+<h2 id="basic">basic</h2>
+
+<p>아래의 코드를 타이핑 해보자.</p>
+
+<pre class="highlight"><code class="js">
+//Promise 선언
+var _promise = function(param){
+
+    return new Promise(function (resolve, rejcet){
+
+        // 비동기를 표현하기 위해 setTimeout 함수를 사용
+        window.setTimeout(function (){
+
+            // 파라미터가 true 이면,
+            if(param){
+                // 해결됨
+                resolve("해결 완료");
+            }
+            // 파라미터가 false 이면
+            else {
+                //실패
+                reject(Error("실패!!"));
+
+            }
+        }, 3000); // END : window.setTimeout
+    }); // END : return new Promise(function(resolve, reject){ ... }
+};
+
+
+//Promise 실행
+_promise(true);
+.then(function (text){
+    //성공시
+    console.log(text);
+}, function (error){
+   // 실패시
+   console.log(error);
+});
+
+//실행결과 : "해결 완료"
+</code></pre>
+
+<h4 id="promise선언부">Promise 선언부</h4>
+
+<p><code>Promise</code>는 말 그대로 &#8217;약속&#8217;이다. &#8220;지금 없으니까 이따가 줄게~^^&#8221; 라는 약속이다. 더 정확히는 &#8220;지금은 없는데 이상없으면 이따가 주고 없으면 알려줄게~&#8221;라는 약속이다.</p>
+
+<p>따라서, <code>promise</code>는 하나의 상태(state)가 될 것이다.</p>
+
+<ul>
+<li><code>pending</code> : 아직 약속을 수행 중인 상태(<code>fulfilled</code>혹은 <code>reject</code>가 되기 전)</li>
+<li><code>fulfilled</code> : 약속(promise)이 지켜진 상태</li>
+<li><code>rejected</code> : 약속(promise)가 어떤 이유에서 못 지켜진 상태</li>
+<li><code>settled</code> : 약속이 지켜졌든 안지켜졌든 일단 결론이 난 상태</li>
+</ul>
+
+<pre class="highlight"><code class="js">
+//Promise 선언
+// 나중에 Promise 객체를 생성하기 위해 Promise 객체를 리턴하도록 함수를 감싸고 있음.
+var _promise = function(param){
+    //Promise 객체만 보면 파라미터로 익명함수를 담고 있고, 익명 함수는 resolve와 reject를 파라미터로 받고 있음.
+
+    // 일단 이 new Promise로 promise가 생성되는 직후부터 resolve, reject가 호출도기 전가지의 순간을 pending상태라 한다.
+    return new Promise(function (resolve, rejcet){
+
+        // 비동기를 표현하기 위해 setTimeout 함수를 사용
+        window.setTimeout(function (){
+
+            // 파라미터가 true 이면,
+            if(param){
+                // 해결됨
+                resolve("해결 완료");
+            }
+            // 파라미터가 false 이면
+            else {
+                //실패
+                reject(Error("실패!!"));
+
+            }
+        }, 3000); // END : window.setTimeout
+    }); // END : return new Promise(function(resolve, reject){ ... }
+};
+</code></pre>
+
+<h4 id="promise실행부">Promise 실행부</h4>
+
+<p>더 심플하다.</p>
+
+<ul>
+<li><p><code>_promise()</code>를 호출하면 <code>Promise 객체</code>가 리턴된다.</p></li>
+<li><p><code>Promise 객체</code>에는 정상적으로 비동기 작업이 완료되었을 때 호출하는 <code>then</code>이라는 API가 존재한다.</p></li>
+<li><p>위의 예제는 하나의 <code>then</code> API를 호출해서 비동기 작업이 완료되면 결과에 따라 성공 혹은 실패 메시지를 콘솔로그로 찍어주게 된다.</p></li>
+<li><p><code>then</code> API는 첫 번째 파라미터에서 성공시 호출할 함수를, 두 번째 파라미터 실패시 호출할 함수를 선언하면 <code>Promise</code>의 상태에 따라 수행하게 된다.</p></li>
+<li><p>앞서 선언부에서 <code>Promise 객체</code>를 생성할 때 <code>resolve</code>와 <code>reject</code>파라미터를 받았는데 그 파라미터가 실행부의 함수와 동일하다.</p></li>
+</ul>
+ <pre class="highlight"><code class="js">
+
+<p>//Promise 실행</p>
+
+<p>_promise(true);</p>
+
+<p>.then(function (text){</p>
+
+<pre><code>//성공시
+console.log(text);
+</code></pre>
+
+<p>}, function (error){</p>
+
+<p>// 실패시</p>
+
+<p>console.log(error);</p>
+
+<p>});</p>
+
+<p>//실행결과 : &#8220;해결 완료&#8221;</p>
+
+<p></code></pre></p>
+
+<hr />
+
+<h2 id="3.참고자료">3. 참고자료</h2>
+
+<ul>
+<li><a href="http://programmingsummaries.tistory.com/325">감성프로그래밍 - 바보들을 위한 Promise 강의</a></li>
+</ul>
+
+</body>
+</html>
