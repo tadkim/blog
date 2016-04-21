@@ -11,21 +11,21 @@
   </tbody>
 </table>
 
-<h1 id="csscodingconvetion">CSS Coding Convetion</h1>
+<h1 id="csscodingconvetion">코딩컨벤션 - CSS</h1>
 
-<p>이 문서는 Colony Studio의 작업 프로세스 정립을 위해 작성되었으며, 지속적인 수정이 가능하다.</p>
+이 문서는 Colony Studio의 작업 프로세스 정립을 위해 작성되었으며, 지속적인 수정이 가능하다.
 
 <div class="tem">
 미리 일러두자면, 이 '코딩 컨벤션'이라는 작업(또는 프로세스)은 글을 작성하는 사람은 물론이고, 읽고 받아들이는 사람에게도 꽤-- 많은 에너지를 요한다. 그럼에도 불구하고 이 문서를 작성하는데에는 그 이유가 있으며, 그 내용은 [CodingCovention - Introduction](http://yumm.co.kr/blogs/asset/contents/convention/introduction)에서 확인하기 바란다.
 </div>
 
-<p><em>또한 이 글의 초기버전(0.1)은 <a href="http://gabia-frontend-dev.com/wordpress/?cat=4">가비아 프론트엔드 기술블로그</a>의 코딩컨벤션 중 일부를 발췌하여 작성되었기 때문에, 외부로 이 내용을 배포하고자하는 경우에는 어떤식으로라든지 내용을 새로 작성하거나, 해당 블로그에 사용 동의 및, 출처 표기작업을 해야한다.</em></p>
+<em>또한 이 글의 초기버전(0.1)은 <a href="http://gabia-frontend-dev.com/wordpress/?cat=4">가비아 프론트엔드 기술블로그</a>의 코딩컨벤션 중 일부를 발췌하여 작성되었기 때문에, 외부로 이 내용을 배포하고자하는 경우에는 어떤식으로라든지 내용을 새로 작성하거나, 해당 블로그에 사용 동의 및, 출처 표기작업을 해야한다.</em>
 
 <hr />
 
 <h2 id="index">Index</h2>
 
-<p>이 문서는 다음과 같이 구성되어있다.</p>
+이 문서는 다음과 같이 구성되어있다.
 
 <ol>
 <li>CSS 영문 소문자 사용</li>
@@ -54,14 +54,14 @@
 
 <h2 id="1.css영문소문자사용">1. CSS 영문 소문자 사용</h2>
 
-<p>모든 속성은 영문 소문자로만 작성한다.</p>
+모든 속성은 영문 소문자로만 작성한다.
 
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
 
-<p>.class {font-family:malgun gothic}</p>
+.class {font-family:malgun gothic}
 
-<p></code></pre></p>
+</code></pre>
 
 <hr />
 
@@ -74,161 +74,101 @@
 <li>2&#8211;4. 마지막 속성의 세미콜론(;)은 생략한다.</li>
 </ul>
 
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
+.class{
+overflow:hidden;
+width:978px;
+clear:both;
+} (x)
 
-<p>.class{</p>
+.class{overflow:hidden;width:978px;clear:both;} (x)
+.class {overflow:hidden; width:978px; clear:both;} (x)
+.class {overflow:hidden;width:978px;clear:both;} (x)
+.class {overflow:hidden;width:978px;clear:both} (o)
+.class{
+overflow:hidden;
+width:978px;
+clear:both;
+} (x)
 
-<p>overflow:hidden;</p>
-
-<p>width:978px;</p>
-
-<p>clear:both;</p>
-
-<p>} (x)</p>
-
-<p>.class{overflow:hidden;width:978px;clear:both;} (x)</p>
-
-<p>.class {overflow:hidden; width:978px; clear:both;} (x)</p>
-
-<p>.class {overflow:hidden;width:978px;clear:both;} (x)</p>
-
-<p>.class {overflow:hidden;width:978px;clear:both} (o)</p>
-
-<p>.class{</p>
-
-<p>overflow:hidden;</p>
-
-<p>width:978px;</p>
-
-<p>clear:both;</p>
-
-<p>} (x)</p>
-
-<p>.class{overflow:hidden;width:978px;clear:both;} (x)</p>
-
-<p>.class {overflow:hidden; width:978px; clear:both;} (x)</p>
-
-<p>.class {overflow:hidden;width:978px;clear:both;} (x)</p>
-
-<p>.class {overflow:hidden;width:978px;clear:both} (o)</p>
-
-<p></code></p>
-
-<p></pre></p>
+.class{overflow:hidden;width:978px;clear:both;} (x)
+.class {overflow:hidden; width:978px; clear:both;} (x)
+.class {overflow:hidden;width:978px;clear:both;} (x)
+.class {overflow:hidden;width:978px;clear:both} (o)
+</code>
+</pre>
 
 <hr />
 
-<h2 id="3.속성값축약하기">3.속성값 축약하기</h2>
+<h2>3.속성값 축약하기</h2>
 
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
-
-<p>.class {color:#555555} (x)</p>
-
-<p>.class {color:#555} (o)</p>
-
-<p>.class {color:#ff4400} (x)</p>
-
-<p>.class {color:#f40} (o)</p>
-
-<p>.class {background-position:left center} (x)</p>
-
-<p>.class {background-position:0 50%} (o)</p>
-
-<p>.class {top:0px} (x)</p>
-
-<p>.class {top:0} (o)</p>
-
-<p>.class {padding:20px 20px 20px 20px} (x)</p>
-
-<p>.class {padding:20px} (o)</p>
-
-<p>.class {margin:0 auto 0 auto} (x)</p>
-
-<p>.class {margin:0 auto} (o)</p>
-
-<p>.class {padding:20px 30px 50px 30px} (x)</p>
-
-<p>.class {padding:20px 30px 50px} (o)</p>
-
-<p>.class {color:#555555} (x)</p>
-
-<p>.class {color:#555} (o)</p>
-
-<p>.class {color:#ff4400} (x)</p>
-
-<p>.class {color:#f40} (o)</p>
-
-<p>.class {background-position:left center} (x)</p>
-
-<p>.class {background-position:0 50%} (o)</p>
-
-<p>.class {top:0px} (x)</p>
-
-<p>.class {top:0} (o)</p>
-
-<p>.class {padding:20px 20px 20px 20px} (x)</p>
-
-<p>.class {padding:20px} (o)</p>
-
-<p>.class {margin:0 auto 0 auto} (x)</p>
-
-<p>.class {margin:0 auto} (o)</p>
-
-<p>.class {padding:20px 30px 50px 30px} (x)</p>
-
-<p>.class {padding:20px 30px 50px} (o)</p>
-
-<p></code></pre></p>
+.class {color:#555555} (x)
+.class {color:#555} (o)
+.class {color:#ff4400} (x)
+.class {color:#f40} (o)
+.class {background-position:left center} (x)
+.class {background-position:0 50%} (o)
+.class {top:0px} (x)
+.class {top:0} (o)
+.class {padding:20px 20px 20px 20px} (x)
+.class {padding:20px} (o)
+.class {margin:0 auto 0 auto} (x)
+.class {margin:0 auto} (o)
+.class {padding:20px 30px 50px 30px} (x)
+.class {padding:20px 30px 50px} (o)
+.class {color:#555555} (x)
+.class {color:#555} (o)
+.class {color:#ff4400} (x)
+.class {color:#f40} (o)
+.class {background-position:left center} (x)
+.class {background-position:0 50%} (o)
+.class {top:0px} (x)
+.class {top:0} (o)
+.class {padding:20px 20px 20px 20px} (x)
+.class {padding:20px} (o)
+.class {margin:0 auto 0 auto} (x)
+.class {margin:0 auto} (o)
+.class {padding:20px 30px 50px 30px} (x)
+.class {padding:20px 30px 50px} (o)
+</code></pre>
 
 <hr />
 
-<h2 id="4.따옴표사용범위">4.따옴표 사용 범위</h2>
+<h2>4.따옴표 사용 범위</h2>
+<p>공백이 포함된 글꼴 이름,한글 글꼴 이름,데이터 타입, filter 속성의 파라미터 값은 작은 따옴표로 감싼다.
+@charset을 선언할 때는 속성값을 큰 따옴표(“”)로 감싼다.그 외의 경우에는 따옴표를 사용하지 않는다.</p>
 
-<p>공백이 포함된 글꼴 이름,한글 글꼴 이름,데이터 타입, filter 속성의 파라미터 값은 작은 따옴표로 감싼다.</p>
-
-<p>@charset을 선언할 때는 속성값을 큰 따옴표(“”)로 감싼다.그 외의 경우에는 따옴표를 사용하지 않는다.</p>
-
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
-
-<p>font-family:&#8217;돋움&#8217;</p>
-
-<p>content:&#8217;content&#8217;</p>
-
-<p>@charset &#8220;utf&#8211;8&#8221;</p>
-
-<p>background:url(image.jpg)</p>
-
-<p>font-family:&#8217;돋움&#8217;</p>
-
-<p>content:&#8217;content&#8217;</p>
-
-<p>@charset &#8220;utf&#8211;8&#8221;</p>
-
-<p>background:url(image.jpg)</p>
-
-<p></code></pre></p>
+font-family:&#8217;돋움&#8217;
+content:&#8217;content&#8217;
+@charset &#8220;utf&#8211;8&#8221;
+background:url(image.jpg)
+font-family:&#8217;돋움&#8217;
+content:&#8217;content&#8217;
+@charset &#8220;utf&#8211;8&#8221;
+background:url(image.jpg)
+</code></pre>
 
 <hr />
 
-<h2 id="5.css인코딩">5.CSS 인코딩</h2>
+<h2>5.CSS 인코딩</h2>
 
-<p>글꼴 이름이 영문이 아닐 때 브라우저에서 콘텐츠를 바르게 표시하고, HTML에서 불러온 스타일을 제대로 렌더링하려면 반드시 CSS 인코딩을 선언해야 한다.HMTL과 동일한 인코딩을 문서 첫 줄에 공백 없이 선언하고 파일을 저장 할 때는 반드시 선언한 인코딩과 동일한 인코딩을 선택한다.</p>
+글꼴 이름이 영문이 아닐 때 브라우저에서 콘텐츠를 바르게 표시하고, HTML에서 불러온 스타일을 제대로 렌더링하려면 반드시 CSS 인코딩을 선언해야 한다.HMTL과 동일한 인코딩을 문서 첫 줄에 공백 없이 선언하고 파일을 저장 할 때는 반드시 선언한 인코딩과 동일한 인코딩을 선택한다.
 
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
-
-<p>@charset &#8220;utf&#8211;8&#8221;;</p>
-
-<p></code></pre></p>
+@charset &#8220;utf&#8211;8&#8221;;
+</code></pre>
 
 <hr />
 
-<h2 id="6.css선언타입">6.CSS 선언 타입</h2>
+<h2>6.CSS 선언 타입</h2>
 
-<p>CSS 선언 타입은 크게 세 가지로 분류하며, 용도에 맞게 사용한다.</p>
+CSS 선언 타입은 크게 세 가지로 분류하며, 용도에 맞게 사용한다.
 
 <ul>
 <li>6&#8211;1.External type</li>
@@ -236,240 +176,182 @@
 <li>6&#8211;3.Inline type</li>
 </ul>
 
-<h3 id="6-1.externaltype">6&#8211;1.External type</h3>
-
+<h3>6&#8211;1.External type</h3>
 <p>CSS를 선언하는 가장 기본적인 방식으로, CSS 파일이 별도로 존재하는 형태이다.</p>
 
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
+&lt;link rel="stylesheet" type="text/css" href="../css/name.css" /&gt;
+</code></pre>
 
-<link rel="stylesheet" type="text/css" href="../css/name.css" />
-
-<p></code></pre></p>
-
-<h3 id="6-2.internaltype">6&#8211;2.Internal type</h3>
-
+<h3>6&#8211;2.Internal type</h3>
 <p>HTML 파일의 head 안에 스타일을 선언하는 방식으로, 단발성 페이지의 CSS 분량이 적을 때 사용한다.</p>
 
-<p>CSS</p>
- <pre class="highlight"><code class="css">
+CSS
+ <pre><code>
+&lt;head&gt;
+&lt;style type="text/css"&gt;
+/*...*/
+&lt;/style&gt;
+&lt;/head&gt;
+</code></pre>
 
-<head>
-<style type="text/css">
-...
-</style>
-</head>
-
-<p></code></pre></p>
-
-<h3 id="6-3.inlinetype">6&#8211;3 .Inline type</h3>
-
+<h3>6&#8211;3 .Inline type</h3>
 <p>HTML 개별 요소에 style속성을 선언하는 방식으로 속성 값이 동적으로 변경되어야 할 때 사용한다.</p>
 
-<p>CSS</p>
- <pre class="highlight"><code class="css">
-
-<div style="margin:10px"></div>
-
-<p></code></pre></p>
+CSS
+ <pre><code>
+&lt;div style="margin:10px"&gt;&lt;/div&gt;
+</code></pre>
 
 <blockquote>
-<p><em>주의 : @import를 통해 CSS를 로드하는 방식은 사용하지 않는다.(@import 명령은 CSS 문서에서 다른 CSS 문서를 부르는 방법이고 External type 방식은 HTML 문서에서 CSS 문서를 부르는 방법이라는 점이 다릅니다. IE 6<sub>7</sub> 브라우저는 @import 명령을 사용하는 경우 HTML 문서를 모두 해석한 다음에 CSS 문서를 해석하는 방식으로 구현되어 있어서 사용자의 체감 성능을 떨어뜨리는 요인으로 작용하기 때문에 되도록 사용을 권장하지 않습니다.)</em></p>
+<em>주의 : @import를 통해 CSS를 로드하는 방식은 사용하지 않는다.(@import 명령은 CSS 문서에서 다른 CSS 문서를 부르는 방법이고 External type 방식은 HTML 문서에서 CSS 문서를 부르는 방법이라는 점이 다릅니다. IE 6<sub>7</sub> 브라우저는 @import 명령을 사용하는 경우 HTML 문서를 모두 해석한 다음에 CSS 문서를 해석하는 방식으로 구현되어 있어서 사용자의 체감 성능을 떨어뜨리는 요인으로 작용하기 때문에 되도록 사용을 권장하지 않습니다.)</em>
 </blockquote>
 
 <hr />
 
-<h2 id="7.한글글꼴선언">7.한글 글꼴 선언</h2>
-
+<h2>7.한글 글꼴 선언</h2>
 <p>한글 글꼴을 선언할 때 한글이나 영문 이름 중 하나로만 표기하면 특정 브라우저에서 글꼴을 올바르게 출력하지 못하는 경우가 있으므로 반드시 한글과 영문 이름을 선언한다.</p>
 
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
-
-<p>font-family:&#8217;맑은 고딕&#8217;,&#8216;Malgun Gothic&#8217;;</p>
-
-<p></code></pre></p>
+font-family:&#8217;맑은 고딕&#8217;,&#8216;Malgun Gothic&#8217;;
+</code></pre>
 
 <hr />
 
-<h2 id="8.z-index사용에관한규약">8. Z-INDEX 사용에 관한 규약</h2>
-
-<p>a.z-index 사용은 10단위로 증감한다.</p>
-
-<p>b.z-index의 사용은 최소 레벨 10에서 시작하고 최고 레벨 1000까지 사용 할 수 있다.</p>
-
-<p>c.레이어팝업 제작 시 z-index는 1000을 최소 레벨로 한다.</p>
-
-<hr />
-
-<h2 id="9.css속성선언순서">9.CSS 속성 선언 순서</h2>
-
-<p>순서 속성 의미</p>
-
+<h2 >8. Z-INDEX 사용에 관한 규약</h2>
 <ul>
-<li>display 표시</li>
-<li>overflow 넘침</li>
-<li>float 흐름</li>
-<li>position 위치</li>
-<li>z-index 정렬</li>
-<li>width &amp; height 크기</li>
-<li>margin &amp; padding(그룹) 간격</li>
-<li>border(그룹) 보더</li>
-<li>background(그룹) 배경</li>
-<li>font(그룹) 폰트</li>
-<li>기타 기타 속성은 순서 무관</li>
+    <li>8-1. z-index 사용은 10단위로 증감한다.</li>
+    <li>8-2. z-index의 사용은 최소 레벨 10에서 시작하고 최고 레벨 1000까지 사용 할 수 있다.</li>
+    <li>8-3. 레이어팝업 제작 시 z-index는 1000을 최소 레벨로 한다.</li>
 </ul>
 
-<p>CSS</p>
+<hr />
+
+<h2>9.CSS 속성 선언 순서</h2>
+<p>순서 속성 의미<p>
+
+<ul>
+    <li>display 표시</li>
+    <li>overflow 넘침</li>
+    <li>float 흐름</li>
+    <li>position 위치</li>
+    <li>z-index 정렬</li>
+    <li>width &amp; height 크기</li>
+    <li>margin &amp; padding(그룹) 간격</li>
+    <li>border(그룹) 보더</li>
+    <li>background(그룹) 배경</li>
+    <li>font(그룹) 폰트</li>
+    <li>기타 기타 속성은 순서 무관</li>
+</ul>
+
+CSS
  <pre class="highlight"><code class="css">
-
-<p>.dim {display:none;position:fixed;top:0;left:0;z-index:1000;width:100%;height:100%;margin:0;padding:0;background:#000;opacity:0.5;filter:alpha(opacity=50)}</p>
-
-<p></code></pre></p>
+.dim {display:none;position:fixed;top:0;left:0;z-index:1000;width:100%;height:100%;margin:0;padding:0;background:#000;opacity:0.5;filter:alpha(opacity=50)}
+</code></pre>
 
 <hr />
 
-<h2 id="10.resetcss">10.Reset CSS</h2>
-
+<h2>10.Reset CSS</h2>
 <p>크로스브라우징을 위해 각 태그 관련 속성을 초기화 시켜주는 CSS</p>
 
-<p>CSS </p>
+CSS 
  <pre class="highlight"><code class="css">
+/* reset */
 
-<p>/* reset */</p>
-
-<p>body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button {margin:0;padding:0}</p>
-
-<p>fieldset,img {border:0 none}</p>
-
-<p>dl,ul,ol,menu,li {list-style:none}</p>
-
-<p>blockquote, q {quotes: none}</p>
-
-<p>blockquote:before, blockquote:after,q:before, q:after {content:&#8216;&#8217;;content:none}</p>
-
-<p>input,select,textarea,button {vertical-align:middle}</p>
-
-<p>button {border:0 none;background-color:transparent;cursor:pointer}</p>
-
-<p>body {background:#fff}</p>
-
-<p>body,th,td,input,select,textarea,button {font-size:12px;line-height:1.5;font-family:&#8217;맑은 고딕&#8217;,&#8216;Malgun Gothic&#8217;,&#8216;돋움&#8217;,dotum,Helvetica,&#8216;Apple SD Gothic Neo&#8217;,Sans-serif;color:#333}</p>
-
-<p>a {color:#333;text-decoration:none}</p>
-
-<p>a:active, a:hover {text-decoration:underline}</p>
-
-<p>address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}</p>
-
-<p>table {border-collapse:collapse;border-spacing:0}</p>
-
-<p></code></pre></p>
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button {margin:0;padding:0}
+fieldset,img {border:0 none}
+dl,ul,ol,menu,li {list-style:none}
+blockquote, q {quotes: none}
+blockquote:before, blockquote:after,q:before, q:after {content:&#8216;&#8217;;content:none}
+input,select,textarea,button {vertical-align:middle}
+button {border:0 none;background-color:transparent;cursor:pointer}
+body {background:#fff}
+body,th,td,input,select,textarea,button {font-size:12px;line-height:1.5;font-family:&#8217;맑은 고딕&#8217;,&#8216;Malgun Gothic&#8217;,&#8216;돋움&#8217;,dotum,Helvetica,&#8216;Apple SD Gothic Neo&#8217;,Sans-serif;color:#333}
+a {color:#333;text-decoration:none}
+a:active, a:hover {text-decoration:underline}
+address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
+table {border-collapse:collapse;border-spacing:0}
+</code></pre>
 
 <hr />
 
-<h2 id="11.빈줄">11.빈 줄</h2>
-
+<h2>11.빈 줄</h2>
 <p>의미 있는 객체를 구분할 목적으로 코드 그룹 사이에 빈 줄을 넣을 수 있다.</p>
-
 <ul>
-<li>단 빈 줄은 한 줄을 넘지 않게 한다.</li>
+    <li>단, 빈 줄은 한 줄을 넘지 않게 한다.</li>
 </ul>
 
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
+/* 의미 있는 그룹 내용1 */
+.class1 {border:1px solid #000}
+&#8212;&#8212;&#8212;&#8212;&#8211;빈 줄&#8212;&#8212;&#8212;&#8212;&#8211;
 
-<p>/* 의미 있는 그룹 내용1 */</p>
-
-<p>.class1 {border:1px solid #000}</p>
-
-<p>&#8212;&#8212;&#8212;&#8212;&#8211;빈 줄&#8212;&#8212;&#8212;&#8212;&#8211;</p>
-
-<p>/* 의미 있는 그룹 내용2 */</p>
-
-<p>.class2 {border:1px solid #333}</p>
-
-<p></code></pre></p>
+/* 의미 있는 그룹 내용2 */
+.class2 {border:1px solid #333}
+</code></pre>
 
 <hr />
 
-<h2 id="12.주석">12.주석</h2>
-
+<h2>12.주석</h2>
 <p>주석 기호와 주석 내용 사이에는 반드시 공백 한 칸이 있어야 한다. 종료 주석은 사용하지 않는다.</p>
 
 <ul>
-<li>12&#8211;1. 작성자 정보는 CSS 파일 생성 날짜, 영문 이름 이니셜, 소속 팀을 작성한다.</li>
-<li>12&#8211;2. 초기 스타일 그룹</li>
-<li>12&#8211;3. 의미 있는 객체를 구분하기 위한 주석은 영역의 윗부분에 표기한다.</li>
-<li>12&#8211;4. 주석 표기 예시</li>
+    <li>12&#8211;1. 작성자 정보는 CSS 파일 생성 날짜, 영문 이름 이니셜, 소속 팀을 작성한다.</li>
+    <li>12&#8211;2. 초기 스타일 그룹</li>
+    <li>12&#8211;3. 의미 있는 객체를 구분하기 위한 주석은 영역의 윗부분에 표기한다.</li>
+    <li>12&#8211;4. 주석 표기 예시</li>
 </ul>
 
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
+/* 주석 내용 */
+</code></pre>
 
-<p>/* 주석 내용 */</p>
+12&#8211;1.작성자 정보는 CSS 파일 생성 날짜, 영문 이름 이니셜, 소속 팀을 작성한다.
 
-<p></code></pre></p>
-
-<p>12&#8211;1.작성자 정보는 CSS 파일 생성 날짜, 영문 이름 이니셜, 소속 팀을 작성한다.</p>
-
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
+/* 201?-??-?? KDY Gabia Front-end Dev */
+</code></pre>
 
-<p>/* 201?-??-?? KDY Gabia Front-end Dev */</p>
+12&#8211;2.초기 스타일 그룹
 
-<p></code></pre></p>
-
-<p>12&#8211;2.초기 스타일 그룹</p>
-
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
+/* reset */
+/* common */
+/* layout */
+</code></pre>
 
-<p>/* reset */</p>
+12&#8211;3.의미 있는 객체를 구분하기 위한 주석은 영역의 윗부분에 표기한다.
 
-<p>/* common */</p>
-
-<p>/* layout */</p>
-
-<p></code></pre></p>
-
-<p>12&#8211;3.의미 있는 객체를 구분하기 위한 주석은 영역의 윗부분에 표기한다.</p>
-
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
+/* GNB 시작 */
+.gnb{}
+</code></pre>
 
-<p>/* GNB 시작 */</p>
+12&#8211;4.주석 표기 예시
 
-<p>.gnb{}</p>
-
-<p></code></pre></p>
-
-<p>12&#8211;4.주석 표기 예시</p>
-
-<p>CSS</p>
+CSS
  <pre class="highlight"><code class="css">
-
-<p>@charset &#8220;utf&#8211;8&#8221;;</p>
-
-<p>/* 201?-??-?? KDY Gabia Front-end Dev */</p>
-
-<p>/* reset */</p>
-
-<p>/* common */</p>
-
-<p>/* layout */</p>
-
-<p>/* skip navigation*/</p>
-
-<p></code></pre></p>
+@charset &#8220;utf&#8211;8&#8221;;
+/* 201?-??-?? KDY Gabia Front-end Dev */
+/* reset */
+/* common */
+/* layout */
+/* skip navigation*/
+</code></pre>
 
 <hr />
 
-<h2 id="13.위의모든사항을바탕으로작성한css예시">13.위의 모든 사항을 바탕으로 작성한 CSS 예시</h2>
-
+<h2>13.위의 모든 사항을 바탕으로 작성한 CSS 예시</h2>
 <p>다음은 <a href="http://gabia-frontend-dev.com/wordpress/?cat=4">가비아 프론트엔드 기술블로그</a>의 경우이다.</p>
 
-<p>CSS</p>
+CSS
 
 <pre class="highlight"><code class="css">
 @charset "utf-8";
@@ -513,7 +395,7 @@ table {border-collapse:collapse;border-spacing:0}
 
 <hr />
 
-<h2 id="14.참고자료">14. 참고자료</h2>
+<h2>14. 참고자료</h2>
 
 <ul>
 <li><a href="http://gabia-frontend-dev.com/wordpress/?cat=4" title="가비아 기술블로그 링크">가비아 기술블로그</a></li>
