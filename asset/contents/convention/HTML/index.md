@@ -5,7 +5,7 @@
   </tbody>
 </table>
 
-# HTML Coding Convetion
+# 코딩컨벤션 - HTML
 
 이 문서는 Colony Studio의 작업 프로세스 정립을 위해 작성되었으며, 지속적인 수정이 가능하다.
 

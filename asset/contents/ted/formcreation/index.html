@@ -1,0 +1,63 @@
+<h1 id="-">형태 제작</h1>
+<p>데이터를 바인딩 하기 전에, 변수마다 적용시킬 가장 기본적인 형태를 HTML/CSS로 제작하기로 했다.</p>
+<p>몸통, 얼굴, 팔 등 각 형태를 어느 변수에 적용시킬지 생각하면서 데이터를 바인딩하면 어느 부분에서 변형을 적용시킬지도 함께 생각하면서 제작을 해야한다.</p>
+<p>일단, 코드로 복잡한 형태를 제작/조작한 적이 없으므로 이에 대한 기본적인 공부가 선행되었다. 형태를 제작하는 <code>svg</code>, <code>path</code>, <code>rect</code>, <code>ellipse</code>, <code>polygon</code> 등 다양한 방법과 형태를 조작하는 CSS-transform 등을 알아보기로 한다. 또한 데이터 바인딩시 변화하는 모습을 예측하기 위해 CSS-animation 공부도 함께 하였다.</p>
+<h2 id="rect">rect</h2>
+<p>사용되는 속성에는 <code>id</code>, <code>x</code>, <code>y</code>, <code>width</code>, <code>height</code>, <code>rx</code>, <code>ry</code>, <code>fill</code>, <code>stroke</code>, <code>stroke-miterlimit</code> 등이 있었다.</p>
+<h2 id="path">path</h2>
+<p>사용되는 속성에는 <code>id</code>, <code>d</code>, <code>fill</code>, <code>stroke</code>, <code>stroke-miterlimit</code> 등이 있었다.</p>
+<h2 id="polygon">polygon</h2>
+<p>폴리곤은 path보다는 단순하지만 라운딩 값이 없고 rect와 ellipse로 구현하기 힘든 다각형(평행사변형 등)을 제작하는 데 사용되는 것이다.</p>
+<h2 id="svg">svg</h2>
+<h3 id="svg-">svg 속성들</h3>
+<h4 id="stroke-dasharray">stroke-dasharray</h4>
+<p><code>stroke-dasharray</code>는 stroke path의 점선 간격을 조절하는 데 쓰인다. 콤마를 사용하여 길이나 퍼센트 값들을 나열하면 된다.</p>
+<pre class="highlight"><code>
+&lt;?xml version="1.0"?&gt;
+&lt;svg width="200" height="200" viewPort="0 0 200 300" version="1.1" xmlns="http://www.w3.org/2000/svg"&gt;
+&lt;line stroke-dasharray="5, 5" x1="10" y1="10" x2="190" y2="10" /&gt;
+</code></pre>
+
+
+<p>이런 식으로 해주고 line에 <code>stroke: black; stroke-width: 2;</code> 등의 속성을 부여하여 사용한다.</p>
+<h3 id="svg-">SVG 선언</h3>
+<p>svg로 둘러싸인 인터넷의 예제 코드는 왜 보통은 아래와 같은 복잡한 속성을 선언하고 있을까?</p>
+<pre class="highlight"><code>
+&lt;svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+</code></pre>
+
+<p>만약 SVG를 text/html 형식으로 된 html 페이지 내에 인라인으로 넣을 것이라면 xmlns 속성은 필요가 없다. SVG를 html 문서 내에 인라인으로 넣는 것은 html5 이후에 가능해진 것이다. </p>
+<p>하지만 만약 페이지를 <code>image/svg+xml</code> 또는 <code>application/xhtml+xml</code> 등 <code>text/html</code>이 아닌 형태로 제공한다면 XML parser가 필요해지므로 위의 <code>xmlns</code>속성이 꼭 필요하게 된다. </p>
+<h3 id="svg-path">SVG Path</h3>
+<h4 id="path">Path</h4>
+<p>SVG에서 path를 그리기 위해서 다음 명령어들을 사용해야한다. <strong>명령어가 대문자일때는 position이 absolute로, 소문자일 때는 relative로 인식된다.</strong></p>
+<ul>
+<li><code>M</code>: moveto</li>
+<li><code>L</code>: lineto</li>
+<li><code>H</code> : horizontal lineto</li>
+<li><code>V</code> : vertical lineto</li>
+<li><code>C</code> : curveto</li>
+<li><code>S</code> : smooth curveto</li>
+<li><code>Q</code> : quadratic Bézier curve</li>
+<li><code>T</code> : smooth quadratic Bézier curve</li>
+<li><code>A</code> : elliptical Arc</li>
+<li><code>Z</code> : closepath</li>
+</ul>
+<h4 id="b-zier-curves">Bézier curves</h4>
+<p>베이지어 곡선은 무한대로 확장될 수 있는 곡선을 모델링하는 데 사용된다. 일반적으로 두 개의 종점(endpoint)과 하나 혹은 두개의 조절점(control point)를 선택할 수 있다. 하나의 조절점을 가진 베이지어 곡선을 quadratic Bézier curve이라고 하고, 두 개의 조절점을 가진 베이지어 곡선을 cubic이라고 한다.</p>
+<p>베이지어 곡선은 기본적인 path를 그리는 방식과 같지만 시작점과 끝점 사이에 <code>q</code>를 추가해주면 생성이 된다. <code>q</code>의 좌표는 결과적으로 베이지어 곡선이 지나게되는 곳과는 차이가 있다. codepen을 이용하여 기본적인 quadratic Bézier curve를 만들어보았다. 이 예제에서 <code>q</code>의 좌표값은 각각 C, C1, C2이다. 베이지어 곡선은 세 점으로 이루어진 삼각형 내에서 그려진다. </p>
+<iframe height='603' scrolling='no' src='//codepen.io/ccuram/embed/vGaGyx/?height=603&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/ccuram/pen/vGaGyx/'>Bézier curves</a> by yumm (<a href='http://codepen.io/ccuram'>@ccuram</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
+
+
+<hr>
+<h2 id="-">새로 나온 개념</h2>
+<h3 id="vh-">vh 라는 크기 단위</h3>
+<p>viewport에서 얼마나 크기를 차지할 지를 뜻하는 상대적 크기 개념이다. % 단위가 가장 가까운 부모 요소에 상대적인 영향을 받는 것과는 달리 <code>vh</code>와 <code>vw</code> 단위는 뷰포트 크기에 영향을 받는다. 스크린에 꽉차는 텍스트를 넣는다든지 할 때 유용하다.</p>
+<p><code>vh</code>요소는 100분의 1 단위이다. 따라서 <code>100vh</code>와 <code>100vw</code>가 뷰포트에 꽉차는 단위 값이 된다.</p>
+<p>이 단위의 호환성은 다음과 같다.
+<img src="http://yumm.co.kr/blogs/asset/img/ted-form-creation1.png" alt="viewport units"></p>
+<h3 id="-">기타</h3>
+<ul>
+<li><code>border-radius</code> 값을 퍼센트로 지정할 수 있다!</li>
+</ul>
