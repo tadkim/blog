@@ -1,0 +1,127 @@
+<table id="meta">
+    <thead><th>160426</th><th>TED</th><th>윰</th></thead>
+    <tbody>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    </tbody>
+</table>
+
+<h1>1차 형태 제작 가이드</h1>
+<p>Mike Bostock의 <a href=https://bl.ocks.org/mbostock/1021103">Superformular Explorer</a>에서 10가지 형태를 채택하고 어떤 직군에 부여할지, 어떤 값들을 조절하여 형태를 변화시킬지, 최대최소값은 얼마인지 등을 전달하는 가이드이다. 코드, 이미지, 설명 등을 첨부하였다. 특정 형태가 어떤 Role에 적용될 지는 공평하게 사다리타기로 결정하였다.</p>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation22.png" alt="형태와 직군을 매칭하기 위한 사다리"/>
+    <figcaption>형태와 직군을 매칭하기 위한 사다리</figcaption>
+</figure>
+
+<h2>전체 코드</h2>
+<p>예제에서 변하는 값은 <code>m</code>,<code>n1</code>,<code>n2</code>,<code>n3</code>,<code>a</code>,<code>b</code>가 있다. 변하는 값이 두 가지일 경우 종속적인 값은 2차 방정식으로 제시하였다.</p>
+<pre class="highlight"><code class="javascript">
+var types = {
+  art: {m:, n1:, n2:, n3:, a:, b:},
+  explorer: {m:1.362, n1:1.362, n2:9.237, n3:5.938, a:-0.9625, b:1.025},
+    //b, 1, 1.475
+    //n2, (226*b-29)/33, (140*b+31)/19
+  humanist: {m:, n1:, n2:, n3:, a:, b:},
+  management: {m:-2.537, n1:407.1, n2:603.1, n3:936.3, a:1.287, b:0.5375},
+    //
+    //
+  media: {m:, n1:, n2:, n3:, a:, b:},
+  profession: {m:4.000, n1:632.5, n2:421.8, n3:100.0, a:2.000, b:1.000},
+    //n1, 300, 670
+    //n2, (8*n1+9440)/37, (5*n1+18850)/37
+  public: {m:, n1:, n2:, n3:, a:, b:},
+  religion: {m:, n1:, n2:, n3:, a:, b:},
+  science: {m:, n1:, n2:, n3:, a:, b:},
+  vip: {m:, n1:, n2:, n3:, a:, b:}
+};
+</code></pre>
+
+<h3>가이드 1. Art</h3>
+<p></p>
+<figure>
+    <img src="" alt=""/>
+    <figcaption></figcaption>
+</figure>
+
+<h3>가이드 2. Explorer</h3>
+<p></p>
+<pre class="highlight"><code class="javascript">
+    explorer: {m:1.362, n1:1.362, n2:9.237, n3:5.938, a:-0.9625, b:1.025},
+    //b, 1, 1.475
+    //n2, (226*b-29)/33, (140*b+31)/19
+</code></pre>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation19.png" alt=""/>
+    <figcaption>b값이 min인 1일 때의 변화</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation20.png" alt=""/>
+    <figcaption>b값이 max인 1.475일 때의 변화</figcaption>
+</figure>
+
+<h3>가이드 3. Humanist</h3>
+<p></p>
+<figure>
+    <img src="" alt=""/>
+    <figcaption></figcaption>
+</figure>
+
+<h3>가이드 4. Management</h3>
+<p>Management의 기본 형태는 과자인 뉴팝과 비슷한 형태이다. 기본적으로 <code>transform: rotate(270deg)</code>가 들어간다.</p>
+<pre class="highlight"><code class="javascript">
+    Management: {m:-2.537, n1:407.1, n2:603.1, n3:936.3, a:1.287, b:0.5375},
+    //m, -2.987, -2.537
+    //a, (1000*m+4487)/3000, (4000*m+38948)/9000
+</code></pre>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation21.png" alt=""/>
+    <figcaption>Management role의 기본 형태</figcaption>
+</figure>
+
+<h3>가이드 5. Media</h3>
+<p></p>
+<figure>
+    <img src="" alt=""/>
+    <figcaption></figcaption>
+</figure>
+
+<h3>가이드 6. Profession</h3>
+<p></p>
+<pre class="highlight"><code class="javascript">
+    profession: {m:4.000, n1:632.5, n2:421.8, n3:100.0, a:2.000, b:1.000},
+    //n1, 300, 670
+    //n2, (8*n1+9440)/37, (5*n1+18850)/37
+</code></pre>
+<figure>
+    <img src="" alt=""/>
+    <figcaption></figcaption>
+</figure>
+
+<h3>가이드 7. Public</h3>
+<p></p>
+<figure>
+    <img src="" alt=""/>
+    <figcaption></figcaption>
+</figure>
+
+<h3>가이드 8. Religion</h3>
+<p></p>
+<figure>
+    <img src="" alt=""/>
+    <figcaption></figcaption>
+</figure>
+
+<h3>가이드 9. Science</h3>
+<p></p>
+<figure>
+    <img src="" alt=""/>
+    <figcaption></figcaption>
+</figure>
+
+<h3>가이드 10. Vip</h3>
+<p></p>
+<figure>
+    <img src="" alt=""/>
+    <figcaption></figcaption>
+</figure>
