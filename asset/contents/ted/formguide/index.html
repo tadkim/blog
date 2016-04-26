@@ -18,31 +18,53 @@
 <p>예제에서 변하는 값은 <code>m</code>,<code>n1</code>,<code>n2</code>,<code>n3</code>,<code>a</code>,<code>b</code>가 있다. 변하는 값이 두 가지일 경우 종속적인 값은 2차 방정식으로 제시하였다.</p>
 <pre class="highlight"><code class="javascript">
 var types = {
-  art: {m:, n1:, n2:, n3:, a:, b:},
+    art: {m:6.612, n1:5.487, n2:2.337, n3:14.26, a:1.775, b:1.362},
+    //n1, 3.313, 6.2
   explorer: {m:1.362, n1:1.362, n2:9.237, n3:5.938, a:-0.9625, b:1.025},
     //b, 1, 1.475
     //n2, (226*b-29)/33, (140*b+31)/19
-  humanist: {m:, n1:, n2:, n3:, a:, b:},
+    humanist: {m:1.915, n1:39.60, n2:113.1, n3:19.18, a:1.250, b:0.5375},
+    //a, 0.9875, 1.250
+    //n1, 24.9, (224*a+281)/6
   management: {m:-2.537, n1:407.1, n2:603.1, n3:936.3, a:1.287, b:0.5375},
-    //
-    //
-  media: {m:, n1:, n2:, n3:, a:, b:},
+    //m, -2.987, -2.537
+    //a, (1000*m+4487)/3000, (4000*m+38948)/9000
+  media: {m:0.6875, n1:0.3500, n2:2.825, n3:8.863, a:-3.625, b:-1.675},
+    //n2, 1.4, 5
   profession: {m:4.000, n1:632.5, n2:421.8, n3:100.0, a:2.000, b:1.000},
     //n1, 300, 670
     //n2, (8*n1+9440)/37, (5*n1+18850)/37
-  public: {m:, n1:, n2:, n3:, a:, b:},
-  religion: {m:, n1:, n2:, n3:, a:, b:},
-  science: {m:, n1:, n2:, n3:, a:, b:},
-  vip: {m:, n1:, n2:, n3:, a:, b:}
+  public: {m:-4.188, n1:8.263, n2:-0.6250, n3:15.84, a:3.313, b:2.337},
+    //m, -5.0, -2.8
+    //n2, (30*m+7)/110, -0.4
+  religion: {m:3.313, n1:10.89, n2:11.23, n3:16.81, a:-0.9625, b:-1.525},
+    //b, -1.8, -1
+    //n2, 10, (25*b+101)/4
+  science: {m:19.96, n1:16.14, n2:2.337, n3:9.987, a:0.3125, b:0.9875},
+     //b, 0.95, 1.4
+     //n1, (320*b-268)/9, (350*b-280)/3
+  vip: {m:3.950, n1:0.2750, n2:1.662, n3:2.675, a:73.90, b:14.94}
+     //b, 14, 15.5
+     //n1, (-2*b+37)/30, (b-9)/10
 };
 </code></pre>
 
+<h2>직군별 형태 가이드</h2>
 <h3>가이드 1. Art</h3>
-<p></p>
+<p>Art 직군의 기본 형태는 뿌리가 달린 치아의 형태라고 생각하면 된다. 기본적으로 <code>transform: rotate(90deg)</code>가 들어간다.</p>
+<pre class="highlight"><code class="javascript">
+    art: {m:6.612, n1:5.487, n2:2.337, n3:14.26, a:1.775, b:1.362},
+    //n1, 3.313, 6.2
+</code></pre>
 <figure>
-    <img src="" alt=""/>
-    <figcaption></figcaption>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation28.png" alt=""/>
+    <figcaption>Art 직군의 default 형태</figcaption>
 </figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation29.png" alt=""/>
+    <figcaption>n1값이 min, max일 때</figcaption>
+</figure>
+<hr>
 
 <h3>가이드 2. Explorer</h3>
 <p></p>
@@ -59,13 +81,29 @@ var types = {
     <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation20.png" alt=""/>
     <figcaption>b값이 max인 1.475일 때의 변화</figcaption>
 </figure>
+<hr>
 
 <h3>가이드 3. Humanist</h3>
-<p></p>
+<p>Humanist 직군의 기본 형태는 전구와 흡사한 형태이다. 기본적으로 <code>transform: rotate(270deg)</code>가 들어간다.</p>
+<pre class="highlight"><code class="javascript">
+    humanist: {m:1.915, n1:39.60, n2:113.1, n3:19.18, a:1.250, b:0.5375},
+    //a, 0.9875, 1.250
+    //n1, 24.9, (224*a+281)/6
+</code></pre>
 <figure>
-    <img src="" alt=""/>
-    <figcaption></figcaption>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation32.png" alt="Humanist 직군의 기본 형태"/>
+    <figcaption>Humanist 직군의 기본 형태</figcaption>
 </figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation33.png" alt="a가 최소값일 때 변화"/>
+    <figcaption>a가 최소값일 때 변화</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation34.png" alt="a가 최대값일 때 변화"/>
+    <figcaption>a가 최대값일 때 변화</figcaption>
+</figure>
+
+<hr>
 
 <h3>가이드 4. Management</h3>
 <p>Management의 기본 형태는 과자인 뉴팝과 비슷한 형태이다. 기본적으로 <code>transform: rotate(270deg)</code>가 들어간다.</p>
@@ -75,53 +113,143 @@ var types = {
     //a, (1000*m+4487)/3000, (4000*m+38948)/9000
 </code></pre>
 <figure>
-    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation21.png" alt=""/>
-    <figcaption>Management role의 기본 형태</figcaption>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation21.png" alt="Management 직군의 기본 형태"/>
+    <figcaption>Management 직군의 기본 형태</figcaption>
 </figure>
 
-<h3>가이드 5. Media</h3>
-<p></p>
 <figure>
-    <img src="" alt=""/>
-    <figcaption></figcaption>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation23.png" alt="m이 최소값일 때 변화"/>
+    <figcaption>m이 최소값일 때 변화</figcaption>
 </figure>
 
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation24.png" alt="m이 최대값일 때의 변화"/>
+    <figcaption>m이 최대값일 때의 변화</figcaption>
+</figure>
+
+
+<hr>
+<h3>가이드 5. Media</h3>
+<p>Media 직군의 형태는 기본적으로 물방울 모양을 하고 있다. <code>transform: rotate(270deg)</code>가 기본으로 적용되어있다.</p>
+<pre class="highlight"><code class="javascript">
+    media: {m:0.6875, n1:0.3500, n2:2.825, n3:8.863, a:-3.625, b:-1.675},
+    //n2, 1.4, 5
+</code></pre>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation30.png" alt="Art 직군의 기본 형태"/>
+    <figcaption>Art 직군의 기본 형태</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation31.png" alt="n2가 최소값, 최대값일 때 모습"/>
+    <figcaption>n2가 최소값, 최대값일 때 모습</figcaption>
+</figure>
+
+<hr>
 <h3>가이드 6. Profession</h3>
-<p></p>
+<p>Profession의 기본 형태는 레몬과 비슷한 형태이다. 가로로 넙적하다.</p>
 <pre class="highlight"><code class="javascript">
     profession: {m:4.000, n1:632.5, n2:421.8, n3:100.0, a:2.000, b:1.000},
     //n1, 300, 670
     //n2, (8*n1+9440)/37, (5*n1+18850)/37
 </code></pre>
 <figure>
-    <img src="" alt=""/>
-    <figcaption></figcaption>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation25.png" alt="Profession 직군의 기본 형태"/>
+    <figcaption>Profession 직군의 기본 형태</figcaption>
 </figure>
 
-<h3>가이드 7. Public</h3>
-<p></p>
 <figure>
-    <img src="" alt=""/>
-    <figcaption></figcaption>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation26.png" alt="n1이 최대값일 때의 변화"/>
+    <figcaption>n1이 최대값일 때의 변화</figcaption>
 </figure>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation27.png" alt="n1이 최대값일 때의 변화"/>
+    <figcaption>n1이 최대값일 때의 변화</figcaption>
+</figure>
+
+<hr>
+<h3>가이드 7. Public</h3>
+<p>Public 직군의 기본 형태는 속이 꽉찬 8자 모양이다. 기본적으로 <code>transform: rotate(90deg)</code>가 적용되어 있다.</p>
+<pre class="highlight"><code class="javascript">
+    public: {m:-4.188, n1:8.263, n2:-0.6250, n3:15.84, a:3.313, b:2.337},
+    //m, -5.0, -2.8
+    //n2, (30*m+7)/110, -0.4
+</code></pre>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation35.png" alt="Public 직군의 기본 형태"/>
+    <figcaption>Public 직군의 기본 형태</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation36.png" alt="m이 최소값일 때의 변화"/>
+    <figcaption>m이 최소값일 때의 변화</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation37.png" alt="m이 최대값일 때의 변화"/>
+    <figcaption>m이 최대값일 때의 변화</figcaption>
+</figure>
+<hr>
+
+
 
 <h3>가이드 8. Religion</h3>
-<p></p>
+<p>Religion 직군의 기본 형태는 머리쪽이 눌린 직사각형 형태이다. 기본적으로 <code>transform: rotate(90deg)</code>가 적용되어 있다.</p>
+<pre class="highlight"><code class="javascript">
+    religion: {m:3.313, n1:10.89, n2:11.23, n3:16.81, a:-0.9625, b:-1.525},
+        //b, -1.8, -1
+        //n2, 10, (25*b+101)/4
+</code></pre>
 <figure>
-    <img src="" alt=""/>
-    <figcaption></figcaption>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation38.png" alt="Religion 직군의 기본 형태"/>
+    <figcaption>Religion 직군의 기본 형태</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation39.png" alt="b가 최소값일 때의 변화"/>
+    <figcaption>b가 최소값일 때의 변화</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation40.png" alt="b가 최대값일 때의 변화"/>
+    <figcaption>b가 최대값일 때의 변화</figcaption>
 </figure>
 
+<hr>
 <h3>가이드 9. Science</h3>
-<p></p>
+<p>Science 직군의 기본 형태는 10개의 꼭지점이 있는 삐죽삐죽한 형태이다.</p>
+<pre class="highlight"><code class="javascript">
+    science: {m:19.96, n1:16.14, n2:2.337, n3:9.987, a:0.3125, b:0.9875},
+     //b, 0.95, 1.4
+     //n1, (320*b-268)/9, (350*b-280)/3
+</code></pre>
 <figure>
-    <img src="" alt=""/>
-    <figcaption></figcaption>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation44.png" alt="Science 직군의 기본 형태"/>
+    <figcaption>Science 직군의 기본 형태</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation45.png" alt="b가 최소값일 때의 변화"/>
+    <figcaption>b가 최소값일 때의 변화</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation46.png" alt="b가 최대값일 때의 변화"/>
+    <figcaption>b가 최대값일 때의 변화</figcaption>
 </figure>
 
-<h3>가이드 10. Vip</h3>
-<p></p>
+<hr>
+<h3>가이드 10. VIP</h3>
+<p>VIP 직군의 기본 형태는 허리가 들어간 육각형 형태이다.</p>
+<pre class="highlight"><code class="javascript">
+    vip: {m:3.950, n1:0.2750, n2:1.662, n3:2.675, a:73.90, b:14.94}
+        //b, 14, 15.5
+        //n1, (-2*b+37)/30, (b-9)/10
+</code></pre>
 <figure>
-    <img src="" alt=""/>
-    <figcaption></figcaption>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation41.png" alt="VIP 직군의 기본 형태"/>
+    <figcaption>VIP 직군의 기본 형태</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation42.png" alt="b가 최소값일 때의 변화"/>
+    <figcaption>b가 최소값일 때의 변화</figcaption>
+</figure>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/ted-form-creation43.png" alt="b가 최대값일 때의 변화"/>
+    <figcaption>b가 최대값일 때의 변화</figcaption>
 </figure>
