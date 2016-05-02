@@ -1,0 +1,75 @@
+<table id="meta">
+    <thead><th>160502</th><th>확률통계공부</th><th>윰</th></thead>
+    <tbody>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    </tbody>
+</table>
+
+<h1 id="-">확률과 통계</h1>
+<p>한국국토정보공사 LX의 확률과 통계 강의 및 문제 풀이를 보고 기초공부를 학습하였다. 실제적으로 응용할 것은 통계 파트이지만, 통계를 다루는 데 기본이 되는 것이 확률이므로 같이 학습을 진행하였다.</p>
+<h2 id="-">확률</h2>
+<h3 id="-">시행과 사건</h3>
+<p>하나의 주사위를 던졌을 때 나오는 눈을 원소로 하는 집합 S={1,2,3,4,5,6}이 있을 때 S의 부분집합의 갯수는 2</p>
+<hr>
+<h2 id="-">통계</h2>
+<h3 id="-">기술통계와 추론통계</h3>
+<ul>
+    <li>기술통계 (descriptive statistics): 자료를 수집하여 표나 그림으로 나타내거나 대표값, 분산도, 분포 형태 등을 도출하여 자료의 특성을 쉽게 파악할 수 있도록 자료를 정리하고 요약하는 통계학 분야</li>
+    <li>추론통계 (inferential statistics): 표본에서 산출한 통계량을 근거로 모집단의 모수를 추론하는 통계학 분야. (전체 집단에서 구하는 것이 시간이나 비용이 많이 들기 때문에 표본을 추출해서 집단의 특징을 구하는 방법을 택함.)</li>
+</ul>
+<h2 id="-">기술통계 분석의 종류</h2>
+<h3 id="-central-tendency-">대표값 (central tendency)</h3>
+<p>자료 전체의 특징을 표현하는 하나의 대표적인 수로써 자료의 집중 경향을 나타낸다. (산술)평균, 중앙값, 최빈값 등이 있다.</p>
+<h3 id="-dispersion-">분산도 (dispersion)</h3>
+<p>변량들이 대표값으로부터 흩어져 있는 정도를 하나의 수로 나타낸 값. 분산도에는 여러가지 종류가 있는데, 표준편차, 평균편차, 사분편차, 범위, 변동 계수 등이 있다.</p>
+<h3 id="-shape-">분포 형태 (shape)</h3>
+<p>그래프를 나타냈을 때 좌우로 어느정도 비대칭적인지(왜곡도), 또는 수직으로 얼마나 뾰족하게 솟아있는 지(첨도) 정도를 나타낸 지표이다. 왜곡도, 첨도가 있다.</p>
+<hr>
+<h2 id="-">대표값과 평균</h2>
+<p>분포가 대칭적일 수록 평균, 중앙값, 최빈값이 비슷하게 나타남.</p>
+<h3 id="-">평균</h3>
+<p>n개의 변량(자료)의 평균(mean)</p>
+<h3 id="-median-">중앙값 (median)</h3>
+<p>변량 전체를 크기 순서대로 나열할 때 중앙에 위치하는 변량의 값.
+    ex) 변량(11, 9, 42, 25, 97, 40, 88, 75, 93)의 중앙값은 42</p>
+<h3 id="-mode-">최빈값 (mode)</h3>
+<p>도수가 가장 많이 나타나는 변량
+    ex) 변량 (12, 9, 12, 15, 17, 15, 18, 15, 13)의 최빈값은 15</p>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/statistics/foundation/statistics-foundation1.png" alt="최빈값, 중앙값, 평균 예시1" />
+    <figcaption>최빈값, 중앙값, 평균 예시1 : 완벽하게 대칭일 경우에 최빈값, 중앙값, 평균이 동일</figcaption>
+</figure>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/statistics/foundation/statistics-foundation2.png" alt="최빈값, 중앙값, 평균 예시2" />
+    <figcaption>최빈값, 중앙값, 평균 예시2 : 오른쪽으로 꼬리가 긴(양의 방향으로 꼬리가 길다. 오른쪽이 왜곡되어있다.) 경우.  </figcaption>
+</figure>
+
+<hr>
+<h2 id="-">분산도와 표준편차</h2>
+<h3 id="-variance-">분산 (variance)</h3>
+<p>평균에서 변량들이 어느정도 흩어져있는지 정도. </p>
+<h3 id="-standard-deviation-">표준편차 (standard deviation)</h3>
+<p>분산에 제곱근을 붙인 것. 표준편차는 각 변량이 평균으로부터 얼마나 떨어져 있는지를 측정하는 지표이다. 표준 편차가 작으면 평균값에 변량들이 밀집해 있는 것이고 표준 편차가 크면 그래프가 펑퍼짐한 모양, 즉 변량들이 넓게 분산되어 있음을 의미한다. 표준편차는 분산도를 나타내는데 가장 유용한 지표이다.</p>
+<h3 id="-coefficient-of-variation-cv-">변동계수 (coefficient of variation, CV)</h3>
+<p>표준편차를 평균으로 나눈 값. 분산도를 상대적으로 측정하는 지표이다. 몇몇의 다른 분포들을 비교할 때 사용. </p>
+<hr>
+<h2 id="-">왜곡도와 첨도</h2>
+<h3 id="-skewness-">왜곡도 (skewness)</h3>
+<p>도수분포의 좌우 비대칭 정도를 측정하는 지표 [오른쪽 / 왼쪽으로 치우침]. 왜곡도의 값은 -3에서 +3의 범위 값을 가진다.</p>
+<ul>
+    <li>왜곡도 = 0 : 대칭분포 [평균=중앙값=최빈값]</li>
+    <li>왜곡도 &gt; 0 : 오른쪽으로 치우침 (positive skewed] 이때 최빈값 &lt; 중앙값 &lt; 평균.</li>
+    <li>왜곡도 &lt; 0 : 왼쪽으로 치우침 (negative skewed] 이때 평균 &lt; 중앙값 &lt; 최빈값.</li>
+</ul>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/statistics/foundation/statistics-foundation3.png" alt="오른쪽으로 치우친 도수분포" />
+    <figcaption></figcaption>
+</figure>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/statistics/foundation/statistics-foundation4.png" alt="왼쪽으로 치우친 도수분포" />
+    <figcaption></figcaption>
+</figure>
