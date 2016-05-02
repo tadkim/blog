@@ -108,21 +108,10 @@ tr:hover{background-color: #f7f7f7;}
 /* --윰탬 생각쓰기-- */
 
 /* 윗문자 아랫문자 */
-span.toptext {
-    font-size: 0.6em;
-    vertical-align: text-bottom;
-    margin-left: 0.1em;
-    margin-right: 0.3em;
-    font-weight: 600;
-}
+span.toptext { font-size: 0.6em; vertical-align: text-bottom; margin-left: 0.1em; margin-right: 0.3em; font-weight: 600;}
+span.bottomtext { font-size: 0.6em; vertical-align: text-top; margin-left: 0.1em; margin-right: 0.3em; font-weight: 600;}
+/* -- 윗문자 아랫문자 -- */
 
-span.bottomtext {
-    font-size: 0.6em;
-    vertical-align: text-top;
-    margin-left: 0.1em;
-    margin-right: 0.3em;
-    font-weight: 600;
-}
 /* 상단 문서 정보 */
 #meta {margin-top: 0em; margin-bottom: -5.2em;}
 #meta th, #meta td, #meta, tr:last-child {border: 0px solid #fff;}
