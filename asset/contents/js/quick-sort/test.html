@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Quick Sort Test
+<script>
+
+    function qSort(arr){
+        if(arr.length === 0){
+            return [];
+        }
+        var left = [];
+        var right = [];
+        var pivot = arr[0];
+        for(var i = 1; i < arr.length; i++) {
+            console.log("pivot : " + pivot + " current element : " + arr[i]);
+            if (arr[i] < pivot) {
+                console.log("moving " + arr[i] + "to the left");
+                left.push(arr[i]);
+            } else {
+                console.log("moving " + arr[i] + "to the right");
+                right.push(arr[i]);
+            }
+        }
+        return qSort(left).concat(pivot, qSort(right)); //재귀
+    } // end qSort()
+
+
+    var a = [];
+    for(var i = 0; i < 10; i++){
+        a[i] = Math.floor(Math.random()*100+1);
+    }
+    console.log(a.join(",")); //join()은출력 결과를 확인하기 위함
+    console.log(qSort(a).join(",")); //join()은 출력 결과를 확인하기 위함
+
+</script>
+
+</body>
+</html>
