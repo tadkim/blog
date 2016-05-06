@@ -1,0 +1,143 @@
+<table id="meta">
+    <thead><th>160505</th><th>SVG vs CSS</th><th>윰</th></thead>
+    <tbody>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
+    </tbody>
+</table>
+
+<h1>CSS와 SVG 중에 어느 것을 선택할까?</h1>
+<p>TED 프로젝트를 진행하는 도중에, body, eye 등 형태를 코드로 만들고 데이터를 바인딩시켜야 하는데, HTML div + CSS로 형태를 콘트롤 하는 것과, SVG로 형태를 만드는 것 중에 어느 것을 선택해야할지 Codepen 예제들을 봐도 감이 잡히질 않아서 검색해보았다. Adobe Dreamweaver의 팀블로그에서 <a href="http://blogs.adobe.com/dreamweaver/2015/09/css-vs-svg-shapes-and-arbitrarily-shaped-ui-components.html">이에 관해 다룬 아티클들</a>이 있었고, 이 글을 번역하면서 두 개의 차이점을 알아보는 시간을 가졌다. </p>
+
+
+<h2>CSS vs. SVG : Shape와 독단적으로 생성된(Arbitrarily-Shaped) UI 컴포넌트</h2>
+
+    <p>앞선 두 글에서는 각각 그래픽 글자 효과를 만들기 위한 CSS와 SVG 기술, 그리고 HTML 체크박스와 라디오버튼을 스타일링하고 애니메이팅하기 위한 CSS와 SVG 기술을 비교해 보았다. 이번 글에서는 독단적으로 생성되는 UI 컴포넌트를 만들기 위해 CSS 프로퍼티와 SVG의 역량, 그리고 둘을 같이 사용하는 기술을 검토해볼 것이다.</p>
+    <p>특히, 사각형태가 아닌 쓸만한 UI 엘리먼트로서 원형의 메뉴를 생성하는 방법에 대해 이야기를 할 것이다.</p>
+    <p>먼저, CSS가 사각형이 아닌 기하학적 형태를 만드는 데 있어서 가능한 부분과 불가능한 부분이 무엇인지 보는 것으로 시작해보겠다.</p>
+    <hr>
+    <h2 id="css-the-shapes-of-css-">CSS의 형태 (The Shapes of CSS)</h2>
+    <p>HTML과 CSS의 모든 것은 사각형이다. 모든 엘리먼트가 사각으로 된 박스 모델로 다뤄진다. 이미지와 글자는 모두 사각형이며 글자는 사각형의 공간에서 흐른다.</p>
+    <p>수년 전, CSS Shape라는 것이 처음 도입되었고, 이는 우리가 사각형이 아닌 형태(원, 타원, 다각형 등)를 구체화하는 것, 그리고 이런 형태 내에서 글자가 흘러가게하는 것을 가능하게 했고 이로써 사각 형태의 흐름을 파괴하고 웹디자인이 인쇄물 디자인에서 가능하던 것에 더 가깝게 만들어주었다.</p>
+    <p>그러나 CSS Shape로 Arbitrary Shape처럼 보이고, 랜더링되는 요소를 만들 수 있게 되진 않았다. 단지, 엘리먼트들을 둘러싼 콘텐츠의 흐름에만 영향을 주었을 뿐. 그리고 미래의 단위는 아마 엘리먼트의 내부의 콘텐츠 흐름도 바꿀 수 있게 할 것이다. (?) 그러나 당신이 사각형태의 흐름을 바꾸려고 한걸음 더 나아가더라도 여전히 엘리먼트의 내부 또는 사각형태가 아닌 외부를 둘러싼 콘텐츠 흐름이 사각형태로 만들어진다. 이를 어떻게 해야할 지에 대해 곧 이야기해보자.</p>
+    <h2 id="-geometric-shapes-">기하학적 형태들 (Geometric Shapes)</h2>
+    <p>CSS Shape의 나머지 형태(위의 CSS Shape와 혼돈하지 않기 위해)는 창조적 형태를 만드려고 의도되진 않았던 다른 CSS의 속성을 이용해서 만들어진 기하학적 형태이다.</p>
+    <p>몇몇  HTML 엘리먼트들과 가상엘리먼트들과 함께 box-shadow, border-radius같은 속성이나 다른 외곽선 속성들을 이용함으로써, 당신은 페이지에 다른 기하학적 형태를 만들 수가 있다. 그러나 이 형태들은 진짜 ‘형태(Shape)’가 아니다. 즉, 당신은 당신이 원했던 시각적인 모양을 구현할 수는 있지만, 그들은 사실상 사각형이나 원형의 형태 등의 다른 기본적인 요소를 최종적으로 우리가 원하는 형태처럼 보이게끔 배치하고 합하여 만들어진 가짜 형태들이다.</p>
+    <p>예를 들어, CSS <code>border-*</code> 속성을 사용하여, 요소에 외곽선을 주고. 요소들의 가로 세로 속성을 무너뜨리고, 보이길 원하지 않는 삼각형에 투명색을 지정함으로서 감추어, 네 가지 주요 방향 중에 한 곳을 가리키는 삼각형을 만들 수 있다.</p>
+    <p>따라서, CSS에서 두 간단한 단계를 거치면 당신은 CSS의 몇몇 라인만으로 삼각형 형태를 만들 수 있고, 어떤 삼각형이든 골라서 나머지 것들을 투명색을 주는 것으로 안보이게 할 수 있다. 따라서, 삼각형이 위를 가리키길 원한다면, 아래 외곽선을 제외한 나머지의 색들을 투명하게 조절하면 된다.</p>
+    <p>예제는 이곳에서 볼수가 있다.(<a href="http://codepen.io/SaraSoueidan/pen/c21a82da3888d518450edc759f3b905a">http://codepen.io/SaraSoueidan/pen/c21a82da3888d518450edc759f3b905a</a>)</p>
+    <p>예를 들면, <code>border-radius</code> 속성과 두개의 가상 엘리먼트(비어있는 div)를 이용함으로서 하트 모양을 만들 수 있다. 각각의 가상 엘리먼트는 한쪽 부분만 라운드 처리가 되고 겹치게 배치가 되어서 전체적으로 하트 모양이 될 수 있다. 이것을 시각화하는 가장 좋은 방법은 다음의 live demo를 가지고 해보는 것이다. 당신이 두 가상 엘리먼트의 위치를 바꾸면 하트 모양이 분리가 될 것이다. 뭔가를 배울 때 가장 좋은 방법은 그걸 파괴해보는 것이다.</p>
+    <p>많은 복잡한 형태들을 CSS 속성과 다른 것들의 조합으로 만들 수 있다. CSS-Tricks에는 CSS만을 사용하여 만든 모양들의 모음집이 있다.
+        <a href="https://css-tricks.com/examples/ShapesOfCSS/">https://css-tricks.com/examples/ShapesOfCSS/</a>
+        이 모양들을 보고 코드를 수정해보면서 어떻게 그들을 만드는지 학습해보아라. 이 섹션에서 내가 빛을 내뿜게 하고 싶은 예제는 5개의 꼭짓점을 가진 별모양이다. CSS를 이용하여 별모양을 만들기 위해, CSS-Tricks에 있는 다음 코드가 필요하다.</p>
+    <p>간단한 모양을 만들기에 꽤 많은 코드가 필요하다. 그렇지 않은가? border 속성과 가상 엘리먼트와 많은 absolute positioning 뿐만 아니라 완벽한 모양을 위해서 CSS Transform도 필요하다.</p>
+    <p>이 모양들이 창의적인만큼, (애초에 사용하라고 의도된 것이 아니기에 특히) 이 모양들은 실용적이지도, 융통성있지도 않다. 그것들은 “진짜” 형태들이 아니라서, 의미(semantics)가 부재하며, 따라서 스크린 리더기를 사용하는 독자들에게는 전달이 되지 않는다. 예를 들어, 위에서 만들었던 하트 모양은 스크린 리더를 사용하는 사람에게는 하트 모양으로 인식되지 않는다. 하트 모양을 만들기 위해 사용된 <code>div</code>는 이 모양에 대해 아무 것도 말해주지 않는다. </p>
+    <p>만약 당신이 말풍선 꼭지로 쓰일 간단한 삼각형 모양을 원한다면 CSS triangle을 사용하는 것이 많은 경우에 합당할 것이다. 하지만 만약 복잡한 모양을 만들거나 그 모양을 유연하거나 접근성있게 만들고 싶다면 CSS는 분명, 최적의 툴이 아니다. CSS 트릭을 써서 만들어진 모든 형태들은 실용적인 쓰임이 한정 되어있는 한낱 빈 요소들(empty elements)일 뿐이고, 형태를 규정짓는 것이 아니라 단지 그 형태처럼 보이게 할 뿐이다.</p>
+    <p>따라서, 나는 CSS를 사용하여 만들 수 있는 좀더 실용적인 형태에 빛을 줘보겠다. 특히, SVG를 사용하는 방법을 배우기 전에, 각각 두 다른 CSS 접근법을 이용하여 어떻게 원형 메뉴를 만들 수 있는지 보자. 그러면 당신은 CSS를 사용하는 것과 SVG를 사용하는 것에 대한 장단점을 논할 수 있을 것이다.</p>
+    <hr>
+    <p>CSS로 원형 메뉴 만들기 - 방법1) Clip-path 사용하기 (Building Circular Menus with CSS #1: Using clip-path)</p>
+    <p><a href="https://css-tricks.com/building-a-circular-navigation-with-css-clip-paths/">https://css-tricks.com/building-a-circular-navigation-with-css-clip-paths/</a></p>
+    <p>CSS에서, 엘리먼트는 <code>clip-path</code> 속성을 사용하여 오려지거나 클리핑 될 수 있다. 클리핑이란 엘리먼트의 전체 혹은 특정 부분을 숨길 수 있게 하는 그래픽 기술이다. 어떤 container나 그래픽적 요소들도 클리핑될 수 있다. 엘리먼트에서 보여지거나 숨겨질 부분은 클리핑 패쓰(clipping path)에 의해 정해진다. (클리핑이 동작하는 방식에 대해 더 자세히 알고싶으면 <a href="https://sarasoueidan.com/blog/css-svg-clipping/">https://sarasoueidan.com/blog/css-svg-clipping/</a> 이 링크로)</p>
+    <p><code>clip-path</code> 속성은 <code>clip</code> 속성에서 새로 개선된 부분이고, <code>clip</code> 속성을 대체한다. <code>clip</code> 속성도 우리가 엘리먼트의 내용의 일부만 보여주게끔 할 수 있었지만, 오직 사각형태로만 클리핑할 수 있었다. 비록 중요도가 점점 떨어져 사라질지라도, 이 <code>clip</code> 속성은 IE6나 그 이전 버전도 포함한 모든 브라우저에서 여전히 작동한다. <code>clip</code>속성에 대해 흥미가 있다면 다음 링크(<a href="http://tympanus.net/codrops/2013/01/16/understanding-the-css-clip-property/)에서">http://tympanus.net/codrops/2013/01/16/understanding-the-css-clip-property/)에서</a> <code>clip</code> 속성의 모든 것을 배울 수 있다.</p>
+    <p><code>clip-path</code> 속성은 <code>shape functions</code>를 통해 정의된, 사각형이 아닌 형태로 클리핑하는 것을 가능하게 해준다. CSS에 정의되어 있는 기본 <code>shape function’은 다음 4가지가 있다 :</code>circle()<code>,</code>ellipse()<code>,</code>inset()<code>,</code>polygon()<code>. 각각의 모양은 점들의 집합을 이용하여 규정되고 엘리먼트에 적용된다. 다음은 이런 형태를 이용한 유효한</code>clip-path`의 예시들이다.</p>
+<pre><code>
+ clip-path: polygon(15px 99px, 30px 87px, 65px 99px, 85px 55px, 122px 57px, 184px 73px, 198px 105px, 199px 150px, 145px 159px, 155px 139px, 126px 120px, 112px 138px, 80px 128px, 39px 126px, 24px 104px);
+clip-path: circle(70% at 0% 50%) padding-box;
+clip-path: inset(10px 20px 30px 40px round 10px) margin-box;
+clip-path: ellipse(farthest-side closest-side at 25% 25%);
+</code></pre>
+
+    <p>이런 형태들은 우리가 원하는 형태로 HTML 요소들을 클리핑하는 데 사용될 수 있다. 이런 function들 중에 가장 흥미로운 것은 <code>polygon</code> 기능인데, 왜냐하면 우리에게 가장 많은 옵션을 주는 것이기 때문이다. 원, 타원, 사각형들이 단지 원래의 형태에서 벗어나지 못하는 것들과는 달리 폴리곤에는 굉장히 많은 형태들이 있다. <code>clip-path</code> 속성은 또한  엘리먼트를 클리핑하는데 사용되는 모양을 형태를 규정하기 위해 SVG 요소를 참조로 삼을 수 있는데, 이는 <code>polygon()</code>으로 허용된 모양의 한계를 벗어날 수 있게 해준다. 예를 들어, 호를 포함한 복잡한 형태는 CSS 기본 shape function에서는 불가능하지만, <code>clip-path</code> 내에서 참조된 SVG path로는 가능하다.</p>
+<pre><code>
+.element {
+    /* … */
+    clip-path: url(#svgClipPathID);
+}
+</code></pre>
+
+    <p>이 속성과 형태의 정확한 문법과 용법은 이 글의 범주를 벗어나지만, 당신은 더 깊이 흥미를 가져야하고, 이 링크(<a href="http://tympanus.net/codrops/css_reference/basic-shape/)(https://sarasoueidan.com/blog/css-svg-clipping/)에서">http://tympanus.net/codrops/css_reference/basic-shape/)(https://sarasoueidan.com/blog/css-svg-clipping/)에서</a> 학습할 수 있다.</p>
+    <p>다음의 라이브 데모에서 두 엘리먼트는 CSS <code>polygon()</code> 기능과 CSS clip path reference로 클리핑되었다.</p>
+    <p><code>clip-path</code>를 통해 엘리먼트의 모양을 바꾸는 것은 사실 엘리먼트를 보는 뷰포트(엘리먼트의 어느 부분이 보이거나 랜더링될 지 규정하는 공간)의 모양을 바꾸는 것이다. 엘리먼트 그 자체는 사실상 사각형이다. 뷰포트를 통해 보이는 부분의 양만 바뀌는 것이지, 페이지 내에서 그 엘리먼트의 위치는 기본적인 사각형태로 다뤄지고 영향을 받는다.</p>
+    <p>그것을 염두에 두고, <code>clip-path</code>는 사각형태가 아닌 모양을 만드는 데 사용되며, 원형 메뉴는 그 좋은 예가 된다. 사실, <code>clip-path</code>를 이용해서 원형 메뉴를 만드는 것은 아래와 같이 간단한 것이다.</p>
+    <ol>
+        <li>모든 사각형 리스트 항목을 쌓는다.</li>
+        <li>항목들을 부채꼴 모양으로 클리핑한다. 부채꼴의 중심각은 몇개의 항목을 메뉴에 넣는가에 따라 달라진다. 예를 들어, 6개의 항목으로 구성된 원형 메뉴의 각각의 각도는 60도가 된다.</li>
+        <li>필요에 따라 항목을 회전시켜 완전한 원형을 이루게끔한다.</li>
+    </ol>
+    <p>다음 이미지는 과정을 보여준다. 엘리먼트들이 처음에 모두 같은 위치에서 어떻게 서로의 위에 위치하고 클리핑되고 필요에 따라 회전되는 지 볼 수 있다.</p>
+    <p><a href="https://css-tricks.com/building-a-circular-navigation-with-css-clip-paths/">https://css-tricks.com/building-a-circular-navigation-with-css-clip-paths/</a></p>
+    <hr>
+    <p>CSS로 원형 메뉴 만들기 - 방법2) CSS Transform 사용하기 (Building Circular Menus with CSS #2: Using CSS Transforms)</p>
+    <p><a href="http://tympanus.net/codrops/2013/08/09/building-a-circular-navigation-with-css-transforms/">전체 방법 튜토리얼</a></p>
+    <p>CSS Transform 기능을 사용하여 원형 메뉴를 만드는 또 다른 방법이 있다. 이 기술은 좀더 서투르고 더 복잡한 방법이지만 어떻게 동작하는지 봄으로써, 당신이 형태를 만들 때 어떤 기술을 써야하고 어떤 것을 사용하지 말아햐나는 지 당신이 할 수 있는 가능성들에 대해 좀더 잘 알고 결정하게끔 더 명확한 생각을 갖게 해줄 것이다.</p>
+    <p>CSS 기본 shape 기능들과 clip-path가 도입되기 전에, 사각형을 구부리는 단 하나의 방법은 <a href="http://tympanus.net/codrops/css_reference/transform/#section_skew">skew transformation</a>을 사용하는 것이었다.</p>
+    <p>요소를 Skewing 함으로써, 사각형을 평행사변형으로 만들 수 있었다. 이것은 당신이 왜곡하기를 원하는 각각 항목을 원하는 각으로 만들어주는 첫 단계를 확립하였다.</p>
+    <p>다시, 당신은 각 메뉴에 들어가길 원하는 항목의 갯수에 근거하여 각도를 계산한다. 처음에는 각각 엘리먼트가 다른 것들의 위에 절대좌표로 위치하게끔 한다. 그런 다음, 기초 수학을 이용하여 <code>transform: skew()</code>를 통해 항목들이 얼마나 왜곡될 지 각도를 계산한다.</p>
+    <p>다음으로, clipping technique를 사용했던 위의 방법1에서 했던 것처럼 항목들이 더이상 겹쳐지지 않고 전체가 하나의 원을 형성하게끔 항목들을 하나씩 회전시킨다.</p>
+    <p>그러나 이 시점에서 각각의 엘리먼트는 여전히 평행사변형이다. 따라서, 평행사변형을 반으로 자르고 각과 맞은편에 있는 곳을 호 모양으로 만들기 위해서 항목들은 콘테이너로 둘러싸여야 하고, 콘테이너는 <code>border-radius</code> 속성을 이용하여 둥글려져야 한다. 그리고 이 콘테이너는 각 항목을 클리핑하는 데 쓰인다.</p>
+    <p>CSS의 <code>skew transform</code>과 부채꼴의 모양을 눈속임하기 위해 <code>overflow</code> 속성을 이용하여 원형 메뉴를 만드는 이 과정은 결코 직관적이지 않다.</p>
+    <p>하나 중요한 경고는, 네비 메뉴의 항목들이 왜곡될 때, 안에 있는 콘텐츠도 마찬가지라는 것이다. 따라서 안에 있는 콘텐츠가 읽을 수 없게 왜곡된다. 이를 바로잡기 위해, 당신은 그들에게 적용시켰던 skew 변형의 반대로 다시 anchor를  “unskew” 해야한다. 따라서 이 방법이 매우 직관적이지 않음을 알 수 있다.</p>
+    <p>항목의 내부에 콘텐츠를 추가하는 것 또한 간단한 게 아니며, 아이콘같은 이미지를 넣거나 하는 것도 거의 불가능하다.  이 콘텐츠에 가장 잘 작동하는 예는 아이콘이다.</p>
+    <p>이 방법은 너무나도 복잡하고, 각 아이템의 각도나 위치를 바꾸는데 너무 많은 계산이 필요함은 말할 것도 없다. 만약 당신이 Sass를 사용한다면, <code>loop</code>나 몇몇 변수(variables)를 지정함으로써 수학 계산을 더 간단하게 할 수 있겠지만, 그래도 CSS를 사용하여 원형 메뉴를 만드는 것은 여전히 너무 많은 문제를 야기한다. 그렇지 않은가?</p>
+    <p>만약 당신이 원형 메뉴를 만드는 데 CSS를 사용할 것이라면, <code>clip-path</code> 기능을 사용하거나 SVG를 사용하는 것을 강력히 권고한다.</p>
+    <p>다음으로, SVG를 이용하여 원형 메뉴를 만드는 방법을 살펴보겠다. 그러나 먼저 CSS를 사용하여 기본적인 형태를 만드는 것과 비교하여 SVG를 이용하여 형태를 만드는 방법을 전반적으로 살펴보겠다.</p>
+    <hr>
+    <h2 id="svg-shapes-in-svg-">SVG 형태 (Shapes in SVG)</h2>
+    <p>SVG는 XML이다. SVG 내의 요소들은 HTML 요소와 비슷하게 마크업되지만 SVG는 모양과 이미지를 만드는 데 중점을 두고 있기 때문에 훨씬 유연하고 파워풀하다. 의미(semantic) 또한 갖추고 있어서 원하는 거의 모든 형태를 만들면서도 접근성도 갖출 수 있다.</p>
+    <h3 id="-geometric-shapes">기하학적 형태들 Geometric Shapes</h3>
+    <p>SVG에는  <code>&lt;line&gt;</code>, <code>&lt;polyline&gt;</code>,’<rect>’,’<circle>’,’<ellipse>’,’<polygon>’의  여섯 가지 기본 엘리먼트가 있다. 이들은 요소 스스로 설명이 되게끔 편리하게 이름이 붙여져 있다. </p>
+    <p>이 형태들 중 <code>&lt;polyline&gt;</code>,<code>&lt;polygon&gt;</code> 과 같은 것들은 점들의 집합으로 정의되어 있고, <code>&lt;rectangle&gt;</code>같은 몇몇은 <code>width</code>와 <code>height</code>로 정의되어 있고, <code>&lt;circle&gt;</code>이나 <code>&lt;ellipse&gt;</code>는 위치값과 반지름 값을 필요로 한다.</p>
+    <p><code>&lt;path&gt;</code>라는 요소도 있는데, CSS로는 할 수 없는 자유로운 드로잉을 제공함으로서 임의의 모양을 그릴 수 있게 해준다.</p>
+    <p>SVG를 이용하여 이런 모양을 만드는 것은 간단하고, 단지 모양들을 그리기(문자 그대로 Adobe Illustrator로 그리고 SVG 형태로 export하면)만 하면 된다는 게 가장 좋은 점이다.</p>
+    <p>여기, 내가 빛을 부여하고 싶은 <code>&lt;polygon&gt;</code> 속성을 이용하여 만들어진 별 모양이 있다. CSS를 사용해서 모양을 만드는 게 얼마나 복잡했는지 기억이 나는가? SVG를 사용하면 단지 다음의 간단한 코드만이 필요하다.</p>
+    <p><pre><code>
+&lt;polygon fill=&quot;#fff&quot; stroke=&quot;#FD4C70&quot; stroke-width=&quot;10&quot; points=&quot;350,75 379,161 469,161 397,215 423,301 350,250 277,301 303,215 231,161 321,161&quot; /&gt;
+</code><pre></p>
+    <p>이제, 어느 방법이 더 나은 것 같은가? 우리 모두 아마 하나의 방법을 생각하지 않을까? SVG Shape는 CSS Shape 보다 간단할 뿐만 아니라 또 다른 장점들도 가지고 있다.</p>
+    <ul>
+        <li>SVG 형태는 실제 콘텐츠이다. (아무 내용도 없는 div와는 달리 화면상에 ‘실제로’ 그려지는 것이다.)</li>
+        <li>SVG 형태는 접근성이 좋다. (스크린 리더기를 사용하는 사람들에게도.)</li>
+        <li>SVG 형태와 속성에는 의미가 부여되어있다(semantic하다).</li>
+        <li>SVG 형태는 CSS 형태와는 달리, 그래픽 에디터를 사용하여 수정이 가능하다.</li>
+        <li>SVG 형태는 <code>stroke</code>,<code>fill</code>,<code>stroke-width</code> 등 세세하게 결과를 다듬을 수 있는 훌륭한 속성들을 가지고 있다.</li>
+    </ul>
+    <p>따라서 만약 당신이 당신 웹페이지에 사용할 기하학 도형을 만든다면, SVG를 사용해야 한다. SVG <code>&lt;path&gt;</code>가 어떻게 보일지 보고 넘어가자. <a href="http://codepen.io/SaraSoueidan/pen/c1406838d1ddcb7e6d61900a42404157/">링크</a> 회색으로 된 선은 <code>&lt;polyline&gt;</code>으로 만들어진 <code>polyline</code>이다.</p>
+    <p>SVG path는 당신이 원하는 어떤 모양이라도 그릴 수 있게 해주는 명령어들로 구성되어있다. 명령어들에는 상대적 혹은 절대적 좌표로 Arc나 Line을 그리는 명령, 드로잉의 시작점을 옮기는 명령, 그리고 path의 마지막 점을 시작점과 연결해주는 명령, 이차방정식 곡선을 만드는 명령어 등이 있다.</p>
+    <p>이러한 명령어들은 SVG path의 <em><code>d</code></em>라는 속성(the <em>data</em> defining the path)으로 표현된다. 이 <code>d</code>안에 <code>M</code>,<code>I</code>,<code>L</code>,<code>A</code>,<code>z</code> 등의 명령어들이 있다. 당신은 <a href="https://www.w3.org/TR/SVG/paths.html#PathDataGeneralInformation">SVG specification</a>에서 모든 선들의 리스트와 설명을 볼 수 있다.</p>
+    <p>이 형태들 중 어떤 것이든간에 UI 컴포넌트로 쓰일 수 있다. 예를 들면, 형태들은 <code>&lt;a&gt;</code>태그로 감싸는 것으로 엘리먼트나 형태를 링크로서 기능하게 할 수 있다.</p>
+    <p>SVG path의 라인이나 호 명령어를 사용함으로서, 우리는 조금의 수학계산만으로도 원형 메뉴를 만들어낼 수 있다.</p>
+    <h3 id="svg-building-circular-menus-with-svg-">SVG로 원형 메뉴 만들기 (Building Circular Menus with SVG)</h3>
+    <p>SVG로 원형 메뉴를 만들기 위해서 우리는 <code>SVG &lt;path&gt;</code>를 이용한 부채꼴(sector shape)가 필요하다. 당신은 또한 모든 드로잉을 그래픽 에디터로 그릴 수 있고 SVG로 export하여 사용하거나 <code>path</code> 명령어와 조금의 수학 계산을 이용하여 직접 코딩을 할 수도 있다.</p>
+    <p>부채꼴을 그리기 위해 다음의 것들이 필요하다.</p>
+    <ol>
+        <li>드로잉을 시작할 지점으로 커서를 옮긴다.</li>
+        <li>한 점에서 다른 점으로 옮김으로써 선을 그린다.</li>
+        <li>길이가 부채꼴의 중심각(메뉴의 항목 개수에 의해 결정됨)을 바탕으로 정해진 호를 그린다.</li>
+        <li>시작점과 반대에 있는 선을 그림으로써 부채꼴을 마무리 짓는다.</li>
+    </ol>
+    <p>부채꼴을 만드는 데는 path 명령어와 함께 사용될 세 점이 필요하다. 세 점의 위치를 정하기 위해, 우리는 해당 항목이 원형 메뉴에서 어디에 위치할 것인지를 알아야한다. (CSS clip path 기술과 비슷함).  </p>
+    <p>각각의 항목이 어떻게 행동하며, 메뉴에서 어디에 놓일 것인지 앎으로서, 우리는 부채꼴을 그릴 세 점의 위치를 정할 수 있다.</p>
+    <p>첫 점은 메뉴의 중심에 위치한다. 메뉴의 가로세로 너비에 따라 이 점의 좌표를 산출하는 것은 매우 쉬운 일이다. 가로 세로 각각 반의 위치에 중심이 있기 때문이다.</p>
+    <p>두번째 점은, 메뉴의 가장자리에 위치한다. y점은 높이의 반 지점에 위치할 것이고 x는 x축을 따라 맨 모서리쪽에 위치할 것이다.</p>
+    <p>세번째 점은, 정하기 좀 더 어려운데, 기초 수학을 필요로 한다. 항목의 갯수를 알면 부채꼴의 중심 각도를 구할 수 있고, 이 각도는 세번째 점의 x,y 좌표를 구하는 데 쓰인다.</p>
+    <p>세번째 좌표를 구하는 공식은 이 글의 범위를 벗어난다. 하지만 이전 글에서 자세히 다뤘으니 더 알고자 한다면 읽어보길 바란다.</p>
+    <ol>
+        <li>CSS clip path 기술은 SVG 기술과 같은 계산을 필요로 한다. </li>
+        <li>엘리먼트 전체를 1로 했을 때의 점의 상대 좌표를 구할 수 있어야 한다.</li>
+        <li>원형 메뉴를 만들기 위해서 약간의 수학계산은 늘 필요하고, 두 방법 모두 장단점이 비슷하게 있다.</li>
+        <li>SVG는 SVG를 지원하는 모든 브라우저에서 되고, clip-path는 지원하지 않을 수 있다 (??) (    1.    The SVG menu currently works in all browsers that support SVG, while support for theclip-path property isn’t the best at this time.
+            )</li>
+    </ol>
+    <p>원형 메뉴를 만드는데 약간의 계산이 해야하기 때문에, 자동으로 계산을 해주는 코드를 만들었다. <a href="https://sarasoueidan.com/tools/circulus/">이곳</a>에서 확인하라.</p>
+    <h2 id="-">요약</h2>
+    <p><code>clip-path</code>라는 기능이 도입되기 전에는 CSS로 사각형이 아닌 UI 컴포넌트를 만드는 게 불가능했으나, <code>clip-path</code>로 인해 쉬워졌다.</p>
+    <p>내가 위에서 원형 메뉴를 만들기 위해 언급했던 CSS transform 기술은 최적화된 것이 절대 아니라서 오늘날에는 사용하지 않기를 강력히 권고하는 바다. CSS transform을 <code>clip-path</code> 기술과 비교하는 것이 당신이 왜 CSS transform이 최적이 아니며 오늘날 CSS와 SVG 중에 무엇이 더 나은 선택인지 결정하는 데 생각을 명확하게 해준다면 좋겠다.</p>
+    <p>우리는 원형 메뉴에만 포커스를 했지만, 모양을 제작하고, UI에서 그 형태들을 사용하는 메인컨셉에는 더 임의로 만든 모양의 컴포넌트가 많을 것이다.</p>
+    <p>SVG는 사각형이 아닌 형태를 만들기 위해 만들어졌고, 이러한 모양들은 하나의 아티클뿐 아닌 다양한 방법으로 오늘날 우리 디자인에 쉽게 통합될 수 있다.</p>
+    <p>사실은, 다음 글은 이 CSS vs SVG 시리즈의 마지막 글이 될텐데, 오늘날 디자인에서 SVG를 통합하는 것에 대해 생각할 수 있는 지평을 넓혀줌으로써, SVG 형태가 우리의 일반적인 UI 컴포넌트들을 다양한 방법으로 향상시켜줄 수 있을지를 보여주겠다.</p>
+    <hr>
+    <p>이제 뭘하면 되냐면
+        SVG, css clipping path를 콘트롤 하는 방법을 손에 익게 만들기, 그걸 통해서 변수에 따라 변화가 명확하게 나타나는 body 형태 새로 만들기</p>
+    <p>그리고 svg와 css 사이에서의 선택 사항을 계속 손에 익혀나가는 것</p>
+    <p>css 애니메이션 번역 겸 공부하는 것</p>
