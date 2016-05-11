@@ -10,6 +10,7 @@
 <p>데이터를 살펴보니 왼쪽으로 치우치고 굉장히 뾰족한 분포를 그리고 있었다. 그리고 최대값은 중앙값과 굉장히 떨어져있어서, 이 데이터를 가지고 추가적인 처리 없이 body-shape에 반영하면 다양한 형태가 나오지 않는 것은 당연했다. 또한 body-shape에 반영할 두 개의 변수가 다르더라도 최종 아웃풋 형태는 비슷한 형태가 되는 경우도 적지 않았다. </p>
 <p>형태상의 문제를 보자면 ver.1으로 제작되었던 형태는 데이터의 분포 형태를 살피지 않고 만들었던 body-type이었고, Mike Bostock의 예제에 종속적인 형태들이라서 변수(데이터)에 따라 변화하는 모양을 스스로도 콘트롤하기 어렵다는 문제가 있었다. 따라서 Mike Bostock의 예제에 의존적이지 않으면서 변화가 확실히 보이는 형태를 만들기 위해 자체적으로 <code>path</code>나 <code>polygon</code>을 조합하고 다양한 효과를 이용하여 형태를 다시 만드는 것을 연구하게 되었다.</p>
 
+<hr>
 
 <h2>SVG 속성을 이용하여 형태 만들기</h2>
 <p>애용하는 사이트 <a href="geometrydaily.tumblr.com">Geometry daily</a>를 참고하고, 여러 효과를 이용하여 새로운 형태를 코드로 스케치 하였다. 탬이 Mike bostock의 여러 svg 형태를 보여주면서 꼭 하나의 path가 아니라 여러 polygon의 조합이어도 된다는 말을 해주어 도움이 되었다.</p>
@@ -34,11 +35,13 @@
 </figure>
 
 
-
+<hr>
 
 <h2>미니언즈 만들기</h2>
-<p>이 부분은 탬이 써주세요</p>
+<p>이 부분은 탬이 써주세요/ 그리고 데이터 바인딩해서 봤던 페이지 캡쳐 있으면 올리면 좋겠슴다</p>
 
+
+<hr>
 
 <h2 id="svg-path-control-">SVG path control : 땅콩 모양 디자인</h2>
 <p>ver.1으로 제작되었던 형태는 데이터의 분포 형태를 살피지 않고 만들었던 body-type이었고, mike bostock의 예제에 종속적인 형태들이라서 변수(데이터)에 따라 변화하는 모양을 스스로도 콘트롤하기 어렵다는 문제가 제기되었다. 따라서 Mike bostock의 예제에 의존적이지 않으면서 변화가 확실히 보이는 형태를 만들기 위해 첫 시도로서 땅콩 모양을 함께 제작해보는 시간을 가졌다.</p>
@@ -74,9 +77,15 @@
 </figure>
 <p>좌표 값들을 넣어서 보니 형태에 이상은 없었지만 형태가 상하좌우 대칭이라 재미가 없어보여서 변수를 지정하여 비대칭 형태를 만들자고 이야기 하였다.</p>
 
+<hr>
 
 <h2 id="gooey-effect-css-tricks-">Gooey effect : CSS-TRICKS를 이용한 유연한 형태 만들기</h2>
-<p>비대칭 형태를 만들려고 보니 기울기 값 등을 임의로 지정해야했는데 언젠가 사용할 일이 있지 않을까 싶어서 눈여겨 봐두었던 Gooey effect (<a href="http://codepen.io/lbebber/pen/OPjxZL?editors=1100">codepen 예제</a>, <a href="https://css-tricks.com/gooey-effect/">설명1</a>, <a href="https://css-tricks.com/shape-blobbing-css/">설명2</a>)를 사용해보면 어떨까 생각이 들었다. 블러와 콘트라스트를 이용한 것이라는 정도만 읽고 자세히 읽진 않았지만 이를 탬에게 공유하자 탬이 이에 대한 연구, 적용 가능성 폭풍 탐구를 진행하였다.</p>
-<img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation3/ted_formcreation3_3.png" alt="peanut_form_creation3"/>
+<p>비대칭 형태를 만들려고 보니 기울기 값 등을 임의로 지정해야했는데 그런 공식을 만들기 전에, 언젠가 사용할 일이 있지 않을까 싶어서 눈여겨 봐두었던 Gooey effect (<a href="http://codepen.io/lbebber/pen/OPjxZL?editors=1100">codepen 예제</a>, <a href="https://css-tricks.com/gooey-effect/">설명1</a>, <a href="https://css-tricks.com/shape-blobbing-css/">설명2</a>)를 사용해보면 어떨까 생각이 들었다. 블러와 콘트라스트를 이용한 것이라는 정도만 읽고 자세히 읽진 않았지만 이를 탬에게 공유하자 탬이 이에 대한 연구, 적용 가능성 폭풍 탐구를 진행하였다.</p>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation3/ted_formcreation3_3.png" alt="peanut_form_creation3"/>
+    <figcaption>탬이 연구한 다양한 상황에서의 조랭이 떡</figcaption>
+</figure>
+
 <p>1차적으로 <a href="http://yumm.co.kr/blogs/asset/img/blurContrast.html">조랭이 떡 모양을 연구</a>했다. Gooey effect는 Contrast, Blur, Brightness를 이용해서 실제로 부드럽게 연결된 형태가 아닌 엘리먼트를 해당 형태처럼 보이게끔 해주는 것이다. 5개 정도의 변수가 있는데 변수가 바뀜에 따라 형태가 안정적이진 않기 때문에 어떻게 활용해야 안정적으로 사용할 수 있을 지는 고민이 필요하지만 자체로도 너무 재밌는, 호기심을 불러일으키는 형태이기 때문에 꼭 이번 프로젝트에 사용하지 않더라도 앞으로 충분히 사용할 일이 있을 것이다.</p>
 <p>이 트릭의 장점을 이번 프로젝트에 충분히 활용하는 방법으로 크기나 형태가 다른 <code>polygon</code>을 합치기 등 연구가 추가적으로 진행될 예정이다. </p>
