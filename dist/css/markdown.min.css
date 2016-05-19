@@ -71,9 +71,10 @@ ol{ padding:  0.5em 1.5em 0.5em 2em; }
 ul li, ol li { margin : 0.5em 0; }
 li > ol, li> ul{ margin-top: -0.5em; }
 
+
 a:link, a:visited{text-decoration: none; color: hsl(158,100%,27%); }
 a:hover, a:focus, a:active{ color: #000; }
-
+/*li a:link, li a:visited, li a:hover, li a:focus, li a:active { font-color: black; text-decoration: underline; text-decoration-style:dotted; color: #000; }*/
 
 h1,h2,h3,h4,h5,h6{ font-family: 'Noto Sans KR', sans-serif; }
 h1{ font-size: 3em; font-family:  'Noto Sans KR', serif; font-weight: 300; letter-spacing: 0em; line-height:1.2em; padding-bottom: 0.3em; border-bottom: 3px solid #444; margin: 2em 0 1em 0; }
