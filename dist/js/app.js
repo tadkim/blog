@@ -2,7 +2,19 @@
  * Created by admin on 2016. 4. 6..
  */
 
+
+
+
 $(function(){
+    var caption;
+    $('img').each(function () {
+        caption = $(this).attr('alt');
+        if (caption !== '')
+        // use .before to insert the caption before the image
+            $(this).after('<caption">' + caption + '</caption>');
+    });
+
+
 
     $('.menu > ul > li').on("click", function(){
 
