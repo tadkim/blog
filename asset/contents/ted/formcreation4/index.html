@@ -8,4 +8,162 @@
 
 <h1>형태 제작 4</h1>
 
-<p>형태 제작 3에서 quadratic bezier를 이용하여 땅콩 형태를 만든 것을 데이터 바인딩하여 기본 몸체를 만들고 </p>
+<p>형태 제작 3에서 Quadratic bezier를 이용한 공식에 데이터 바인딩하여 기본 몸체를 만든 것에 추가적인 작업이 진행, 마무리되었다.</p>
+
+
+
+<hr>
+<h2>아웃풋 형태 샘플 제작</h2>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160515ted_formcreation_sample.png"/>
+    <figcaption>캐릭터 아웃풋 샘플</figcaption>
+</figure>
+
+
+<p>최종적으로 어떤 형태가 나오는 지 알면 자체적으로 코딩을 할 수 있을 것 같다는 탬의 말에 샘플을 제작하였다. 이를 바탕으로 탬이 이목구비를 달아 주었다.</p>
+
+
+
+
+
+
+<hr>
+<h2>다리 붙이기</h2>
+<p>다리는 이 시트를 가이드 삼아서 탬이 위치를 고안해서 코딩해주었다.</p>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160515ted_formcreation_legs.png"/>
+    <figcaption>다리 위치에 대한 러프한 가이드</figcaption>
+</figure>
+
+
+
+
+
+<hr>
+<h2>하나의 body shape 대상으로 두 개의 팔 고안, 적용해봄</h2>
+<p>몸의 모양이 모두 다르기 때문에 팔도 일괄적으로 고정된 형태를 사용할 수 없었다. 따라서 먼저 하나의 body shape에 적용해 볼 팔을 공식화 해보기로 했다. 코드가 복잡해지는 것을 방지하기 위해 이미 있는 좌표값을 사용하려고 노력하였다. 익숙해졌던 quadratic bezier를 사용하다가 공식이 복잡해져서 SVG Arc를 새로 공부하여 공식에 적용했다. </p>
+
+<h3>Arm Type 1 : 머리에 손 얹기</h3>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160520ted_outro_generate_arm1.png"/>
+    <figcaption>팔을 어느 점에 근접하게 위치시킬지 생각하기 위한 시트</figcaption>
+</figure>
+
+<p>머리에 손을 얹은 모양의 팔을 만들기 위해서는 2개의 path가 필요했다. 팔뚝 부분은 z축으로 몸통 뒤로 가게 하고 손 부분은 몸통의 앞으로 가도록 위치시키고 싶었기 때문이다. 그래서 임의의 기준으로 팔을 두 부분으로 나누었다. 손의 형태는 정원이 아니라 타원에 가깝고 자연스러운 형태로 하고 싶었는데, path 가이드 점을 보자면 평행사변형 모양이 되도록 위치시키려고 했다. 하지만 이 공식을 짜기 번거롭다고 생각이 들어 Arc로 제작하는 것으로 방향을 틀었고 Arc를 이용하여 제작을 했다.</p>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160520ted_outro_generate_arm2.png"/>
+    <figcaption>Quadratic bezier를 사용하려 했던 형태</figcaption>
+</figure>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160520ted_outro_generate_arm3.png"/>
+    <figcaption>Arc를 이용하여 만든 최종 형태<br />Arc의 가로 세로 반지름은 데이터를 바인딩 해본 후에 수정되었다.</figcaption>
+</figure>
+
+<p>Arc의 width와 height도 '이 정도면 되지 않을까?'하고 어림 잡아 정하였기 때문에 실제로 바인딩해본 후에 값을 수정하였다. 그리고 왼팔 공식을 제작한 후 오른팔으로 변경하는 데 있어서 x 좌표 값들을 -로 바꾸어주고 Arc의 속성들을 변경하였는데 Arc의 속성 중에 <code>sweep-flag</code>를 잘못 이해하고 있음을 알게 되었다.</p>
+
+
+<h3>Arm Type 2 : 두 손 머리 위로 만세!</h3>
+<p>두 번째 타입은 첫 번째 타입보다 훨씬 수월했고 간단한 형태이기 때문에 바인딩 결과물도 body shape에 상관 없이 크게 어색하지 않은 정도로 나왔다.</p>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160520ted_outro_generate_arm4.png"/>
+    <figcaption></figcaption>
+</figure>
+
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160520ted_outro_generate_arm5.png"/>
+    <figcaption>Arc의 가로 세로 반지름은 데이터를 바인딩 해본 후에 수정되었다.</figcaption>
+</figure>
+
+
+
+
+
+
+
+
+
+<hr>
+<h2>body shape별 팔 두 가지씩 고안</h2>
+<p>하나의 body shape를 두고 고안했던 두 가지 팔의 공식을 적용해본 후, 모든 body shape에 어색함 없이 적용될 하나의 팔 공식을 만드는 것은 불가능하다고 판단해서 body shape별로 각각 두 가지씩 팔을 만들어야겠다고 생각했다. 팔을 만들기 위한 시트를 출력하고 나니 꽤 긴 과정이 될 것 같았다. 뒤이은 회의에서 이 긴 과정은 불필요한 것으로 결론이 났고 중단하였다.</p>
+
+<p>모두 다른 모양이 아니고 하나의 공식을 만들고 그것을 조금만 변형하여 적용이 가능하게 body shape간의 공통점을 보려고 집중하였다.</p>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160520ted_outro_generate_arm6.png"/>
+    <figcaption>비슷한 팔이 공통적으로 적용 가능한 body shape가 무엇인지 보기 위한 시트</figcaption>
+</figure>
+
+
+<p>팔을 만드는 데 시간이 꽤 걸릴 것 같아서 그동안 탬에게 미간, 눈의 크기, 얼굴의 방향 등 디테일 수정을 해달라고 부탁하였다.</p>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160519ted_outro_detail.png"/>
+    <figcaption></figcaption>
+</figure>
+
+<p>눈이 middle에 위치한 경우 미간이 넓어질 때 눈이 몸의 범위를 넘어가는 경우가 생기곤 했는데, 눈 외부에 <code>stroke</code>를 주어서 눈꺼풀처럼 보이게 하는 것으로 보완하였다. <code>stroke</code>일 때 미간이 좁아졌을 때 왼쪽 오른쪽 눈이 서로를 침범하는 경우가 있었는데, <code>stroke</code> 역할을 하는 '겉원'을 만드는 것으로 해결할 수 있었다. (탬이 한 작업이라 자세한 것은 탬이 알고 있음) </p>
+
+
+
+
+
+<hr>
+<h2>프로젝트의 마무리를 위한 회의</h2>
+<p>총 6개의 body shape에 붙일 팔 형태와 공식을 구하려고 하는 도중에, 회의가 소집되었다. 결과물의 퀄리티나 심미성을 어느 선까지 추구할지에 대한 얘기부터 시작해서, 탬이 과제로 느끼는 개발쪽 아젠다 등을 얘기해보았다.</p>
+
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160519ted_outro_discussion.png"/>
+    <figcaption>TED 프로젝트에서 남은 일들과 얻어갈 것들을 함께 고민하는 회의</figcaption>
+</figure>
+
+<h3>프로젝트 마무리 시점 정하기</h3>
+<p>TED 프로젝트를 시작한 지 한달쯤이 되어가는 시점이었고, 현재 작업 진행 상황으로 봐서 디자인적으로 디테일을 신경쓰고 디벨롭 시키는 것 외에 기술적으로 탬이 더 공부하거나 얻어갈 의미가 없어지고 있었다. path, svg에 데이터를 바인딩해서 콘트롤 하는 것은 해보았으니, 디자인 디테일을 어디까지 챙겨갈 것인지 정해야 한다는 것을 탬이 잘 짚어주었다. 내 입장에서도 해보고 싶은 기술을 써보았기 때문에 더이상 형태적으로 디테일을 디벨롭시키는 것은 무의미하다고 생각이 들었다.</p>
+
+<p>사실 2000개가 넘는 캐릭터로 예쁜 '한 판'을 만들고 마무리하는 것이 처음의 목적이었으나, 2000개의 퀄리티를 모두 아름답게 콘트롤 하기엔 앞으로 더더욱 시간을 들여도 만족 못할 것이라는 생각이 들었다. 왜냐면 애초에 땅콩 모양의 shape로 한 것도 디자인적으로 가장 예쁜 형태가 땅콩 형태이기 때문이라는 판단 때문이기 보다는 이번 프로젝트를 통해서 마스터 하고 싶은 것이 '데이터 바인딩해서 path 다루기'였기 때문이다. 이런 이유로 아무리 마무리를 위해서 디자인적 variation을 해봤자 더 발전하는 부분은 없다고 판단해서 컬러 다양화만 진행하고 마무리하는 것으로 회의를 통해 합의되었다.</p>
+
+<h3>탬이 느끼는 개발쪽 이슈</h3>
+<p>그리고 이런 고민이 있던 와중에 탬은 데이터 시각화 자체의 질에 집중하는 부분 외에도 작업 효율화와 안정화를 위해 "해야하는 것"으로 부담을 느꼈던 개발쪽 아젠다들이 있었다. 탬은 우리가 '잘 만든 콘텐츠'라고 느끼는 것은  보여지는 콘텐츠가 아름답고 명확하기도 하지만 그 아래에 불편없이 잘 동작된다고 느끼게끔 열심히 발길질하는 거위의 발같은 부분도 신경썼기 때문이라고 생각했다고 한다. 그리고 이런 보여지는 부분/ 안보이는 부분을 모두 퀄리티 있게 다루기 위해서 분명 둘만으로 커버하기 힘든데, 해야하기 때문에 부담으로 느껴진다고 했다.</p>
+
+
+<h4>데이터 시각화 외에 작업의 효율, 안정화를 위해 해야하는 개발쪽 아젠다</h4>
+<ul>
+    <li>FRONT-END</li>
+    <li>협업 기술</li>
+    <li>Data-binding</li>
+    <li>서버 관리</li>
+    <li>node.js나 angular.js같은 프레임워크</li>
+    <li>Web application</li>
+    <li>Sorting</li>
+    <li>Ajax를 사용한 로딩 동기화</li>
+</ul>
+
+<p>둘이 모든 것을 커버하기는 불가능하고 코어 밸류 쌓기에도 힘들다고 얘기를 하였고, 프로젝트를 할 때 새로운 사람이 충원된다는 가정을 하고 지금은 당장은 찝찝하겠지만 우리를 위해 라이브러리 등 좀 더 수월한 방법을 사용하여 부담을 줄이자는 결론에 이르렀다.</p>
+
+
+
+
+<hr>
+<h2>컬러 다양화</h2>
+<h3>정해진 컬러 조합 부여 vs. 범위만 통제하여 HSL 스펙트럼 상의 랜덤 값을 부여</h3>
+<p>컬러를 정할 때 컬러를 선택하여 조합으로 부여하는 게 예쁜 색 조합을 유지하기에 용이한 방법이다. 하지만 워낙 캐릭터의 갯수가 많기 때문에 다양한 컬러를 보고 싶어서 보색 대비 등을 이용한다면 예쁜 랜덤 컬러 조합이 나오지 않을까 하는 기대가 있었다. HSL 색공간에서 임의의 Hue 값을 <code>a</code>라고 한다면 <code>360-a</code>로 보색을 추출할 수 있을 것이라고 생각했다. 따라서 <code>a</code> 색상을 body 색상으로, 그리고 <code>360-a</code> 값을 팔다리 색상으로 하면 어느 정도 예쁘게 나올 것 같았다.</p>
+
+<p>결과적으로 마음에 드는 색조합 범위를 찾는 데는 실패했지만, 아마 시간을 두고 다양한 범위로 실험을 해보면 의외의 소득이 있을 것 같다는 생각을 했다.</p>
+
+
+
+
+<hr>
+<h2>마무리</h2>
+<p>얼굴을 처음 샘플과 최대한 비슷하게 마무리하고 컬러 실험을 적용한 것을 캡쳐하는 것으로 프로젝트를 마무리 하였다. </p>
+
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation4/160515ted_formcreation_output.png"/>
+    <figcaption>마음에 드는 몇몇 형태의 SVG 코드를 코드펜에 복붙, 배치한 것 </figcaption>
+</figure>

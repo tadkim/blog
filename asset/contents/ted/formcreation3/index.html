@@ -89,3 +89,53 @@
 
 <p>1차적으로 <a href="http://yumm.co.kr/blogs/asset/img/blurContrast.html">조랭이 떡 모양을 연구</a>했다. Gooey effect는 Contrast, Blur, Brightness를 이용해서 실제로 부드럽게 연결된 형태가 아닌 엘리먼트를 해당 형태처럼 보이게끔 해주는 것이다. 5개 정도의 변수가 있는데 변수가 바뀜에 따라 형태가 안정적이진 않기 때문에 어떻게 활용해야 안정적으로 사용할 수 있을 지는 고민이 필요하지만 자체로도 너무 재밌는, 호기심을 불러일으키는 형태이기 때문에 꼭 이번 프로젝트에 사용하지 않더라도 앞으로 충분히 사용할 일이 있을 것이다.</p>
 <p>이 트릭의 장점을 이번 프로젝트에 충분히 활용하는 방법으로 크기나 형태가 다른 <code>polygon</code>을 합치기 등 연구가 추가적으로 진행될 예정이다. </p>
+
+
+
+
+<hr>
+<h2>공식화된 땅콩 형태 제작</h2>
+<p>비대칭을 포함한 다양한 땅콩 형태를 제작하기 위해 상반신의 길이 <code>h1</code>, 하반신의 길이 <code>h2</code>, 상반신의 너비 <code>w1</code>, 허리 너비 <code>w2</code>, 하반신의 너비 <code>w3</code>, 그리고 quadratic bezier의 점이 지나는 선분의 등분 비율인 <code>a:b</code> 를 정하면 형태가 도출되는 공식을 계산하였다.</p>
+
+<p>비율 <code>a:b</code>는 처음에 임의의 랜덤 값으로 지정하였으나 과정 상에서 깔끔하지 못한 부분이 많고 다양하게 도출되어도 형태에서 딱히 이점이 없어서 <code>a={1,2,3}</code>, <code>b={1,2,3}</code>으로 지정한 후 랜덤 지정으로 수정하였다.</p>
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation3/ted_formcreation3_13.png" />
+    <figcaption></figcaption>
+</figure>
+
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation3/ted_formcreation3_16.png" />
+    <figcaption></figcaption>
+</figure>
+
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation3/ted_formcreation3_11.png" />
+    <figcaption></figcaption>
+</figure>
+
+<p>아래에서 볼 수 있듯이 공식이 복잡하여서 입력하는 데 오류가 많이 날 것 같았다. 공식 상에서 자주 나오는 <code>(a+b)</code>, <code>(2a+b)</code>, <code>(w1-w3)</code>등의 식을 <code>t1</code>, <code>t2</code>, <code>t3</code>으로 한번 더 축약하였다.</p>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation3/ted_formcreation3_14.png" />
+    <figcaption></figcaption>
+</figure>
+
+<p>아래는 이를 이용하여 최초로 적용된 형태들이다. 데이터를 바인딩 하고 보니 공식에서 1개 점이 잘못 지정된 게 발견되어서 수정하였다.</p>
+
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation3/ted_formcreation3_18.png" />
+    <figcaption></figcaption>
+</figure>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation3/ted_formcreation3_19.png" />
+    <figcaption></figcaption>
+</figure>
+
+<figure>
+    <img src="http://yumm.co.kr/blogs/asset/img/ted/formcreation3/ted_formcreation3_21.png" />
+    <figcaption></figcaption>
+</figure>
