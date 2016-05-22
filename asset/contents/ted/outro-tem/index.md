@@ -146,7 +146,7 @@ bostock의 super formular type을 제시하고, 그안에서 어떠한 조건들
 SVG의 Path라는 요소의 특성을 고려하면 '일관적인모양으로 보이는 선'을 찾는 다는 것 자체가 굉장히 어렵다. 또한 "임의의", "전제"로 해야하고 등의 표현해서 내가 윰에게 전달한 가이드만으로는 작업을 진행하는데 많은 제약이 있겠다는 생각을 해본다.
 
 
-![  superfomulartype 기능을 TED 프로젝트에 응용 구현한 형태 ](http://yumm.co.kr/blog/asset/img/retrospect/retrospect_ted_04.png "superfomulartype 기능을 TED 프로젝트에 응용 구현한 형태")
+![  superfomulartype 기능을 TED 프로젝트에 응용 구현한 형태 ](http://yumm.co.kr/blogs/asset/img/retrospect/retrospect_ted_04.png "superfomulartype 기능을 TED 프로젝트에 응용 구현한 형태")
 각 shape는 TED연사의 직업을 기준으로 나뉘며, 각 직업안에서 변수를 적용하여 형태를 다양화하고자 했다.
 
 _ _ _
