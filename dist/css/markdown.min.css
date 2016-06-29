@@ -3,6 +3,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:600);
 
 /* CSS 리셋 - HTML5doctor */
 /* 
@@ -43,6 +44,7 @@ body{ background-color: #efefef; font-size: 16px; font-family:  'Nanum Myeongjo'
 .menu_bar > ul > li > ul > li{list-style-type: disc; margin: 0 0 0.8em -0.5em; line-height: 1.3em;}
 .menu_bar > ul > li > ul > li:hover{ color: #efefef;}
 .menu_bar > ul > li > ul {padding-left: 1.2em;}
+.menu_bar > ul > li > p {font-family: 'Open Sans', sans-serif; font-weight: 600; color: white; letter-spacing: 0em;}
 .menu_bar ol, .menu_bar ul{ padding-left: 0 ; margin-left: 1em; background-color: hsla(142, 28%, 50%, 1); }
 .content_area{  width: 710px; height: 100%; background-color: #fff; margin: 0 0 0 250px; padding-top:2em;}
 .content{ width: 560px; background-color:#fff; margin: 0 4.5em; }
