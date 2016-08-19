@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<h1 id="basictutorial:2.theheroeditor">[Angular2] Basic tutorial : 2. The Hero Editor</h1>
+
+<p>이 문서는 <a href="https://angular.io/docs/ts/latest/tutorial/toh-pt1.html">angular 공식페이지 튜토리얼</a>을 학습차원에서 정리한 글이다.</p>
+
+<hr />
+
+<h2 id="apptranspiling을유지하고실행하기">app transpiling을 유지하고 실행하기</h2>
+
+<p>TypeScript의 변화를 감지하여 작동하는 컴파일러, 그리고 서버를 동작시킨다.</p>
+
+<pre class="highlight"><code>
+npm start
+</code></pre>
+
+<p>이 명령은 __watch__모드에서 서버를 시작한다. 우리가 (이번 예제의 목표인) __Tour of Heros__를 만들 때 까지 이것은 작동하고 있을 것이다.</p>
+
+<hr />
+
+<h2 id="showourhero">Show our Hero</h2>
+
+<p><strong>우리는 Hero의 데이터를 우리의 애플리케이션에서 표시하고 싶다.</strong></p>
+
+<p>우리의 <code>AppComponent</code>에 두 가지 속성을 추가한다. 하나는 <code>title</code>속성이고, 하나는 <code>hero</code>속성이다.</p>
+
+<p><strong>app.component.ts (AppComponent class)</strong></p>
+
+<pre class="highlight"><code class="ts">
+export class AppComponent{
+    title = 'Tour of Heroes';
+    hero = 'Windstorm';
+}
+</code></pre>
+
+<p>우리는 이제 템플린을 업데이트한다. 이러한 새로운 속성에 데이터 바인딩 한으로 decoration 된 <code>@Component</code></p>
+
+<pre class="highlight"><code class="ts">
+template : '&lt;h1&gt;{{title}}&lt;/h1&gt;&lt;h2&gt; {{hero}} details!&lt;/h2&gt;'
+</code></pre>
+
+<p>이제 브라우저는 새로고침하여 title과 hero에 대한 정보를 표시한다.</p>
+
+<figure>
+<img src="http://yumm.co.kr/blogs/asset/img/angualr2/ng2_tutorial2.png" alt="angular2 tutorial2" title="angular2 tutorial2" />
+<figcaption>angular2 tutorial2</figcaption>
+</figure>
+
+<p>이미 코드를 수정하고 확인해보면 수정한 내용으로 화면이 변경되어있음을 알 수 있다.</p>
+
+<h3 id="이중중괄호doublecurlybraces">이중 중괄호(Double Curly Braces)</h3>
+
+<p>이중 중괄호는 우리 app이 컴포넌트로부터 <code>title</code>과 <code>hero</code>의 속성에 대해 알 수 있도록 하며, 그것을 렌더링 할 수 있도록 해준다. 이것은 &#8220;보간(interpolation)&#8221;형태의 단방향 데이터 바인딩이다.</p>
+
+<hr />
+
+<h2 id="heroobject">Hero object</h2>
+
+<p>지금 우리의 hero는 단지 &#8217;name&#8217;에 불과하다. 우리의 hero는 더 많은 속성들을 필요로 한다. 그러면 <code>hero</code>를 __리터럴 문자열__에서 하나의 __class__로 변환하자.</p>
+
+<p><code>Hero</code> 클래스를 <code>id</code>와 <code>name</code>이라는 속성(properties)들과 함께 생성한다. 지금 <code>app.component.ts</code>의 상단에 이것을 넣자. 이것은 <code>import</code>구문 아래이다.</p>
+
+<p><strong>app.component.ts(Hero class)</strong></p>
+
+<pre class="highlight"><code class="ts">
+export class Hero{
+    id:number;
+    name:string;
+}
+</code></pre>
+
+<p>이제 우리는 <code>Hero</code>클래스를 가지게 되었다. 이어서 우리의 컴포넌트의 <code>hero</code> 속성(properties)들을 적합한 <code>Hero</code>의 타입을 찾기위해 리팩터링한다. 그런 다음에 <code>id</code>는 __1__로, <code>name</code>은 __&#8217;windstorm&#8217;으로 초기화한다.</p>
+
+<p><strong>app.component.ts(hero property)</strong></p>
+
+<pre class="highlight"><code class="ts">
+hero: Hero ={
+    id: 1,
+    name:'Windstorm'
+}
+</code></pre>
+
+<blockquote>
+<p>Because we changed the hero from a string to an object, we update the binding in the template to refer to the hero’s <code>name</code> property.</p>
+</blockquote>
+
+<p>왜냐하면 우리는 __hero__를 문자열에서 하나의 객체로 변경하기 때문이다. 우리는 __hero__의 <code>name</code>속성을 템플릿 안에 바인딩하는 업데이트를 한다.</p>
+
+<pre class="highlight"><code class="ts">
+template:'&lt;h1&gt;{{title}}&lt;h1&gt; &lt;h2&gt;{{hero.name}} details! &lt;h2&gt;'
+</code></pre>
+
+<p>이 결과로, 브라우저가 새로고침되면서 hero의 name을 표시하게 된다.</p>
+
+<h2 id="addingmorehtml">Adding more HTML</h2>
+
+<p>__name__을 표시하는 것은 좋지만, 우리는 __hero__의 모든 속성을 보고 싶다. 따라서, 우리는 __hero__의 <code>id</code>속성을 위해 <code>&lt;div&gt;</code>를 추가한다. 그리고 또 다른 <code>&lt;div&gt;</code>는 __hero__의 <code>name</code>속성을 위해 추가한다.</p>
+
+<p><strong>app.component.ts(hero property)</strong></p>
+
+<pre class="highlight"><code class="ts">
+template:'&lt;h1&gt;{{title}}&lt;/h1&gt; &lt;h2&gt;{{hero.name}} details! &lt;/h2&gt; &lt;div&gt; &lt;label&gt; id: &lt;/label&gt; {{hero:id}} &lt;/div&gt; &lt;div&gt; &lt;label&gt; name: &lt;/label&gt; {{hero:name}} &lt;/div&gt;'
+</code></pre>
+
+<p>점점 우리의 template가 길어지고 있다. 오타가 나지 않도록 주의하자.</p>
+
+<hr />
+
+<h2 id="multi-linetemplatestrings">Multi-line template strings</h2>
+
+<p>우리의 아름다운 삶을 유지하기 위해, 우리는 __ES2015__의 기능과 __TypeScript__사용에 대해 적극 고민해봐야한다.</p>
+
+<p>그 방법으로서, 우리는 위에서 넣었던 따옴표(&#8217;)를 키보드의 숫자 1키 옆에 있는 역 따옴표(<code>)로 변경하고, 각각의</code><h1><code>,</code><h2><code>,</code><div>`등을 하나의 줄에 위치시킨다. 아래 코드를 보는 것이 이해가 더 빠를 것이다.</p>
+
+<p><strong>app.component.ts(AppComponent&#8217;s template)</strong></p>
+
+<pre class="highlight"><code class="ts">
+@Component({
+  selector: 'my-app',
+  template: `
+    &lt;h1&gt;{{title}}&lt;/h1&gt;
+    &lt;h2&gt;{{hero.name}} details!&lt;/h2&gt;
+    &lt;div&gt;&lt;label&gt;id: &lt;/label&gt;{{hero.id}}&lt;/div&gt;
+    &lt;div&gt;
+      &lt;label&gt;name: &lt;/label&gt;
+      
+    &lt;/div&gt;
+    `
+})
+</code></pre>
+
+<div class="tem"><p>
+이 부분에서 직접 손으로 타이핑해서는 실행이 안되어 어려움이 있었다. 예제코드를 그대로 가져와 넣었을 때는 동작하는 것으로보아, 뭔가 __역따옴표__라던가, 기타 등등에 대한 기술부분에서 문제가 발생했던 것으로 보인다. 앞으로 이에대해서 알게되면, 이 문서에도 함께 추가했으면 좋겠다.
+</p></div>
+
+<hr />
+
+<h2 id="editingourhero">Editing our Hero</h2>
+
+<p>여기서부터는 우리가 텍스트박스(textbox)에서 __hero__의 이름을 수정하는 기능을 넣고 싶을 때 어떤 방법으로 풀어나가야하는지에 대한 설명을 정리했다.</p>
+
+<p>먼저 __hero name__을 리팩토링 해보자. <code>&lt;label&gt;</code>과 <code>&lt;label&gt;</code>과 <code>&lt;input&gt;</code>과 <code>&lt;input</code>요소를 다음 코드와 같이 리팩토링 해본다.</p>
+
+<p><strong>app.component.ts(input element)</strong></p>
+
+<pre class="highlight"><code class="ts">
+@Component({
+  selector: 'my-app',
+  template: `
+    &lt;h1&gt;{{title}}&lt;/h1&gt;
+    &lt;h2&gt;{{hero.name}} details!&lt;/h2&gt;
+    &lt;div&gt;&lt;label&gt;id: &lt;/label&gt;{{hero.id}}&lt;/div&gt;
+    &lt;div&gt;
+      &lt;label&gt;name: &lt;/label&gt;
+      &lt;input value="{{hero.name}}" placeholder="name"&gt;
+    &lt; /div &gt;
+`
+})
+</code></pre>
+
+<p>우리는 브라우저에서 __hero__의 이름이 <code>&lt;input&gt;</code>textbox 안에서 나타나는 것을 확인할 수 있다. 하지만, 뭔가 느낌이 구리다. 자세히 보면, 우리가 __name__을 변경했을 때, 우리가 만든 변화가 <code>&lt;h2&gt;</code>에서 반영되지 않고 있다는 것을 알 수 있다.</p>
+
+<p><strong>우리가 <code>&lt;input&gt;</code>기능에 원하는 것은 (이제까지 다른 기술로도 했던) 일방향(one-way)적인 바인딩이 아니다.</strong></p>
+
+<hr />
+
+<h2 id="양방향바인딩two-waybinding">양방향 바인딩(Two-Way Binding)</h2>
+
+<p>사실, 우리의 의도는 <code>&lt;input&gt;</code>이라는 요소 안에서 __hero__의 __name__을 표현하는 것이며, __hero name__이 변경되면 이것이 바인딩된 모든 영역에서 함께 변경되는 것을 원한다. </p>
+
+<blockquote>
+<p>간단하게 말해서 우리는 &#8217;양방향 바인딩(Two-way Binding)&#8217;을 원한다.</p>
+</blockquote>
+
+<p>양방향 데이터 바인딩을 위해 <code>ngModel</code> 내장 지시문(Built-in Directive)을 사용할 수 있는 템플릿으로 업데이트.</p>
+
+<blockquote>
+<p><code>ngModel</code>에 대한 더 많은 정보는 <a href="https://angular.io/docs/ts/latest/guide/forms.html#ngModel">Forms</a>와 <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html#ngModel">Template Syntax</a>챕터에서 볼 수 있다.</p>
+</blockquote>
+
+<p><code>&lt;input&gt;</code>요소를 다음과 같이 바꿔준다.</p>
+
+<p><strong>app.component.ts(input element)</strong></p>
+
+<pre class="highlight"><code>
+&lt;input [(ngmodel)]="hero.name" placeholder="name"&gt;
+<!--&lt;input value="{{hero.name}}" placeholder="name"&gt;-->
+</code></pre>
+
+<p>브라우저가 새로고침되면, __hero__에 대한 내용을 다시 볼 수 있다. 더하여, 이제 __hero__의 __name__도 변경할 수 있으며 변경 결과를 확인할 수 있다. <em>(변경 된 결과는 바로 새로고침 되어 <code>&lt;h2&gt;</code>요소에 반영된다.)</em></p>
+
+<div class="tem"><p>
+`ngModel`을 할 때에는 `hero.name`에 중첩 중괄호를 쓰지 않는다. (왜 안나오나 했네;) 
+</p></div>
+
+<hr />
+
+<h2 id="우리가살펴왔던것들">우리가 살펴왔던 것들</h2>
+
+<p>우리가 구축한 내용들을 정리해보자.</p>
+
+<ul>
+<li>우리의 __Tour of Heroes__는, 제목 및 <code>Hero</code>객체의 속성을 표시하는 방법으로, <strong>단방향 데이터 바인딩</strong>(a form of one-way data binding)을 하는데에 중첩 중괄호 표시를 사용했다.</li>
+<li>우리는 템플릿을 여러 줄의 string으로 작성했는데, 이러한 템플릿을 읽어낼 수 있도록 ES2015의 <code>Template strings</code> 기능을 사용했다.</li>
+<li>우리는 양방항(Two-way) 데이터 바인딩을 <code>&lt;input&gt;</code>태그에 적용하는 방법으로 <code>ngModel</code>directive를 사용했다.</li>
+<li><code>ngModel</code>의 지시어(Directive)는 콘텐츠 내 <code>hero.name</code>에 대한 또다른(모든) 바인딩에 대한 변경사항을 전파한다.</li>
+</ul>
+
+<p>이번 예제에 대한 <a href="https://angular.io/resources/live-examples/toh-1/ts/plnkr.html">Live sample</a>을 통해, 관련 설치가 안되어있는 사람들도 직접 Angular2에 대한 기능을 살펴 볼 수 있다.</p>
+
+<h3 id="app.component.ts의전체코드공유">app.component.ts의 전체 코드 공유</h3>
+
+<pre class="highlight"><code class="ts">
+import { Component } from '@angular/core';
+export class Hero {
+  id: number;
+  name: string;
+}
+@Component({
+  selector: 'my-app',
+  template: `
+    <h1>{{title}}</h1>
+    <h2>{{hero.name}} details!</h2>
+    <div><label>id: </label>{{hero.id}}</div>
+    <div>
+      <label>name: </label>
+      <input [(ngModel)]="hero.name" placeholder="name">
+    </div>
+    `
+})
+export class AppComponent {
+  title = 'Tour of Heroes';
+  hero: Hero = {
+    id: 1,
+    name: 'Windstorm'
+  };
+}
+</code></pre>
+
+<hr />
+
+<h2 id="theroadahead">The Road Ahead</h2>
+
+<p>우리가 여기서 작성한 것은 한명의 hero에 대한 내용이다. 우리는 더 많은 hero에 대한 내용을 표현하고 싶다. 또한, 사용자들이 hero를 선택하고, 각 hero의 세부항목들을 선택해서 확인할 수 있도록 하고싶다. 앞으로의 튜토리얼에서 우리는 __&#8216;어떻게 리스트의 정보를 가져오는지&#8217;<strong>와 <strong>&#8216;어떻게 가져온 데이터를 템플릿에 바인딩 하는지&#8217;</strong>, 그리고 </strong>&#8216;어떻게 사용자에게 선택을 허용할지&#8217;__에 대한 내용을 학습하게 된다.</p>
+
+<blockquote>
+<p><strong>Next Step</strong> : <a href="https://angular.io/docs/ts/latest/tutorial/toh-pt2.html" title="Master/Detail">Master/Detail</a></p>
+</blockquote>
+
+</body>
+</html>
